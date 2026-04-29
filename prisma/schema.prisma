@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  password  String
+  cases     Case[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Case {
+  id            String          @id @default(uuid())
+  title         String
+  type          String
+  status        String          @default("OPEN") // OPEN, IN_PROGRESS, CLOSED, ARCHIVED
+  userId        String
+  user          User            @relation(fields: [userId], references: [id])
+  events        IncidentEvent[]
+  evidences     Evidence[]
+  analysis      AnalysisResult?
+  report        Report?
+  isLocked      Boolean         @default(false)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
+model IncidentEvent {
+  id          String   @id @default(uuid())
+  caseId      String
+  case        Case     @relation(fields: [caseId], references: [id])
+  title       String
+  description String
+  datetime    DateTime
+  location    String?
+  actor       String?
+  action      String?
+  damage      String?
+  source      String   @default("INTERVIEW") // INTERVIEW, EVIDENCE
+  evidences   Evidence[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Evidence {
+  id          String          @id @default(uuid())
+  caseId      String
+  case        Case            @relation(fields: [caseId], references: [id])
+  name        String
+  type        String
+  fileUrl     String?
+  fileHash    String?
+  description String?
+  events      IncidentEvent[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model AnalysisResult {
+  id             String   @id @default(uuid())
+  caseId         String   @unique
+  case           Case     @relation(fields: [caseId], references: [id])
+  riskLevel      String?
+  risks          String?  // JSON string
+  missingInfo    String?  // JSON string
+  contradictions String?  // JSON string
+  suggestions    String?  // JSON string
+  content        String?  // The long-form text analysis
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Report {
+  id        String   @id @default(uuid())
+  caseId    String   @unique
+  case      Case     @relation(fields: [caseId], references: [id])
+  content   String
+  status    String   @default("DRAFT") // DRAFT, FINAL
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model LegalReference {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  category    String?
+  citation    String?
+  content     String
+  createdAt   DateTime @default(now())
+}
