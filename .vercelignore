@@ -1,0 +1,8 @@
+node_modules
+.next
+.env*
+.factline-local-store.json
+.factline-local-store.json.tmp
+artifacts
+coverage
+*.log

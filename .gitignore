@@ -2,7 +2,15 @@ node_modules/
 build/
 dist/
 coverage/
+artifacts/
 .DS_Store
 *.log
 .env*
 !.env.example
+.factline-local-store.json
+.factline-local-store.json.tmp
+.next/
+tsconfig.tsbuildinfo
+
+.vercel
+.env*.local

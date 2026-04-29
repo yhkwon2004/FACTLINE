@@ -1,201 +1,321 @@
-import { 
-  ICaseRepository, 
-  IEventRepository, 
-  IEvidenceRepository, 
-  IAnalysisRepository, 
-  IReportRepository, 
-  IUserRepository 
+import {
+  IAnalysisRepository,
+  ICaseRepository,
+  IEvidenceRepository,
+  IEventRepository,
+  ILegalReferenceRepository,
+  ILifeRecordRepository,
+  IReportRepository,
+  IUserRepository,
 } from "../../domain/repositories";
-import { 
-  User, 
-  Case, 
-  IncidentEvent, 
-  Evidence, 
-  AnalysisResult, 
-  Report 
+import {
+  AnalysisResult,
+  Case,
+  Evidence,
+  IncidentEvent,
+  LegalReference,
+  LifeRecord,
+  Report,
+  User,
 } from "../../domain/entities";
-import prisma from "../prisma-client";
+import { getPrismaClient } from "../prisma-client";
+import type { IncidentType, LifeRecordType } from "../../domain/types";
+
+type PrismaCaseWithRelations = Awaited<ReturnType<ReturnType<typeof getPrismaClient>["case"]["findUnique"]>>;
+
+function mapUser(data: { id: string; email: string; name: string; passwordHash: string; createdAt: Date; updatedAt: Date }) {
+  return new User({
+    id: data.id,
+    email: data.email,
+    name: data.name,
+    passwordHash: data.passwordHash,
+    createdAt: data.createdAt,
+    updatedAt: data.updatedAt,
+  });
+}
+
+function mapEvent(data: any) {
+  return new IncidentEvent({
+    id: data.id,
+    caseId: data.caseId,
+    title: data.title,
+    rawStatement: data.rawStatement,
+    description: data.description,
+    datetime: data.datetime,
+    isApproximateTime: data.isApproximateTime,
+    approximateTimeText: data.approximateTimeText,
+    location: data.location,
+    actor: data.actor,
+    action: data.action,
+    damage: data.damage,
+    source: data.source,
+    evidenceIds: data.evidences?.map((evidence: { id: string }) => evidence.id) ?? [],
+    createdAt: data.createdAt,
+    updatedAt: data.updatedAt,
+  });
+}
+
+function mapEvidence(data: any) {
+  return new Evidence({
+    id: data.id,
+    caseId: data.caseId,
+    name: data.name,
+    type: data.type,
+    fileUrl: data.fileUrl,
+    fileHash: data.fileHash,
+    description: data.description,
+    createdAt: data.createdAt,
+    updatedAt: data.updatedAt,
+  });
+}
+
+function mapCase(data: any) {
+  return new Case({
+    id: data.id,
+    title: data.title,
+    type: data.type as IncidentType,
+    status: data.status,
+    userId: data.userId,
+    description: data.description,
+    events: data.events?.map(mapEvent) ?? [],
+    evidences: data.evidences?.map(mapEvidence) ?? [],
+    isLocked: data.isLocked,
+    createdAt: data.createdAt,
+    updatedAt: data.updatedAt,
+  });
+}
+
+function mapLifeRecord(data: any) {
+  return new LifeRecord({
+    id: data.id,
+    userId: data.userId,
+    caseId: data.caseId,
+    type: data.type as LifeRecordType,
+    title: data.title,
+    content: data.content,
+    occurredAt: data.occurredAt,
+    approximateTimeText: data.approximateTimeText,
+    location: data.location,
+    people: data.people,
+    tags: data.tags ? JSON.parse(data.tags) : [],
+    createdAt: data.createdAt,
+    updatedAt: data.updatedAt,
+  });
+}
 
 export class PrismaUserRepository implements IUserRepository {
   async findById(id: string): Promise<User | null> {
-    const data = await prisma.user.findUnique({ where: { id } });
-    if (!data) return null;
-    return new User(data.id, data.email, data.name, data.createdAt);
+    const data = await getPrismaClient().user.findFirst({ where: { id, deletedAt: null } });
+    return data ? mapUser(data) : null;
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    const data = await prisma.user.findUnique({ where: { email } });
-    if (!data) return null;
-    return new User(data.id, data.email, data.name, data.createdAt);
+    const data = await getPrismaClient().user.findFirst({ where: { email, deletedAt: null } });
+    return data ? mapUser(data) : null;
   }
 
-  async save(user: any): Promise<User> {
-    const data = await prisma.user.upsert({
-      where: { id: user.id || "" },
-      update: { name: user.name, email: user.email, password: user.password },
-      create: { id: user.id, name: user.name, email: user.email, password: user.password },
+  async save(user: User): Promise<User> {
+    const data = await getPrismaClient().user.upsert({
+      where: { id: user.id },
+      update: {
+        email: user.email,
+        name: user.name,
+        passwordHash: user.passwordHash ?? "",
+      },
+      create: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        passwordHash: user.passwordHash ?? "",
+      },
     });
-    return new User(data.id, data.email, data.name, data.createdAt);
+
+    return mapUser(data);
+  }
+
+  async delete(id: string): Promise<void> {
+    await getPrismaClient().user.update({ where: { id }, data: { deletedAt: new Date() } });
   }
 }
 
 export class PrismaCaseRepository implements ICaseRepository {
   async findById(id: string): Promise<Case | null> {
-    const data = await prisma.case.findUnique({ 
-      where: { id },
-      include: { events: true, evidences: true }
+    const data = await getPrismaClient().case.findFirst({
+      where: { id, deletedAt: null },
+      include: { events: { include: { evidences: true } }, evidences: true },
     });
-    if (!data) return null;
-    
-    return new Case(
-      data.id, 
-      data.title, 
-      data.type, 
-      data.status, 
-      data.userId,
-      data.events.map(e => new IncidentEvent(e.id, e.caseId, e.title, e.description, e.datetime, e.location, e.actor, e.action, e.damage, e.source as any)),
-      data.evidences.map(e => new Evidence(e.id, e.caseId, e.name, e.type, e.fileUrl, e.fileHash, e.description)),
-      data.isLocked,
-      data.createdAt,
-      data.updatedAt
-    );
+    return data ? mapCase(data) : null;
   }
 
   async findAllByUserId(userId: string): Promise<Case[]> {
-    const cases = await prisma.case.findMany({ where: { userId } });
-    return cases.map(data => new Case(data.id, data.title, data.type, data.status, data.userId, [], [], data.isLocked, data.createdAt, data.updatedAt));
+    const data = await getPrismaClient().case.findMany({
+      where: { userId, deletedAt: null },
+      orderBy: { updatedAt: "desc" },
+      include: { events: { include: { evidences: true } }, evidences: true },
+    });
+    return data.map(mapCase);
   }
 
   async save(caseData: Case): Promise<Case> {
-    const data = await prisma.case.upsert({
-      where: { id: caseData.id || "" },
-      update: { 
-        title: caseData.title, 
-        type: caseData.type, 
-        status: caseData.status, 
+    const data = await getPrismaClient().case.upsert({
+      where: { id: caseData.id },
+      update: {
+        title: caseData.title,
+        type: caseData.type,
+        description: caseData.description,
+        status: caseData.status,
         isLocked: caseData.isLocked,
-        updatedAt: new Date()
       },
-      create: { 
+      create: {
         id: caseData.id,
-        title: caseData.title, 
-        type: caseData.type, 
-        status: caseData.status, 
+        title: caseData.title,
+        type: caseData.type,
+        description: caseData.description,
+        status: caseData.status,
         userId: caseData.userId,
-        isLocked: caseData.isLocked
+        isLocked: caseData.isLocked,
       },
+      include: { events: { include: { evidences: true } }, evidences: true },
     });
-    return caseData;
+    return mapCase(data);
+  }
+
+  async lock(id: string): Promise<void> {
+    await getPrismaClient().case.update({ where: { id }, data: { isLocked: true } });
   }
 
   async delete(id: string): Promise<void> {
-    await prisma.case.delete({ where: { id } });
+    await getPrismaClient().case.update({ where: { id }, data: { deletedAt: new Date() } });
   }
 }
 
 export class PrismaEventRepository implements IEventRepository {
   async findByCaseId(caseId: string): Promise<IncidentEvent[]> {
-    const data = await prisma.incidentEvent.findMany({ where: { caseId } });
-    return data.map(e => new IncidentEvent(e.id, e.caseId, e.title, e.description, e.datetime, e.location, e.actor, e.action, e.damage, e.source as any));
+    const data = await getPrismaClient().incidentEvent.findMany({
+      where: { caseId },
+      include: { evidences: true },
+      orderBy: [{ datetime: "asc" }, { createdAt: "asc" }],
+    });
+    return data.map(mapEvent);
   }
 
   async save(event: IncidentEvent): Promise<IncidentEvent> {
-    await prisma.incidentEvent.upsert({
-      where: { id: event.id || "" },
-      update: { 
-        title: event.title, 
-        description: event.description, 
-        datetime: event.datetime, 
-        location: event.location, 
-        actor: event.actor, 
-        action: event.action, 
+    const data = await getPrismaClient().incidentEvent.upsert({
+      where: { id: event.id },
+      update: {
+        title: event.title,
+        rawStatement: event.rawStatement,
+        description: event.description,
+        datetime: event.datetime,
+        isApproximateTime: event.isApproximateTime,
+        approximateTimeText: event.approximateTimeText,
+        location: event.location,
+        actor: event.actor,
+        action: event.action,
         damage: event.damage,
-        source: event.source
+        source: event.source,
       },
-      create: { 
+      create: {
         id: event.id,
         caseId: event.caseId,
-        title: event.title, 
-        description: event.description, 
-        datetime: event.datetime, 
-        location: event.location, 
-        actor: event.actor, 
-        action: event.action, 
+        title: event.title,
+        rawStatement: event.rawStatement,
+        description: event.description,
+        datetime: event.datetime,
+        isApproximateTime: event.isApproximateTime,
+        approximateTimeText: event.approximateTimeText,
+        location: event.location,
+        actor: event.actor,
+        action: event.action,
         damage: event.damage,
-        source: event.source
-      }
+        source: event.source,
+      },
+      include: { evidences: true },
     });
-    return event;
+
+    if (event.evidenceIds.length > 0) {
+      await getPrismaClient().incidentEvent.update({
+        where: { id: event.id },
+        data: { evidences: { set: event.evidenceIds.map((id) => ({ id })) } },
+      });
+    }
+
+    return mapEvent(data);
   }
 
   async delete(id: string): Promise<void> {
-    await prisma.incidentEvent.delete({ where: { id } });
+    await getPrismaClient().incidentEvent.delete({ where: { id } });
   }
 }
 
 export class PrismaEvidenceRepository implements IEvidenceRepository {
   async findByCaseId(caseId: string): Promise<Evidence[]> {
-    const data = await prisma.evidence.findMany({ where: { caseId } });
-    return data.map(e => new Evidence(e.id, e.caseId, e.name, e.type, e.fileUrl, e.fileHash, e.description));
+    const data = await getPrismaClient().evidence.findMany({ where: { caseId }, orderBy: { createdAt: "desc" } });
+    return data.map(mapEvidence);
   }
 
   async save(evidence: Evidence): Promise<Evidence> {
-    await prisma.evidence.upsert({
-      where: { id: evidence.id || "" },
-      update: { 
-        name: evidence.name, 
-        type: evidence.type, 
-        fileUrl: evidence.fileUrl, 
-        fileHash: evidence.fileHash, 
-        description: evidence.description 
+    const data = await getPrismaClient().evidence.upsert({
+      where: { id: evidence.id },
+      update: {
+        name: evidence.name,
+        type: evidence.type,
+        fileUrl: evidence.fileUrl,
+        fileHash: evidence.fileHash,
+        description: evidence.description,
       },
-      create: { 
+      create: {
         id: evidence.id,
         caseId: evidence.caseId,
-        name: evidence.name, 
-        type: evidence.type, 
-        fileUrl: evidence.fileUrl, 
-        fileHash: evidence.fileHash, 
-        description: evidence.description 
-      }
+        name: evidence.name,
+        type: evidence.type,
+        fileUrl: evidence.fileUrl,
+        fileHash: evidence.fileHash,
+        description: evidence.description,
+      },
     });
-    return evidence;
+    return mapEvidence(data);
   }
 
   async delete(id: string): Promise<void> {
-    await prisma.evidence.delete({ where: { id } });
+    await getPrismaClient().evidence.delete({ where: { id } });
   }
 
   async linkToEvent(evidenceId: string, eventId: string): Promise<void> {
-    await prisma.incidentEvent.update({
+    await getPrismaClient().incidentEvent.update({
       where: { id: eventId },
-      data: {
-        evidences: {
-          connect: { id: evidenceId }
-        }
-      }
+      data: { evidences: { connect: { id: evidenceId } } },
+    });
+  }
+
+  async unlinkFromEvent(evidenceId: string, eventId: string): Promise<void> {
+    await getPrismaClient().incidentEvent.update({
+      where: { id: eventId },
+      data: { evidences: { disconnect: { id: evidenceId } } },
     });
   }
 }
 
 export class PrismaAnalysisRepository implements IAnalysisRepository {
   async findByCaseId(caseId: string): Promise<AnalysisResult | null> {
-    const data = await prisma.analysisResult.findUnique({ where: { caseId } });
+    const data = await getPrismaClient().analysisResult.findUnique({ where: { caseId } });
     if (!data) return null;
-    return new AnalysisResult(
-      data.id,
-      data.caseId,
-      data.riskLevel as any,
-      data.risks ? JSON.parse(data.risks) : [],
-      data.missingInfo ? JSON.parse(data.missingInfo) : [],
-      data.contradictions ? JSON.parse(data.contradictions) : [],
-      data.suggestions ? JSON.parse(data.suggestions) : [],
-      data.content
-    );
+    return new AnalysisResult({
+      id: data.id,
+      caseId: data.caseId,
+      riskLevel: data.riskLevel as any,
+      risks: data.risks ? JSON.parse(data.risks) : [],
+      missingInfo: data.missingInfo ? JSON.parse(data.missingInfo) : [],
+      contradictions: data.contradictions ? JSON.parse(data.contradictions) : [],
+      suggestions: data.suggestions ? JSON.parse(data.suggestions) : [],
+      content: data.content,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
+    });
   }
 
   async save(analysis: AnalysisResult): Promise<AnalysisResult> {
-    const data = await prisma.analysisResult.upsert({
+    const data = await getPrismaClient().analysisResult.upsert({
       where: { caseId: analysis.caseId },
       update: {
         riskLevel: analysis.riskLevel,
@@ -203,7 +323,7 @@ export class PrismaAnalysisRepository implements IAnalysisRepository {
         missingInfo: JSON.stringify(analysis.missingInfo),
         contradictions: JSON.stringify(analysis.contradictions),
         suggestions: JSON.stringify(analysis.suggestions),
-        content: analysis.content
+        content: analysis.content,
       },
       create: {
         id: analysis.id,
@@ -213,26 +333,137 @@ export class PrismaAnalysisRepository implements IAnalysisRepository {
         missingInfo: JSON.stringify(analysis.missingInfo),
         contradictions: JSON.stringify(analysis.contradictions),
         suggestions: JSON.stringify(analysis.suggestions),
-        content: analysis.content
-      }
+        content: analysis.content,
+      },
     });
-    return analysis;
+    return new AnalysisResult({
+      id: data.id,
+      caseId: data.caseId,
+      riskLevel: data.riskLevel as any,
+      risks: data.risks ? JSON.parse(data.risks) : [],
+      missingInfo: data.missingInfo ? JSON.parse(data.missingInfo) : [],
+      contradictions: data.contradictions ? JSON.parse(data.contradictions) : [],
+      suggestions: data.suggestions ? JSON.parse(data.suggestions) : [],
+      content: data.content,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
+    });
+  }
+}
+
+export class PrismaLegalReferenceRepository implements ILegalReferenceRepository {
+  async search(query: string, incidentType?: string): Promise<LegalReference[]> {
+    const data = await getPrismaClient().legalReference.findMany({
+      where: {
+        OR: [
+          { title: { contains: query, mode: "insensitive" } },
+          { description: { contains: query, mode: "insensitive" } },
+          { content: { contains: query, mode: "insensitive" } },
+          incidentType ? { category: { contains: incidentType, mode: "insensitive" } } : {},
+        ],
+      },
+      take: 8,
+    });
+    return data.map((item) => new LegalReference(item));
+  }
+
+  async save(reference: LegalReference): Promise<LegalReference> {
+    const data = await getPrismaClient().legalReference.upsert({
+      where: { id: reference.id },
+      update: {
+        title: reference.title,
+        description: reference.description,
+        category: reference.category,
+        citation: reference.citation,
+        content: reference.content,
+        sourceUrl: reference.sourceUrl,
+      },
+      create: {
+        id: reference.id,
+        title: reference.title,
+        description: reference.description,
+        category: reference.category,
+        citation: reference.citation,
+        content: reference.content,
+        sourceUrl: reference.sourceUrl,
+      },
+    });
+    return new LegalReference(data);
   }
 }
 
 export class PrismaReportRepository implements IReportRepository {
   async findByCaseId(caseId: string): Promise<Report | null> {
-    const data = await prisma.report.findUnique({ where: { caseId } });
-    if (!data) return null;
-    return new Report(data.id, data.caseId, data.content, data.status as any, data.createdAt);
+    const data = await getPrismaClient().report.findUnique({ where: { caseId } });
+    return data
+      ? new Report({ id: data.id, caseId: data.caseId, content: data.content, status: data.status as any, createdAt: data.createdAt, updatedAt: data.updatedAt })
+      : null;
   }
 
   async save(report: Report): Promise<Report> {
-    await prisma.report.upsert({
+    const data = await getPrismaClient().report.upsert({
       where: { caseId: report.caseId },
-      update: { content: report.content, status: report.status },
-      create: { id: report.id, caseId: report.caseId, content: report.content, status: report.status }
+      update: { content: report.contentWithNotice(), status: report.status },
+      create: { id: report.id, caseId: report.caseId, content: report.contentWithNotice(), status: report.status },
     });
-    return report;
+    return new Report({ id: data.id, caseId: data.caseId, content: data.content, status: data.status as any, createdAt: data.createdAt, updatedAt: data.updatedAt });
+  }
+}
+
+export class PrismaLifeRecordRepository implements ILifeRecordRepository {
+  async findById(id: string): Promise<LifeRecord | null> {
+    const data = await getPrismaClient().lifeRecord.findUnique({ where: { id } });
+    return data ? mapLifeRecord(data) : null;
+  }
+
+  async findAllByUserId(userId: string): Promise<LifeRecord[]> {
+    const data = await getPrismaClient().lifeRecord.findMany({
+      where: { userId },
+      orderBy: [{ occurredAt: "desc" }, { createdAt: "desc" }],
+    });
+    return data.map(mapLifeRecord);
+  }
+
+  async findByCaseId(caseId: string): Promise<LifeRecord[]> {
+    const data = await getPrismaClient().lifeRecord.findMany({
+      where: { caseId },
+      orderBy: [{ occurredAt: "asc" }, { createdAt: "asc" }],
+    });
+    return data.map(mapLifeRecord);
+  }
+
+  async save(record: LifeRecord): Promise<LifeRecord> {
+    const data = await getPrismaClient().lifeRecord.upsert({
+      where: { id: record.id },
+      update: {
+        caseId: record.caseId,
+        type: record.type,
+        title: record.title,
+        content: record.content,
+        occurredAt: record.occurredAt,
+        approximateTimeText: record.approximateTimeText,
+        location: record.location,
+        people: record.people,
+        tags: JSON.stringify(record.tags),
+      },
+      create: {
+        id: record.id,
+        userId: record.userId,
+        caseId: record.caseId,
+        type: record.type,
+        title: record.title,
+        content: record.content,
+        occurredAt: record.occurredAt,
+        approximateTimeText: record.approximateTimeText,
+        location: record.location,
+        people: record.people,
+        tags: JSON.stringify(record.tags),
+      },
+    });
+    return mapLifeRecord(data);
+  }
+
+  async delete(id: string): Promise<void> {
+    await getPrismaClient().lifeRecord.delete({ where: { id } });
   }
 }

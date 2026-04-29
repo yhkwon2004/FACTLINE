@@ -1,6 +1,6 @@
 import CryptoJS from "crypto-js";
 
-const SECRET_KEY = process.env.VITE_ENCRYPTION_KEY || "factline-super-secret-key-123";
+const SECRET_KEY = process.env.ENCRYPTION_KEY || "factline-development-encryption-key-change-me";
 
 /**
  * AES Encryption service for sensitive data
