@@ -187,8 +187,10 @@ export function LifeRecordForm({
     <div className="grid gap-4 xl:grid-cols-[390px_1fr]">
       <Card className="space-y-4">
         <div>
-          <h2 className="font-bold">새 일상 기록</h2>
-          <p className="mt-1 text-sm leading-6 text-slate-600">평소에는 독립 기록으로 남기고, 필요할 때 증거/정리 화면에서 기존 기록을 불러옵니다.</p>
+          <h2 className="font-bold">오늘의 다이어리</h2>
+          <p className="mt-1 text-sm leading-6 text-slate-600">
+            법률 문제와 무관하게 하루의 일, 약속, 불편함, 기억할 사람과 장소를 남깁니다.
+          </p>
         </div>
         <form className="space-y-4" onSubmit={submit}>
           <Field label="기록 종류">
@@ -200,10 +202,14 @@ export function LifeRecordForm({
             </select>
           </Field>
           <Field label="제목">
-            <Input name="title" placeholder="오늘 남길 기록의 제목" required />
+            <Input name="title" placeholder="예: 오후 통화, 퇴근길 메모, 기억해둘 일" required />
           </Field>
           <Field label="내용">
-            <Textarea name="content" placeholder="무슨 일이 있었는지 일상 언어로 적어 주세요." required />
+            <Textarea
+              name="content"
+              placeholder="오늘 있었던 일을 편하게 적어 주세요. 확실하지 않은 부분은 '기억상', '대략'처럼 표시해도 됩니다."
+              required
+            />
           </Field>
           <Field label="시간">
             <div className="grid gap-2">
@@ -215,11 +221,11 @@ export function LifeRecordForm({
             </div>
           </Field>
           <Field label="대략적인 시간">
-            <Input name="approximateTimeText" placeholder="예: 지난주 퇴근길, 5월 초" />
+            <Input name="approximateTimeText" placeholder="정확하지 않다면 예: 지난주 퇴근길, 5월 초, 점심 무렵" />
           </Field>
           <Field label="장소/매체">
             <div className="grid gap-2">
-              <Input name="location" value={location} onChange={(event) => setLocation(event.target.value)} placeholder="예: 집, 회사, 통화, 메신저" />
+              <Input name="location" value={location} onChange={(event) => setLocation(event.target.value)} placeholder="예: 집, 회사, 통화, 카카오톡, 이메일" />
               <Button type="button" variant="outline" onClick={requestLocation} className="w-full">
                 <LocateFixed size={16} />
                 현재 위치 참조
@@ -228,14 +234,14 @@ export function LifeRecordForm({
             </div>
           </Field>
           <Field label="관련 사람">
-            <Input name="people" placeholder="예: 본인, 지인, 담당자" />
+            <Input name="people" placeholder="예: 본인, 지인, 담당자, 목격한 사람" />
           </Field>
           <Field label="태그">
-            <Input name="tags" placeholder="쉼표로 구분: 출근길, 일정, 불편" />
+            <Input name="tags" placeholder="쉼표로 구분: 출근길, 일정, 약속, 불편, 증거확인" />
           </Field>
           <Button type="submit" className="w-full" disabled={isSubmitting}>
             <NotebookPen size={16} />
-            {isSubmitting ? "저장 중" : "기록 저장"}
+            {isSubmitting ? "저장 중" : "다이어리 저장"}
           </Button>
         </form>
         <NoticeModal
@@ -251,8 +257,8 @@ export function LifeRecordForm({
         <Card className="space-y-4">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="font-bold">기록 캘린더</h2>
-              <p className="mt-1 text-sm leading-6 text-slate-600">카테고리별 색상으로 기록이 남은 날짜를 확인합니다.</p>
+              <h2 className="font-bold">다이어리 캘린더</h2>
+              <p className="mt-1 text-sm leading-6 text-slate-600">카테고리별 색상으로 어떤 날에 어떤 기억이 남았는지 확인합니다.</p>
             </div>
             <div className="flex items-center gap-2">
               <Button type="button" variant="outline" onClick={() => moveMonth(-1)} aria-label="이전 달">
@@ -327,11 +333,11 @@ export function LifeRecordForm({
         <div className="grid gap-4 lg:grid-cols-[1fr_360px]">
           <div className="space-y-3">
             <div className="flex items-center justify-between gap-3">
-              <h2 className="font-bold">{selectedDate} 기록</h2>
+              <h2 className="font-bold">{selectedDate} 다이어리</h2>
               <span className="text-xs font-semibold text-slate-500">{selectedRecords.length}건</span>
             </div>
             {selectedRecords.length === 0 ? (
-              <Card className="text-sm leading-6 text-slate-600">선택한 날짜에 표시할 기록이 없습니다.</Card>
+              <Card className="text-sm leading-6 text-slate-600">선택한 날짜에 표시할 다이어리가 없습니다.</Card>
             ) : (
               selectedRecords.map((record) => (
                 <RecordCard key={record.id} record={record} linkedCaseTitle={linkedCaseTitle} />
@@ -339,7 +345,7 @@ export function LifeRecordForm({
             )}
           </div>
           <Card className="space-y-3">
-            <h2 className="font-bold">최근 기록</h2>
+            <h2 className="font-bold">최근 다이어리</h2>
             {filteredRecords.slice(0, 6).map((record) => (
               <button
                 key={record.id}
@@ -358,7 +364,7 @@ export function LifeRecordForm({
                 <p className="mt-1 text-xs text-slate-500">{formatDate(record.occurredAt, record.approximateTimeText)}</p>
               </button>
             ))}
-            {filteredRecords.length === 0 ? <p className="text-sm leading-6 text-slate-600">아직 기록이 없습니다.</p> : null}
+            {filteredRecords.length === 0 ? <p className="text-sm leading-6 text-slate-600">아직 다이어리가 없습니다.</p> : null}
           </Card>
         </div>
       </div>

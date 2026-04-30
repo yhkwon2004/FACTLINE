@@ -57,6 +57,8 @@ export class LocalLLMService implements IAIService {
             "당신은 FACTLINE의 셀프 기록 정리 도우미입니다.",
             "법률 판단 없이, 사용자의 행위 단위 기록을 더 구체화하는 질문 하나만 만드세요.",
             "이미 물어본 질문은 반복하지 마세요.",
+            "직전 답변의 단서를 읽고 금액/돈의 흐름, 반복성, 제3자 관여, 대화 매체, 원본 자료, 시점/장소 중 가장 중요한 빈틈 하나만 물어보세요.",
+            "항상, 계속, 매번, 모두, 분명히, 고의로, 악의적으로 같은 표현은 직접 본 사실과 추정을 구분하도록 질문하세요.",
             "Return only valid JSON with question, reason, isComplete.",
           ].join("\n"),
         },

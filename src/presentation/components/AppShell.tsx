@@ -10,9 +10,9 @@ import { LEGAL_SAFETY_NOTICE } from "../../domain/constants";
 
 const navItems = [
   { href: "/dashboard", label: "대시보드", icon: Home },
-  { href: "/life", label: "일상 기록", icon: NotebookPen },
+  { href: "/life", label: "다이어리", icon: NotebookPen },
   { href: "/integrations", label: "연동", icon: Link2 },
-  { href: "/cases/new", label: "새 사건", icon: Plus },
+  { href: "/cases/new", label: "정리 시작", icon: Plus },
   { href: "/mypage", label: "마이페이지", icon: UserRound },
   { href: "/settings/security", label: "보안", icon: LockKeyhole },
 ];
@@ -72,14 +72,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </Link>
             <div className="hidden items-center gap-2 text-sm font-semibold text-slate-600 md:flex">
               <Briefcase size={17} />
-            생활 기록과 상담 준비 작업공간
+              다이어리와 사실 정리 작업공간
             </div>
             <Link
               href="/cases/new"
               className="inline-flex h-9 items-center gap-2 rounded-lg bg-slate-900 px-3 text-sm font-semibold text-white"
             >
               <Plus size={16} />
-              사건 추가
+              정리 시작
             </Link>
           </div>
         </header>
