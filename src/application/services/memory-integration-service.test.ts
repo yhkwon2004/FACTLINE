@@ -16,5 +16,18 @@ describe("MemoryIntegrationService", () => {
     assert.equal(parsed[0].occurredAt?.getMinutes(), 20);
     assert.equal(parsed[1].participantName, "나");
     assert.equal(parsed[1].occurredAt, null);
+    assert.equal(parsed[1].direction, "OUTBOUND");
+  });
+
+  it("parses KakaoTalk exported bracket lines with active date headers", () => {
+    const parsed = parseMemoryText("--------------- 2026년 4월 30일 목요일 ---------------\n[나] [오후 2:05] 보낸 메시지\n[상대방] [오후 2:07] 받은 메시지");
+
+    assert.equal(parsed.length, 2);
+    assert.equal(parsed[0].participantName, "나");
+    assert.equal(parsed[0].direction, "OUTBOUND");
+    assert.equal(parsed[0].occurredAt?.getHours(), 14);
+    assert.equal(parsed[0].occurredAt?.getMinutes(), 5);
+    assert.equal(parsed[1].participantName, "상대방");
+    assert.equal(parsed[1].direction, "INBOUND");
   });
 });

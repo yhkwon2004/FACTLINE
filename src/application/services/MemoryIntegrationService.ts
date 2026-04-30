@@ -1,7 +1,7 @@
 import { createHash, randomUUID } from "node:crypto";
 import { ConnectedSource, MemoryRecord } from "../../domain/entities";
 import type { IConnectedSourceRepository, IMemoryRecordRepository } from "../../domain/repositories";
-import type { IntegrationProvider, MemoryRecordKind } from "../../domain/types";
+import type { IntegrationProvider, MemoryRecordDirection, MemoryRecordKind } from "../../domain/types";
 import type { ConnectSourceInput, ImportMemoryInput } from "../dtos";
 
 const providerLabels: Record<IntegrationProvider, string> = {
@@ -36,7 +36,10 @@ type ParsedMemoryLine = {
   content: string;
   occurredAt: Date | null;
   approximateTimeText: string | null;
+  direction: MemoryRecordDirection;
 };
+
+const outboundNames = new Set(["나", "저", "본인", "me", "myself"]);
 
 function normalizeProvider(provider: IntegrationProvider) {
   return providerLabels[provider] ? provider : "MANUAL";
@@ -54,34 +57,99 @@ function parseDate(dateText: string, timeText?: string) {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
+function parseKoreanDate(dateText: string) {
+  const match = dateText.match(/(20\d{2})\s*년\s*(\d{1,2})\s*월\s*(\d{1,2})\s*일/);
+  if (!match) return null;
+  return `${match[1]}-${match[2].padStart(2, "0")}-${match[3].padStart(2, "0")}`;
+}
+
+function normalizeKoreanTime(period: string | undefined, timeText: string | undefined) {
+  if (!timeText) return undefined;
+  const [hourText, minuteText] = timeText.split(":");
+  let hour = Number(hourText);
+  const minute = minuteText?.padStart(2, "0") ?? "00";
+  const normalizedPeriod = period?.toLowerCase();
+
+  if ((period === "오후" || normalizedPeriod === "pm") && hour < 12) hour += 12;
+  if ((period === "오전" || normalizedPeriod === "am") && hour === 12) hour = 0;
+
+  return `${String(hour).padStart(2, "0")}:${minute}:00`;
+}
+
+function inferDirection(participantName: string | null): MemoryRecordDirection {
+  if (!participantName) return "UNKNOWN";
+  return outboundNames.has(participantName.trim().toLowerCase()) ? "OUTBOUND" : "INBOUND";
+}
+
+function makeParsedLine(
+  participantName: string | null,
+  content: string,
+  occurredAt: Date | null,
+  approximateTimeText: string | null,
+): ParsedMemoryLine {
+  return {
+    participantName,
+    content: content.trim(),
+    occurredAt,
+    approximateTimeText,
+    direction: inferDirection(participantName),
+  };
+}
+
 export function parseMemoryText(rawText: string): ParsedMemoryLine[] {
-  return rawText
+  const parsed: ParsedMemoryLine[] = [];
+  let activeDateText: string | null = null;
+
+  for (const line of rawText
     .split(/\r?\n/)
     .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line) => {
-      const dated = line.match(/^(\d{4}[.-]\d{1,2}[.-]\d{1,2})(?:\s+(\d{1,2}:\d{2}(?::\d{2})?))?\s+(.+)$/);
-      const body = dated ? dated[3].trim() : line;
-      const occurredAt = dated ? parseDate(dated[1], dated[2]) : null;
-      const speaker = body.match(/^(?:\[([^\]]+)\]|([^:：]{1,40}))[:：]\s*(.+)$/);
+    .filter(Boolean)) {
+    const dateHeader = line.match(/^-+\s*(20\d{2}\s*년\s*\d{1,2}\s*월\s*\d{1,2}\s*일)[^-]*-+$/);
+    if (dateHeader) {
+      activeDateText = parseKoreanDate(dateHeader[1]);
+      continue;
+    }
 
-      if (speaker) {
-        const participantName = (speaker[1] ?? speaker[2] ?? "").trim() || null;
-        return {
-          participantName,
-          content: speaker[3].trim(),
-          occurredAt,
-          approximateTimeText: occurredAt ? null : dated?.[1] ?? null,
-        };
-      }
+    const bracketKakao = line.match(/^\[([^\]]+)\]\s*\[(오전|오후|AM|PM)?\s*(\d{1,2}:\d{2})\]\s*(.+)$/i);
+    if (bracketKakao) {
+      const timeText = normalizeKoreanTime(bracketKakao[2], bracketKakao[3]);
+      const occurredAt = activeDateText ? parseDate(activeDateText, timeText) : null;
+      parsed.push(makeParsedLine(bracketKakao[1].trim(), bracketKakao[4], occurredAt, occurredAt ? null : activeDateText));
+      continue;
+    }
 
-      return {
-        participantName: null,
-        content: body,
-        occurredAt,
-        approximateTimeText: occurredAt ? null : dated?.[1] ?? null,
-      };
-    });
+    const inlineKorean = line.match(
+      /^(20\d{2}\s*년\s*\d{1,2}\s*월\s*\d{1,2}\s*일)\s*(?:(오전|오후|AM|PM)\s*)?(\d{1,2}:\d{2})?,?\s*([^:：]{1,40})[:：]\s*(.+)$/i,
+    );
+    if (inlineKorean) {
+      const dateText = parseKoreanDate(inlineKorean[1]);
+      const timeText = normalizeKoreanTime(inlineKorean[2], inlineKorean[3]);
+      const occurredAt = dateText ? parseDate(dateText, timeText) : null;
+      parsed.push(makeParsedLine(inlineKorean[4].trim(), inlineKorean[5], occurredAt, occurredAt ? null : dateText));
+      continue;
+    }
+
+    const dated = line.match(/^(\d{4}[.-]\d{1,2}[.-]\d{1,2})(?:\s+(\d{1,2}:\d{2}(?::\d{2})?))?\s+(.+)$/);
+    const body = dated ? dated[3].trim() : line;
+    const occurredAt = dated ? parseDate(dated[1], dated[2]) : null;
+    const speaker = body.match(/^(?:\[([^\]]+)\]|([^:：]{1,40}))[:：]\s*(.+)$/);
+
+    if (speaker) {
+      const participantName = (speaker[1] ?? speaker[2] ?? "").trim() || null;
+      parsed.push(makeParsedLine(participantName, speaker[3], occurredAt, occurredAt ? null : dated?.[1] ?? null));
+      continue;
+    }
+
+    if (parsed.length > 0 && activeDateText) {
+      const last = parsed[parsed.length - 1];
+      last.content = `${last.content}\n${body}`;
+      continue;
+    }
+
+    parsed.push(makeParsedLine(null, body, occurredAt, occurredAt ? null : dated?.[1] ?? null));
+  }
+
+  return parsed;
 }
 
 export class MemoryIntegrationService {
@@ -149,7 +217,7 @@ export class MemoryIntegrationService {
         kind: providerKinds[provider],
         externalId: hashContent(raw).slice(0, 24),
         participantName: line.participantName,
-        direction: "UNKNOWN",
+        direction: line.direction,
         content: line.content,
         occurredAt: line.occurredAt,
         approximateTimeText: line.approximateTimeText,

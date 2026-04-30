@@ -19,6 +19,8 @@ import { Badge, Button, Card, Field, Input, Textarea, cn } from "./UI";
 import { NoticeModal } from "./NoticeModal";
 
 type Provider = "KAKAOTALK" | "GMAIL" | "OUTLOOK" | "SMS" | "INSTAGRAM" | "MANUAL";
+type SearchField = "ALL" | "NAME" | "CONTENT";
+type KeywordMode = "ANY" | "ALL";
 
 type Connector = {
   provider: Provider;
@@ -98,9 +100,10 @@ const providerStyles: Record<Provider, string> = {
 };
 
 const sampleText = [
-  "2026-04-30 09:10 상대방: 오늘 이야기한 내용 확인했습니다.",
-  "2026-04-30 09:14 나: 관련 자료는 이메일로 다시 보내 주세요.",
-  "2026-04-30 10:02 참고인: 그때 통화한 사실은 기억하고 있습니다.",
+  "--------------- 2026년 4월 30일 목요일 ---------------",
+  "[상대방] [오전 9:10] 오늘 이야기한 내용 확인했습니다.",
+  "[나] [오전 9:14] 관련 자료는 이메일로 다시 보내 주세요.",
+  "[참고인] [오전 10:02] 그때 통화한 사실은 기억하고 있습니다.",
 ].join("\n");
 
 function formatDate(value: string | null) {
@@ -119,6 +122,19 @@ function clip(value: string, length = 96) {
   return value.length > length ? `${value.slice(0, length)}...` : value;
 }
 
+function splitKeywords(value: string) {
+  return value
+    .split(",")
+    .map((keyword) => keyword.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+function directionLabel(direction: string) {
+  if (direction === "OUTBOUND") return "보낸 메시지";
+  if (direction === "INBOUND") return "받은 메시지";
+  return "방향 확인";
+}
+
 export function IntegrationCenter({ initialData }: { initialData: IntegrationData }) {
   const [data, setData] = useState(initialData);
   const [selectedConnector, setSelectedConnector] = useState<Connector | null>(null);
@@ -127,25 +143,32 @@ export function IntegrationCenter({ initialData }: { initialData: IntegrationDat
   const [sourceName, setSourceName] = useState("카카오톡 내보내기");
   const [rawText, setRawText] = useState("");
   const [query, setQuery] = useState("");
+  const [searchField, setSearchField] = useState<SearchField>("ALL");
+  const [keywordMode, setKeywordMode] = useState<KeywordMode>("ANY");
   const [selectedPerson, setSelectedPerson] = useState("ALL");
   const [isImporting, setIsImporting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const sourceByProvider = useMemo(() => new Map(data.sources.map((source) => [source.provider, source])), [data.sources]);
   const filteredRecords = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
+    const keywords = splitKeywords(query);
     return data.records
       .filter((record) => selectedPerson === "ALL" || record.participantName === selectedPerson)
       .filter((record) => {
-        if (!normalizedQuery) return true;
-        return [record.content, record.participantName, record.participantHandle, record.location, record.provider]
-          .filter(Boolean)
-          .join(" ")
-          .toLowerCase()
-          .includes(normalizedQuery);
+        if (keywords.length === 0) return true;
+        const fields =
+          searchField === "NAME"
+            ? [record.participantName, record.participantHandle]
+            : searchField === "CONTENT"
+              ? [record.content]
+              : [record.content, record.participantName, record.participantHandle, record.location, record.provider, record.kind];
+        const haystack = fields.filter(Boolean).join(" ").toLowerCase();
+        return keywordMode === "ALL"
+          ? keywords.every((keyword) => haystack.includes(keyword))
+          : keywords.some((keyword) => haystack.includes(keyword));
       })
       .sort((a, b) => new Date(b.occurredAt ?? b.createdAt).getTime() - new Date(a.occurredAt ?? a.createdAt).getTime());
-  }, [data.records, query, selectedPerson]);
+  }, [data.records, keywordMode, query, searchField, selectedPerson]);
 
   const recommendedQuestions = useMemo(() => {
     const missing = data.summary?.missingQuestions ?? [];
@@ -191,12 +214,14 @@ export function IntegrationCenter({ initialData }: { initialData: IntegrationDat
 
   async function submitImport(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const submittedRawText = String(form.get("rawText") ?? rawText);
     setIsImporting(true);
     try {
       const response = await fetch("/api/integrations/import", {
         method: "POST",
         headers: { "content-type": "application/json", accept: "application/json" },
-        body: JSON.stringify({ provider, sourceName, rawText }),
+        body: JSON.stringify({ provider, sourceName, rawText: submittedRawText }),
       });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error ?? "원문을 가져올 수 없습니다.");
@@ -239,7 +264,6 @@ export function IntegrationCenter({ initialData }: { initialData: IntegrationDat
           </div>
           <div className="grid gap-2">
             {data.connectors.map((connector) => {
-              const Icon = providerIcons[connector.provider];
               const source = sourceByProvider.get(connector.provider);
               return (
                 <button
@@ -250,7 +274,7 @@ export function IntegrationCenter({ initialData }: { initialData: IntegrationDat
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <Icon size={18} />
+                      <ChannelVisual provider={connector.provider} />
                       <span className="font-bold">{connector.label}</span>
                     </div>
                     <Badge tone={source ? "green" : "slate"}>{source ? statusLabel(source.status) : connector.capability}</Badge>
@@ -259,6 +283,24 @@ export function IntegrationCenter({ initialData }: { initialData: IntegrationDat
                 </button>
               );
             })}
+          </div>
+        </Card>
+
+        <Card className="space-y-3 border-yellow-200 bg-yellow-50">
+          <div className="flex items-start gap-3">
+            <ChannelVisual provider="KAKAOTALK" />
+            <div>
+              <h2 className="font-bold text-yellow-950">카카오톡 가져오기 방식</h2>
+              <p className="mt-1 text-sm leading-6 text-yellow-950/80">
+                PC 카카오톡에서 대화방을 열고 대화 내보내기로 저장한 텍스트를 가져옵니다. 자동 GUI 조작 방식은 환경 의존성이 커서 서버 기능으로 제공하지 않고, 사용자 기기에서 생성된 파일만 처리합니다.
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-2 text-xs leading-5 text-yellow-950/80">
+            <div className="rounded-lg bg-white/70 p-3">1. PC 카카오톡 대화방 열기</div>
+            <div className="rounded-lg bg-white/70 p-3">2. 대화 내용 저장 또는 내보내기 실행</div>
+            <div className="rounded-lg bg-white/70 p-3">3. FACTLINE에서 텍스트 파일 선택 또는 원문 붙여넣기</div>
+            <div className="rounded-lg bg-white/70 p-3">4. 날짜, 시간, 발신자, 보낸/받은 방향, 문구, SHA-256 해시 저장</div>
           </div>
         </Card>
 
@@ -292,9 +334,12 @@ export function IntegrationCenter({ initialData }: { initialData: IntegrationDat
             </div>
             <Field label="원문">
               <Textarea
+                name="rawText"
                 value={rawText}
                 onChange={(event) => setRawText(event.target.value)}
-                placeholder="YYYY-MM-DD HH:mm 이름: 실제 메시지 내용"
+                placeholder="--------------- 2026년 4월 30일 목요일 ---------------
+[나] [오후 2:05] 실제 보낸 메시지
+[상대방] [오후 2:07] 실제 받은 메시지"
                 className="min-h-48"
                 required
               />
@@ -330,11 +375,50 @@ export function IntegrationCenter({ initialData }: { initialData: IntegrationDat
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
               <h2 className="font-bold">기록 검색</h2>
-              <p className="mt-1 text-sm leading-6 text-slate-600">사람, 사건명, 문구, 채널 기준으로 직접 찾습니다.</p>
+              <p className="mt-1 text-sm leading-6 text-slate-600">검색 기준을 고르고 쉼표로 여러 키워드를 입력해 관련 메시지를 가져옵니다.</p>
             </div>
             <div className="relative md:w-80">
               <Search className="pointer-events-none absolute left-3 top-3 text-slate-400" size={16} />
-              <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="이름, 문구, 사건 키워드" className="pl-9" />
+              <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="예: 계약금, 환불, 약속" className="pl-9" />
+            </div>
+          </div>
+          <div className="grid gap-2 md:grid-cols-2">
+            <div className="flex flex-wrap gap-2">
+              {[
+                { value: "ALL", label: "전체" },
+                { value: "NAME", label: "이름" },
+                { value: "CONTENT", label: "내용" },
+              ].map((item) => (
+                <button
+                  key={item.value}
+                  type="button"
+                  onClick={() => setSearchField(item.value as SearchField)}
+                  className={cn(
+                    "rounded-lg border px-3 py-2 text-xs font-semibold",
+                    searchField === item.value ? "border-slate-900 bg-slate-900 text-white" : "border-stone-200 bg-white text-slate-700",
+                  )}
+                >
+                  {item.label} 검색
+                </button>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-2 md:justify-end">
+              {[
+                { value: "ANY", label: "하나라도 포함" },
+                { value: "ALL", label: "모두 포함" },
+              ].map((item) => (
+                <button
+                  key={item.value}
+                  type="button"
+                  onClick={() => setKeywordMode(item.value as KeywordMode)}
+                  className={cn(
+                    "rounded-lg border px-3 py-2 text-xs font-semibold",
+                    keywordMode === item.value ? "border-emerald-800 bg-emerald-800 text-white" : "border-stone-200 bg-white text-slate-700",
+                  )}
+                >
+                  {item.label}
+                </button>
+              ))}
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -458,9 +542,58 @@ function MemoryRecordCard({ record }: { record: RecordView }) {
       <p className="whitespace-pre-wrap text-sm leading-6 text-slate-700">{clip(record.content, 220)}</p>
       <div className="flex flex-wrap gap-2 text-xs text-slate-500">
         <span className="rounded-md bg-stone-100 px-2 py-1">{record.provider}</span>
+        <span className="rounded-md bg-stone-100 px-2 py-1">{directionLabel(record.direction)}</span>
         {record.location ? <span className="rounded-md bg-stone-100 px-2 py-1">{record.location}</span> : null}
         {record.fileHash ? <span className="rounded-md bg-stone-100 px-2 py-1">sha256 {record.fileHash.slice(0, 12)}...</span> : null}
       </div>
     </Card>
+  );
+}
+
+function ChannelVisual({ provider }: { provider: Provider }) {
+  if (provider === "KAKAOTALK") {
+    return (
+      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#FEE500] text-[10px] font-black text-[#3B1E1E]">
+        TALK
+      </span>
+    );
+  }
+
+  if (provider === "GMAIL") {
+    return (
+      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-stone-200">
+        <span className="h-4 w-6 rounded-sm border-l-4 border-r-4 border-t-4 border-l-blue-500 border-r-green-500 border-t-red-500 border-b-yellow-400" />
+      </span>
+    );
+  }
+
+  if (provider === "INSTAGRAM") {
+    return (
+      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-fuchsia-600 via-rose-500 to-yellow-400 text-white">
+        <Instagram size={20} />
+      </span>
+    );
+  }
+
+  if (provider === "OUTLOOK") {
+    return (
+      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-sky-400 to-blue-700 text-white">
+        <Mail size={19} />
+      </span>
+    );
+  }
+
+  if (provider === "SMS") {
+    return (
+      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lime-500 text-white">
+        <Phone size={19} />
+      </span>
+    );
+  }
+
+  return (
+    <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-600 text-white">
+      <MessageCircle size={19} />
+    </span>
   );
 }
