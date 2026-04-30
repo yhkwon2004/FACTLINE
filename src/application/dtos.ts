@@ -1,4 +1,4 @@
-import type { IncidentType, LifeRecordType } from "../domain/types";
+import type { IncidentType, IntegrationProvider, LifeRecordType } from "../domain/types";
 
 export interface RegisterInput {
   email: string;
@@ -52,6 +52,20 @@ export interface LifeRecordInput {
   location?: string | null;
   people?: string | null;
   tags?: string[];
+}
+
+export interface ConnectSourceInput {
+  userId: string;
+  provider: IntegrationProvider;
+  displayName?: string;
+  consentScopes?: string[];
+}
+
+export interface ImportMemoryInput {
+  userId: string;
+  provider: IntegrationProvider;
+  sourceName?: string | null;
+  rawText: string;
 }
 
 export interface StatementDraftInput {

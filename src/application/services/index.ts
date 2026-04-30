@@ -9,3 +9,4 @@ export * from "./ReportService";
 export * from "./SecurityAuditService";
 export * from "./AuthNavigationPolicy";
 export * from "./LifeRecordService";
+export * from "./MemoryIntegrationService";

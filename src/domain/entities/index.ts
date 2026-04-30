@@ -6,3 +6,5 @@ export * from "./AnalysisResult";
 export * from "./LegalReference";
 export * from "./Report";
 export * from "./LifeRecord";
+export * from "./ConnectedSource";
+export * from "./MemoryRecord";

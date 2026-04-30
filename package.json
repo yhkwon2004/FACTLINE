@@ -10,7 +10,7 @@
     "preview": "next start",
     "clean": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\"",
     "lint": "tsc --noEmit",
-    "test": "node --test --import tsx src/domain/services/domain-services.test.ts src/application/services/auth-navigation-policy.test.ts src/application/services/auth-service.test.ts"
+    "test": "node --test --import tsx src/domain/services/domain-services.test.ts src/application/services/auth-navigation-policy.test.ts src/application/services/auth-service.test.ts src/application/services/memory-integration-service.test.ts"
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.170",

@@ -18,6 +18,8 @@ model User {
   passwordHash String
   cases        Case[]
   lifeRecords  LifeRecord[]
+  connectedSources ConnectedSource[]
+  memoryRecords MemoryRecord[]
   auditLogs    AuditLog[]
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
@@ -93,6 +95,51 @@ model LifeRecord {
   tags                String?  // JSON string
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
+}
+
+model ConnectedSource {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  provider      String
+  displayName   String
+  status        String   @default("IMPORT_ONLY")
+  consentScopes String?
+  consentedAt   DateTime?
+  lastSyncedAt  DateTime?
+  memoryRecords MemoryRecord[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([userId, provider])
+  @@index([userId])
+}
+
+model MemoryRecord {
+  id                  String   @id @default(uuid())
+  userId              String
+  user                User     @relation(fields: [userId], references: [id])
+  sourceId            String?
+  source              ConnectedSource? @relation(fields: [sourceId], references: [id])
+  provider            String
+  kind                String   @default("MESSAGE")
+  externalId          String?
+  participantName     String?
+  participantHandle   String?
+  direction           String   @default("UNKNOWN")
+  content             String
+  occurredAt          DateTime?
+  approximateTimeText String?
+  location            String?
+  metadata            String?
+  attachmentNames     String?
+  fileHash            String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([userId, occurredAt])
+  @@index([userId, participantName])
+  @@index([userId, provider])
 }
 
 model AnalysisResult {

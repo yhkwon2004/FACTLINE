@@ -1,25 +1,36 @@
 import {
   IAnalysisRepository,
   ICaseRepository,
+  IConnectedSourceRepository,
   IEvidenceRepository,
   IEventRepository,
   ILegalReferenceRepository,
   ILifeRecordRepository,
+  IMemoryRecordRepository,
   IReportRepository,
   IUserRepository,
 } from "../../domain/repositories";
 import {
   AnalysisResult,
   Case,
+  ConnectedSource,
   Evidence,
   IncidentEvent,
   LegalReference,
   LifeRecord,
+  MemoryRecord,
   Report,
   User,
 } from "../../domain/entities";
 import { getPrismaClient } from "../prisma-client";
-import type { IncidentType, LifeRecordType } from "../../domain/types";
+import type {
+  ConnectedSourceStatus,
+  IncidentType,
+  IntegrationProvider,
+  LifeRecordType,
+  MemoryRecordDirection,
+  MemoryRecordKind,
+} from "../../domain/types";
 
 type PrismaCaseWithRelations = Awaited<ReturnType<ReturnType<typeof getPrismaClient>["case"]["findUnique"]>>;
 
@@ -98,6 +109,64 @@ function mapLifeRecord(data: any) {
     location: data.location,
     people: data.people,
     tags: data.tags ? JSON.parse(data.tags) : [],
+    createdAt: data.createdAt,
+    updatedAt: data.updatedAt,
+  });
+}
+
+function parseJsonArray(value?: string | null) {
+  if (!value) return [];
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function parseJsonObject(value?: string | null) {
+  if (!value) return {};
+  try {
+    const parsed = JSON.parse(value);
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function mapConnectedSource(data: any) {
+  return new ConnectedSource({
+    id: data.id,
+    userId: data.userId,
+    provider: data.provider as IntegrationProvider,
+    displayName: data.displayName,
+    status: data.status as ConnectedSourceStatus,
+    consentScopes: parseJsonArray(data.consentScopes).map(String),
+    consentedAt: data.consentedAt,
+    lastSyncedAt: data.lastSyncedAt,
+    createdAt: data.createdAt,
+    updatedAt: data.updatedAt,
+  });
+}
+
+function mapMemoryRecord(data: any) {
+  return new MemoryRecord({
+    id: data.id,
+    userId: data.userId,
+    sourceId: data.sourceId,
+    provider: data.provider as IntegrationProvider,
+    kind: data.kind as MemoryRecordKind,
+    externalId: data.externalId,
+    participantName: data.participantName,
+    participantHandle: data.participantHandle,
+    direction: data.direction as MemoryRecordDirection,
+    content: data.content,
+    occurredAt: data.occurredAt,
+    approximateTimeText: data.approximateTimeText,
+    location: data.location,
+    metadata: parseJsonObject(data.metadata),
+    attachmentNames: parseJsonArray(data.attachmentNames).map(String),
+    fileHash: data.fileHash,
     createdAt: data.createdAt,
     updatedAt: data.updatedAt,
   });
@@ -465,5 +534,98 @@ export class PrismaLifeRecordRepository implements ILifeRecordRepository {
 
   async delete(id: string): Promise<void> {
     await getPrismaClient().lifeRecord.delete({ where: { id } });
+  }
+}
+
+export class PrismaConnectedSourceRepository implements IConnectedSourceRepository {
+  async findByUserId(userId: string): Promise<ConnectedSource[]> {
+    const data = await getPrismaClient().connectedSource.findMany({
+      where: { userId },
+      orderBy: { updatedAt: "desc" },
+    });
+    return data.map(mapConnectedSource);
+  }
+
+  async findByUserAndProvider(userId: string, provider: IntegrationProvider): Promise<ConnectedSource | null> {
+    const data = await getPrismaClient().connectedSource.findUnique({
+      where: { userId_provider: { userId, provider } },
+    });
+    return data ? mapConnectedSource(data) : null;
+  }
+
+  async save(source: ConnectedSource): Promise<ConnectedSource> {
+    const data = await getPrismaClient().connectedSource.upsert({
+      where: { id: source.id },
+      update: {
+        provider: source.provider,
+        displayName: source.displayName,
+        status: source.status,
+        consentScopes: JSON.stringify(source.consentScopes),
+        consentedAt: source.consentedAt,
+        lastSyncedAt: source.lastSyncedAt,
+      },
+      create: {
+        id: source.id,
+        userId: source.userId,
+        provider: source.provider,
+        displayName: source.displayName,
+        status: source.status,
+        consentScopes: JSON.stringify(source.consentScopes),
+        consentedAt: source.consentedAt,
+        lastSyncedAt: source.lastSyncedAt,
+      },
+    });
+    return mapConnectedSource(data);
+  }
+}
+
+export class PrismaMemoryRecordRepository implements IMemoryRecordRepository {
+  async findByUserId(userId: string): Promise<MemoryRecord[]> {
+    const data = await getPrismaClient().memoryRecord.findMany({
+      where: { userId },
+      orderBy: [{ occurredAt: "desc" }, { createdAt: "desc" }],
+      take: 500,
+    });
+    return data.map(mapMemoryRecord);
+  }
+
+  async findByUserAndParticipant(userId: string, participantName: string): Promise<MemoryRecord[]> {
+    const data = await getPrismaClient().memoryRecord.findMany({
+      where: { userId, participantName: { contains: participantName, mode: "insensitive" } },
+      orderBy: [{ occurredAt: "asc" }, { createdAt: "asc" }],
+      take: 300,
+    });
+    return data.map(mapMemoryRecord);
+  }
+
+  async saveMany(records: MemoryRecord[]): Promise<MemoryRecord[]> {
+    if (records.length === 0) return [];
+
+    const saved = await getPrismaClient().$transaction(
+      records.map((record) =>
+        getPrismaClient().memoryRecord.create({
+          data: {
+            id: record.id,
+            userId: record.userId,
+            sourceId: record.sourceId,
+            provider: record.provider,
+            kind: record.kind,
+            externalId: record.externalId,
+            participantName: record.participantName,
+            participantHandle: record.participantHandle,
+            direction: record.direction,
+            content: record.content,
+            occurredAt: record.occurredAt,
+            approximateTimeText: record.approximateTimeText,
+            location: record.location,
+            metadata: JSON.stringify(record.metadata),
+            attachmentNames: JSON.stringify(record.attachmentNames),
+            fileHash: record.fileHash,
+          },
+        }),
+      ),
+    );
+
+    return saved.map(mapMemoryRecord);
   }
 }

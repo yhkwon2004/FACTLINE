@@ -19,6 +19,13 @@ describe("AuthNavigationPolicy", () => {
     assert.equal(decision.location, "/login?next=%2Flife&reason=auth-required");
   });
 
+  it("requires login for memory source integrations", () => {
+    const decision = policy.decide({ pathname: "/integrations", isAuthenticated: false });
+
+    assert.equal(decision.kind, "redirect");
+    assert.equal(decision.location, "/login?next=%2Fintegrations&reason=auth-required");
+  });
+
   it("allows public entry and auth pages without a session", () => {
     assert.equal(policy.decide({ pathname: "/", isAuthenticated: false }).kind, "allow");
     assert.equal(policy.decide({ pathname: "/login", isAuthenticated: false }).kind, "allow");

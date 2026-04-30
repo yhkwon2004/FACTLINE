@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Briefcase, Home, LockKeyhole, NotebookPen, Plus, ShieldCheck, UserRound } from "lucide-react";
+import { Briefcase, Home, Link2, LockKeyhole, NotebookPen, Plus, ShieldCheck, UserRound } from "lucide-react";
 import { cn } from "./UI";
 import { NoticeModal } from "./NoticeModal";
 import { LEGAL_SAFETY_NOTICE } from "../../domain/constants";
@@ -11,6 +11,7 @@ import { LEGAL_SAFETY_NOTICE } from "../../domain/constants";
 const navItems = [
   { href: "/dashboard", label: "대시보드", icon: Home },
   { href: "/life", label: "일상 기록", icon: NotebookPen },
+  { href: "/integrations", label: "연동", icon: Link2 },
   { href: "/cases/new", label: "새 사건", icon: Plus },
   { href: "/mypage", label: "마이페이지", icon: UserRound },
   { href: "/settings/security", label: "보안", icon: LockKeyhole },
@@ -83,7 +84,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         </header>
         <main className="mx-auto max-w-6xl px-4 py-5 pb-24 md:px-8 md:py-8">{children}</main>
-        <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t border-stone-200 bg-white md:hidden">
+        <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-6 border-t border-stone-200 bg-white md:hidden">
           {navItems.map((item) => {
             const Icon = item.icon;
             const active = pathname === item.href;

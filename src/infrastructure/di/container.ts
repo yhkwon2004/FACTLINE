@@ -6,6 +6,7 @@ import {
   InterviewService,
   LegalReferenceService,
   LifeRecordService,
+  MemoryIntegrationService,
   ReportService,
   SecurityAuditService,
   TimelineApplicationService,
@@ -23,20 +24,24 @@ import { LocalMockStorageService } from "../storage/LocalMockStorageService";
 import {
   PrismaAnalysisRepository,
   PrismaCaseRepository,
+  PrismaConnectedSourceRepository,
   PrismaEvidenceRepository,
   PrismaEventRepository,
   PrismaLegalReferenceRepository,
   PrismaLifeRecordRepository,
+  PrismaMemoryRecordRepository,
   PrismaReportRepository,
   PrismaUserRepository,
 } from "../repositories/prisma-repositories";
 import {
   LocalJsonAnalysisRepository,
   LocalJsonCaseRepository,
+  LocalJsonConnectedSourceRepository,
   LocalJsonEvidenceRepository,
   LocalJsonEventRepository,
   LocalJsonLegalReferenceRepository,
   LocalJsonLifeRecordRepository,
+  LocalJsonMemoryRecordRepository,
   LocalJsonReportRepository,
   LocalJsonUserRepository,
 } from "../repositories/local-json-repositories";
@@ -57,6 +62,8 @@ function createRepositories() {
       legalReferences: new LocalJsonLegalReferenceRepository(),
       reports: new LocalJsonReportRepository(),
       lifeRecords: new LocalJsonLifeRecordRepository(),
+      connectedSources: new LocalJsonConnectedSourceRepository(),
+      memoryRecords: new LocalJsonMemoryRecordRepository(),
     };
   }
 
@@ -69,11 +76,14 @@ function createRepositories() {
     legalReferences: new PrismaLegalReferenceRepository(),
     reports: new PrismaReportRepository(),
     lifeRecords: new PrismaLifeRecordRepository(),
+    connectedSources: new PrismaConnectedSourceRepository(),
+    memoryRecords: new PrismaMemoryRecordRepository(),
   };
 }
 
 export function createContainer() {
-  const { users, cases, events, evidences, analyses, legalReferences, reports, lifeRecords } = createRepositories();
+  const { users, cases, events, evidences, analyses, legalReferences, reports, lifeRecords, connectedSources, memoryRecords } =
+    createRepositories();
 
   const ai = process.env.AI_PROVIDER === "local" || process.env.LOCAL_LLM_ENDPOINT
     ? new LocalLLMService()
@@ -97,6 +107,7 @@ export function createContainer() {
     ),
     legalReferenceService,
     lifeRecordService: new LifeRecordService(lifeRecords, cases),
+    memoryIntegrationService: new MemoryIntegrationService(connectedSources, memoryRecords),
     reportService: new ReportService(cases, analyses, reports, lifeRecords, ai, legalReferenceService),
     securityAuditService: new SecurityAuditService(users, cases, new SecurityAuditWriter()),
     sessionService: new JwtSessionService(),

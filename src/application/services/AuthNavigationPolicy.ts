@@ -9,7 +9,7 @@ export interface NavigationInput {
 }
 
 const PUBLIC_PATHS = new Set(["/", "/login", "/register"]);
-const PROTECTED_PREFIXES = ["/dashboard", "/cases", "/settings", "/mypage", "/life"];
+const PROTECTED_PREFIXES = ["/dashboard", "/cases", "/settings", "/mypage", "/life", "/integrations"];
 
 export class AuthNavigationPolicy {
   decide(input: NavigationInput): NavigationDecision {

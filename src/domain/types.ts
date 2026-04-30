@@ -4,6 +4,10 @@ export type EventSource = "INTERVIEW" | "EVIDENCE" | "MANUAL";
 export type RiskLevel = "LOW" | "MEDIUM" | "HIGH";
 export type ReportStatus = "DRAFT" | "FINAL";
 export type LifeRecordType = "NOTE" | "SCHEDULE" | "EVENT" | "ISSUE";
+export type IntegrationProvider = "KAKAOTALK" | "GMAIL" | "OUTLOOK" | "SMS" | "INSTAGRAM" | "MANUAL";
+export type ConnectedSourceStatus = "ACTIVE" | "IMPORT_ONLY" | "NEEDS_OAUTH" | "DISCONNECTED";
+export type MemoryRecordKind = "MESSAGE" | "EMAIL" | "SMS" | "SOCIAL_DM" | "CALL" | "LOCATION" | "PHOTO" | "NOTE";
+export type MemoryRecordDirection = "INBOUND" | "OUTBOUND" | "UNKNOWN";
 
 export type MissingField = "when" | "where" | "who" | "action" | "damage" | "evidence";
 export type ContradictionType = "TIME" | "LOCATION" | "ACTOR" | "SEQUENCE";

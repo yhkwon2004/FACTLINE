@@ -4,24 +4,35 @@ import { join } from "node:path";
 import {
   AnalysisResult,
   Case,
+  ConnectedSource,
   Evidence,
   IncidentEvent,
   LegalReference,
   LifeRecord,
+  MemoryRecord,
   Report,
   User,
 } from "../../domain/entities";
 import type {
   IAnalysisRepository,
   ICaseRepository,
+  IConnectedSourceRepository,
   IEvidenceRepository,
   IEventRepository,
   ILegalReferenceRepository,
   ILifeRecordRepository,
+  IMemoryRecordRepository,
   IReportRepository,
   IUserRepository,
 } from "../../domain/repositories";
-import type { IncidentType, LifeRecordType } from "../../domain/types";
+import type {
+  ConnectedSourceStatus,
+  IncidentType,
+  IntegrationProvider,
+  LifeRecordType,
+  MemoryRecordDirection,
+  MemoryRecordKind,
+} from "../../domain/types";
 
 type StoredUser = {
   id: string;
@@ -126,6 +137,40 @@ type StoredLifeRecord = {
   updatedAt: string;
 };
 
+type StoredConnectedSource = {
+  id: string;
+  userId: string;
+  provider: IntegrationProvider;
+  displayName: string;
+  status: ConnectedSourceStatus;
+  consentScopes: string[];
+  consentedAt?: string | null;
+  lastSyncedAt?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type StoredMemoryRecord = {
+  id: string;
+  userId: string;
+  sourceId?: string | null;
+  provider: IntegrationProvider;
+  kind: MemoryRecordKind;
+  externalId?: string | null;
+  participantName?: string | null;
+  participantHandle?: string | null;
+  direction: MemoryRecordDirection;
+  content: string;
+  occurredAt?: string | null;
+  approximateTimeText?: string | null;
+  location?: string | null;
+  metadata: Record<string, unknown>;
+  attachmentNames: string[];
+  fileHash?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
 type LocalStore = {
   users: StoredUser[];
   cases: StoredCase[];
@@ -135,6 +180,8 @@ type LocalStore = {
   legalReferences: StoredLegalReference[];
   reports: StoredReport[];
   lifeRecords: StoredLifeRecord[];
+  connectedSources: StoredConnectedSource[];
+  memoryRecords: StoredMemoryRecord[];
 };
 
 const storePath =
@@ -153,6 +200,8 @@ function emptyStore(): LocalStore {
     legalReferences: [],
     reports: [],
     lifeRecords: [],
+    connectedSources: [],
+    memoryRecords: [],
   };
 }
 
@@ -236,6 +285,25 @@ function mapLifeRecord(data: StoredLifeRecord) {
   });
 }
 
+function mapConnectedSource(data: StoredConnectedSource) {
+  return new ConnectedSource({
+    ...data,
+    consentedAt: toNullableDate(data.consentedAt),
+    lastSyncedAt: toNullableDate(data.lastSyncedAt),
+    createdAt: toDate(data.createdAt),
+    updatedAt: toDate(data.updatedAt),
+  });
+}
+
+function mapMemoryRecord(data: StoredMemoryRecord) {
+  return new MemoryRecord({
+    ...data,
+    occurredAt: toNullableDate(data.occurredAt),
+    createdAt: toDate(data.createdAt),
+    updatedAt: toDate(data.updatedAt),
+  });
+}
+
 function storeUser(user: User): StoredUser {
   return {
     id: user.id,
@@ -309,6 +377,44 @@ function storeLifeRecord(record: LifeRecord): StoredLifeRecord {
     location: record.location,
     people: record.people,
     tags: record.tags,
+    createdAt: record.createdAt.toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+}
+
+function storeConnectedSource(source: ConnectedSource): StoredConnectedSource {
+  return {
+    id: source.id,
+    userId: source.userId,
+    provider: source.provider,
+    displayName: source.displayName,
+    status: source.status,
+    consentScopes: source.consentScopes,
+    consentedAt: iso(source.consentedAt),
+    lastSyncedAt: iso(source.lastSyncedAt),
+    createdAt: source.createdAt.toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+}
+
+function storeMemoryRecord(record: MemoryRecord): StoredMemoryRecord {
+  return {
+    id: record.id,
+    userId: record.userId,
+    sourceId: record.sourceId,
+    provider: record.provider,
+    kind: record.kind,
+    externalId: record.externalId,
+    participantName: record.participantName,
+    participantHandle: record.participantHandle,
+    direction: record.direction,
+    content: record.content,
+    occurredAt: iso(record.occurredAt),
+    approximateTimeText: record.approximateTimeText,
+    location: record.location,
+    metadata: record.metadata,
+    attachmentNames: record.attachmentNames,
+    fileHash: record.fileHash,
     createdAt: record.createdAt.toISOString(),
     updatedAt: new Date().toISOString(),
   };
@@ -601,6 +707,59 @@ export class LocalJsonLifeRecordRepository implements ILifeRecordRepository {
   async delete(id: string): Promise<void> {
     updateStore((store) => {
       store.lifeRecords = store.lifeRecords.filter((record) => record.id !== id);
+    });
+  }
+}
+
+export class LocalJsonConnectedSourceRepository implements IConnectedSourceRepository {
+  async findByUserId(userId: string): Promise<ConnectedSource[]> {
+    return readStore()
+      .connectedSources.filter((source) => source.userId === userId)
+      .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+      .map(mapConnectedSource);
+  }
+
+  async findByUserAndProvider(userId: string, provider: IntegrationProvider): Promise<ConnectedSource | null> {
+    const data = readStore().connectedSources.find((source) => source.userId === userId && source.provider === provider);
+    return data ? mapConnectedSource(data) : null;
+  }
+
+  async save(source: ConnectedSource): Promise<ConnectedSource> {
+    return updateStore((store) => {
+      const data = storeConnectedSource(source);
+      const index = store.connectedSources.findIndex(
+        (item) => item.id === source.id || (item.userId === source.userId && item.provider === source.provider),
+      );
+      if (index >= 0) store.connectedSources[index] = { ...store.connectedSources[index], ...data };
+      else store.connectedSources.push(data);
+      return mapConnectedSource(data);
+    });
+  }
+}
+
+export class LocalJsonMemoryRecordRepository implements IMemoryRecordRepository {
+  async findByUserId(userId: string): Promise<MemoryRecord[]> {
+    return readStore()
+      .memoryRecords.filter((record) => record.userId === userId)
+      .sort((a, b) => (b.occurredAt ?? b.createdAt).localeCompare(a.occurredAt ?? a.createdAt))
+      .slice(0, 500)
+      .map(mapMemoryRecord);
+  }
+
+  async findByUserAndParticipant(userId: string, participantName: string): Promise<MemoryRecord[]> {
+    const normalized = participantName.toLowerCase();
+    return readStore()
+      .memoryRecords.filter((record) => record.userId === userId && (record.participantName ?? "").toLowerCase().includes(normalized))
+      .sort((a, b) => (a.occurredAt ?? a.createdAt).localeCompare(b.occurredAt ?? b.createdAt))
+      .slice(0, 300)
+      .map(mapMemoryRecord);
+  }
+
+  async saveMany(records: MemoryRecord[]): Promise<MemoryRecord[]> {
+    return updateStore((store) => {
+      const stored = records.map(storeMemoryRecord);
+      stored.forEach((record) => upsertById(store.memoryRecords, record));
+      return stored.map(mapMemoryRecord);
     });
   }
 }

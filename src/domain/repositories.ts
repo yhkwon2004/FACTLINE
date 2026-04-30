@@ -1,4 +1,5 @@
-import { User, Case, IncidentEvent, Evidence, AnalysisResult, LegalReference, Report, LifeRecord } from "./entities";
+import { User, Case, IncidentEvent, Evidence, AnalysisResult, LegalReference, Report, LifeRecord, ConnectedSource, MemoryRecord } from "./entities";
+import type { IntegrationProvider } from "./types";
 
 export interface IUserRepository {
   findById(id: string): Promise<User | null>;
@@ -50,4 +51,16 @@ export interface ILifeRecordRepository {
   findByCaseId(caseId: string): Promise<LifeRecord[]>;
   save(record: LifeRecord): Promise<LifeRecord>;
   delete(id: string): Promise<void>;
+}
+
+export interface IConnectedSourceRepository {
+  findByUserId(userId: string): Promise<ConnectedSource[]>;
+  findByUserAndProvider(userId: string, provider: IntegrationProvider): Promise<ConnectedSource | null>;
+  save(source: ConnectedSource): Promise<ConnectedSource>;
+}
+
+export interface IMemoryRecordRepository {
+  findByUserId(userId: string): Promise<MemoryRecord[]>;
+  findByUserAndParticipant(userId: string, participantName: string): Promise<MemoryRecord[]>;
+  saveMany(records: MemoryRecord[]): Promise<MemoryRecord[]>;
 }
