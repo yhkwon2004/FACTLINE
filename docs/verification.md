@@ -29,3 +29,5 @@ Google Client ID는 사용자 요청에 따라 미설정입니다. 실제 Google
 - 실제 스마트폰 하드웨어의 두 손가락 제스처는 미검증. 모바일 CSS와 확대/이동 버튼은 브라우저 뷰포트로 검사하며 원본·실제 사건 정확도는 기존 한계가 유지됨.
 
 편집 스튜디오 최종 화면과 모바일 화면을 실제 앱에서 촬영했습니다. 실제로 내려받은 SVG는 XML 파싱과 텍스트·경로 보존을 검사했고 스크립트가 없음을 확인했습니다. 합성 예시 출력은 screenshots/diagram-example.svg에 있습니다. 375px 모바일 가로 넘침 없음, 확대 버튼·화면 이동 동작 확인. 브라우저 자동화의 download 이벤트 대기가 응답하지 않아 앱 완료 상태와 실제 다운로드 파일로 검증했습니다.
+
+공개 배포 확인: 기능 커밋 238cefd, Vercel dpl_JBSfHrBQauy7Ud32jbFrAEUoBU1D. https://eumlog-evidence.vercel.app 에서 check-diagram.mjs의 8개 HTTP 흐름 및 오래된 쿠키 로그인 검사를 통과했습니다. Blob CAS로 동시 저장 중 하나만 반영되고 다른 요청은 409로 보존됨을 확인했습니다. 검사용 계정·관계도는 finally에서 삭제했습니다.
