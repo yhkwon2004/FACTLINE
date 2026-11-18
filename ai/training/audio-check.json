@@ -1,0 +1,25 @@
+{
+  "check": "WAV / AAC-M4A / Opus-WebM decode; invalid and playlist rejection; actual local Whisper; date vs recording offset",
+  "duration": 11.93,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 3.74,
+      "text": "이 녹음은 기능 검증용 합성 자료입니다.",
+      "approximate": true
+    },
+    {
+      "start": 3.74,
+      "end": 8.9,
+      "text": "2026년 5월 12일 교실에서 있었던 일을 기록합니다.",
+      "approximate": true
+    },
+    {
+      "start": 8.9,
+      "end": 11.93,
+      "text": "실제 인물이나 사건이 아닙니다.",
+      "approximate": true
+    }
+  ],
+  "synthetic": true
+}

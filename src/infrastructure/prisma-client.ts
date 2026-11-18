@@ -10,4 +10,4 @@ export function getPrismaClient() {
   return globalForPrisma.prisma;
 }
 
-export default getPrismaClient();
+export default getPrismaClient;

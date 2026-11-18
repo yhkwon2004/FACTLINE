@@ -1,114 +1,127 @@
 "use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Briefcase, Home, Link2, LockKeyhole, NotebookPen, Plus, ShieldCheck, UserRound } from "lucide-react";
+import {
+  FolderOpen,
+  Home,
+  NotebookPen,
+  Settings,
+  Plus,
+  ArrowUpRight,
+  ShieldCheck,
+  CircleHelp,
+} from "lucide-react";
 import { cn } from "./UI";
-import { NoticeModal } from "./NoticeModal";
-import { LEGAL_SAFETY_NOTICE } from "../../domain/constants";
-
-const navItems = [
-  { href: "/dashboard", label: "대시보드", icon: Home },
-  { href: "/life", label: "다이어리", icon: NotebookPen },
-  { href: "/integrations", label: "연동", icon: Link2 },
-  { href: "/cases/new", label: "정리 시작", icon: Plus },
-  { href: "/mypage", label: "마이페이지", icon: UserRound },
-  { href: "/settings/security", label: "보안", icon: LockKeyhole },
+const links = [
+  { href: "/dashboard", label: "홈", icon: Home },
+  { href: "/cases", label: "내 사건", icon: FolderOpen },
+  { href: "/life", label: "기록", icon: NotebookPen },
+  { href: "/mypage", label: "내 정보", icon: Settings },
 ];
-
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [showSafetyNotice, setShowSafetyNotice] = useState(false);
-
   return (
-    <div className="min-h-screen bg-stone-50 text-slate-900">
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-stone-200 bg-white md:flex md:flex-col">
-        <div className="border-b border-stone-200 px-6 py-5">
-          <Link href="/dashboard" className="text-xl font-bold tracking-tight">
-            maze_FACTLINE
-          </Link>
-          <p className="mt-1 text-xs text-slate-500">사실관계 정리 도구</p>
-        </div>
-        <nav className="flex-1 space-y-1 px-3 py-4">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const active = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "flex h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold",
-                  active ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-stone-100",
-                )}
-              >
-                <Icon size={18} />
-                {item.label}
-              </Link>
-            );
-          })}
+    <div className="app-frame">
+      <a className="skip-link" href="#workspace">
+        본문으로 이동
+      </a>
+      <aside className="app-sidebar">
+        <Link className="brand" href="/dashboard">
+          <span className="brand-mark">
+            <span />
+            <span />
+            <span />
+          </span>
+          EUMLOG<span className="brand-dot">.</span>
+        </Link>
+        <p className="brand-caption">흩어진 기록을 하나의 사실로</p>
+        <nav aria-label="주 메뉴">
+          {links.map((item) => (
+            <Link
+              aria-current={
+                (
+                  item.href === "/cases"
+                    ? pathname.startsWith("/cases")
+                    : pathname === item.href
+                )
+                  ? "page"
+                  : undefined
+              }
+              className={cn(
+                "nav-link",
+                (item.href === "/cases"
+                  ? pathname.startsWith("/cases")
+                  : pathname === item.href) && "active",
+              )}
+              href={item.href}
+              key={item.href}
+            >
+              <item.icon size={19} />
+              {item.label}
+            </Link>
+          ))}
         </nav>
-        <div className="border-t border-stone-200 p-4">
-          <button
-            type="button"
-            onClick={() => setShowSafetyNotice(true)}
-            className="w-full rounded-lg bg-stone-100 p-3 text-left text-xs leading-5 text-slate-600 transition hover:bg-stone-200"
-          >
-            <div className="mb-2 flex items-center gap-2 font-semibold text-slate-800">
-              <ShieldCheck size={15} />
-              기록 안전 안내
+        <div className="sidebar-bottom">
+          <div className="private-label">
+            <ShieldCheck size={17} />
+            <div>
+              <strong>전용 AI로 분석</strong>
+              <p>원본은 암호화해서 보관해요</p>
             </div>
-            클릭해서 자세히 보기
-          </button>
+          </div>
+          <Link href="/settings/security" className="subtle-link">
+            보관 및 보안 <ArrowUpRight size={14} />
+          </Link>
+          <Link href="/integrations" className="subtle-link">
+            대화 가져오기 <ArrowUpRight size={14} />
+          </Link>
+          <Link href="/models" className="subtle-link">
+            AI 학습 정보 <CircleHelp size={14} />
+          </Link>
         </div>
       </aside>
-
-      <div className="md:pl-64">
-        <header className="sticky top-0 z-20 border-b border-stone-200 bg-stone-50/95 px-4 py-3 backdrop-blur md:px-8">
-          <div className="mx-auto flex max-w-6xl items-center justify-between">
-            <Link href="/dashboard" className="font-bold md:hidden">
-              maze_FACTLINE
-            </Link>
-            <div className="hidden items-center gap-2 text-sm font-semibold text-slate-600 md:flex">
-              <Briefcase size={17} />
-              다이어리와 사실 정리 작업공간
-            </div>
-            <Link
-              href="/cases/new"
-              className="inline-flex h-9 items-center gap-2 rounded-lg bg-slate-900 px-3 text-sm font-semibold text-white"
-            >
-              <Plus size={16} />
-              정리 시작
+      <div className="app-body">
+        <header className="app-header">
+          <Link className="mobile-brand" href="/dashboard">
+            EUMLOG.
+          </Link>
+          <span className="desktop-crumb">
+            내 작업공간 <span>/</span> 증거 정리
+          </span>
+          <div className="header-actions">
+            <span className="local-indicator">
+              <i />
+              암호화 보관
+            </span>
+            <Link href="/cases/new" className="primary-link">
+              <Plus size={16} />새 사건
             </Link>
           </div>
         </header>
-        <main className="mx-auto max-w-6xl px-4 py-5 pb-24 md:px-8 md:py-8">{children}</main>
-        <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-6 border-t border-stone-200 bg-white md:hidden">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const active = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn("flex h-16 flex-col items-center justify-center gap-1 text-xs font-semibold", active ? "text-emerald-800" : "text-slate-500")}
-              >
-                <Icon size={20} />
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
+        <main id="workspace" className="workspace">
+          {children}
+        </main>
       </div>
-      <NoticeModal
-        open={showSafetyNotice}
-        title="기록 안전 안내"
-        description={`${LEGAL_SAFETY_NOTICE}\n\nFACTLINE은 사용자가 입력한 사실을 정리하는 도구이며, 유죄·무죄 판단이나 법률 조언을 제공하지 않습니다.`}
-        tone="warning"
-        actionLabel="확인했습니다"
-        onClose={() => setShowSafetyNotice(false)}
-      />
+      <nav className="mobile-nav" aria-label="모바일 주 메뉴">
+        {links.map((item) => (
+          <Link
+            href={item.href}
+            key={item.href}
+            aria-current={
+              (
+                item.href === "/cases"
+                  ? pathname.startsWith("/cases")
+                  : pathname === item.href
+              )
+                ? "page"
+                : undefined
+            }
+          >
+            <item.icon size={21} />
+            <span>{item.label}</span>
+          </Link>
+        ))}
+      </nav>
     </div>
   );
 }

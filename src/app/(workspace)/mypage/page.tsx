@@ -1,3 +1,4 @@
+import {GoogleSignIn} from "../../../presentation/components/GoogleSignIn";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { CalendarDays, FileText, LockKeyhole, LogOut, ShieldCheck, UserRound } from "lucide-react";
@@ -14,11 +15,12 @@ async function getMyPageData() {
   const container = createContainer();
   const session = token ? await container.sessionService.verify(token) : null;
   const cases = session?.userId ? await container.caseService.list(session.userId) : [];
-  return { session, cases };
+  const user=session?.userId?await container.authService.activeUser(session.userId):null;
+  return { session, cases, user };
 }
 
 export default async function MyPage() {
-  const { session, cases } = await getMyPageData();
+  const { session, cases, user } = await getMyPageData();
   const latestUpdatedAt = cases[0]?.updatedAt;
 
   return (
@@ -67,6 +69,7 @@ export default async function MyPage() {
             <LockKeyhole size={17} />
             보안 설정 보기
           </Link>
+          {user?.googleConnected?<p className="notice">Google 계정이 연결되어 있습니다.</p>:<details className="auth-email-fallback"><summary>Google 계정 연결</summary><GoogleSignIn next="/mypage" link/></details>}
           <form action="/api/auth/logout" method="post">
             <Button type="submit" variant="outline" className="w-full">
               <LogOut size={17} />

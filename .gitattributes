@@ -1,0 +1,8 @@
+# Preserve dataset/model bytes so recorded SHA-256 values survive Windows checkouts.
+ai/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+*.safetensors -text
+*.pkl -text
+*.npy -text
+*.woff2 -text
+*.jpg -text
+*.png -text

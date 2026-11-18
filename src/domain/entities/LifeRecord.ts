@@ -4,6 +4,7 @@ export interface LifeRecordProps {
   id: string;
   userId: string;
   caseId?: string | null;
+  sourceEvidenceId?: string | null;
   type?: LifeRecordType;
   title: string;
   content: string;
@@ -20,6 +21,7 @@ export class LifeRecord {
   public readonly id: string;
   public readonly userId: string;
   public caseId: string | null;
+  public sourceEvidenceId: string | null;
   public type: LifeRecordType;
   public title: string;
   public content: string;
@@ -35,6 +37,7 @@ export class LifeRecord {
     this.id = props.id;
     this.userId = props.userId;
     this.caseId = props.caseId ?? null;
+    this.sourceEvidenceId=props.sourceEvidenceId ?? null;
     this.type = props.type ?? "NOTE";
     this.title = props.title;
     this.content = props.content;

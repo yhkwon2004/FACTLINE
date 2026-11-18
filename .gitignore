@@ -14,3 +14,16 @@ tsconfig.tsbuildinfo
 
 .vercel
 .env*.local
+
+.venv/
+.data/
+ai/models/*
+!ai/models/adapter/
+!ai/models/semantic_classifier.pkl
+!ai/models/relation_classifier.pkl
+!ai/models/relation-metrics.json
+!ai/models/retrieval.pkl
+!ai/models/corpus_embeddings.npy
+!ai/models/metrics.json
+!ai/models/training-run.json
+ai/__pycache__/

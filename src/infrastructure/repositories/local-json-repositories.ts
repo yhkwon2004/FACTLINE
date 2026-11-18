@@ -1,3 +1,11 @@
+import {
+  cloudStorage,
+  readVault,
+  writeVault,
+  writeConflict,
+  deletePendingUploads,
+} from "../storage/PrivateVault";
+import { seal, unseal, removeEncrypted } from "../storage/LocalEvidenceStorage";
 import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -39,6 +47,7 @@ type StoredUser = {
   email: string;
   name: string;
   passwordHash?: string;
+  googleSubject?: string;
   createdAt: string;
   updatedAt: string;
   deletedAt?: string | null;
@@ -122,6 +131,7 @@ type StoredReport = {
 };
 
 type StoredLifeRecord = {
+  sourceEvidenceId?:string|null;
   id: string;
   userId: string;
   caseId?: string | null;
@@ -188,7 +198,10 @@ const storePath =
   process.env.FACTLINE_LOCAL_STORE_PATH ??
   (process.env.VERCEL
     ? join(tmpdir(), ".factline-local-store.json")
-    : join(/* turbopackIgnore: true */ process.cwd(), ".factline-local-store.json"));
+    : join(
+        /* turbopackIgnore: true */ process.cwd(),
+        ".factline-local-store.json",
+      ));
 
 function emptyStore(): LocalStore {
   return {
@@ -205,22 +218,61 @@ function emptyStore(): LocalStore {
   };
 }
 
-function readStore(): LocalStore {
+function readLocalStore(): LocalStore {
   if (!existsSync(storePath)) return emptyStore();
-  return { ...emptyStore(), ...JSON.parse(readFileSync(storePath, "utf8")) };
+  const raw = readFileSync(storePath, "utf8");
+  const plain = raw.startsWith("EUMLOG1:")
+    ? unseal(Buffer.from(raw.slice(8), "base64")).toString("utf8")
+    : raw;
+  return { ...emptyStore(), ...JSON.parse(plain) };
 }
 
 function writeStore(store: LocalStore) {
   const tmpPath = `${storePath}.tmp`;
-  writeFileSync(tmpPath, JSON.stringify(store, null, 2));
+  writeFileSync(
+    tmpPath,
+    "EUMLOG1:" + seal(Buffer.from(JSON.stringify(store))).toString("base64"),
+    { mode: 0o600 },
+  );
   renameSync(tmpPath, storePath);
 }
 
-function updateStore<T>(mutate: (store: LocalStore) => T): T {
-  const store = readStore();
-  const result = mutate(store);
-  writeStore(store);
-  return result;
+async function readStore(): Promise<LocalStore> {
+  if (!cloudStorage()) return readLocalStore();
+  const object = await readVault("state-v1.bin");
+  return object
+    ? { ...emptyStore(), ...JSON.parse(unseal(object.bytes).toString()) }
+    : emptyStore();
+}
+// shortcut: the small deployment keeps one state document; CAS prevents lost writes across Vercel instances.
+async function updateStore<T>(mutate: (store: LocalStore) => T): Promise<T> {
+  if (!cloudStorage()) {
+    const state = readLocalStore();
+    const result = mutate(state);
+    writeStore(state);
+    return result;
+  }
+  for (let attempt = 0; attempt < 16; attempt++) {
+    const object = await readVault("state-v1.bin");
+    const state: LocalStore = object
+      ? { ...emptyStore(), ...JSON.parse(unseal(object.bytes).toString()) }
+      : emptyStore();
+    const result = mutate(state);
+    try {
+      await writeVault(
+        "state-v1.bin",
+        seal(Buffer.from(JSON.stringify(state))),
+        object?.etag ?? null,
+      );
+      return result;
+    } catch (error) {
+      if (!writeConflict(error)) throw error;
+      await new Promise((resolve) =>
+        setTimeout(resolve, 100 + Math.random() * 150),
+      );
+    }
+  }
+  throw new Error("동시 변경이 많습니다. 잠시 후 다시 시도해 주세요.");
 }
 
 function toDate(value?: string | null) {
@@ -241,6 +293,7 @@ function mapUser(data: StoredUser) {
     email: data.email,
     name: data.name,
     passwordHash: data.passwordHash,
+    googleSubject: data.googleSubject,
     createdAt: toDate(data.createdAt),
     updatedAt: toDate(data.updatedAt),
   });
@@ -269,8 +322,12 @@ function mapCase(data: StoredCase, store: LocalStore) {
     ...data,
     type: data.type,
     status: data.status as any,
-    events: store.events.filter((event) => event.caseId === data.id).map(mapEvent),
-    evidences: store.evidences.filter((evidence) => evidence.caseId === data.id).map(mapEvidence),
+    events: store.events
+      .filter((event) => event.caseId === data.id)
+      .map(mapEvent),
+    evidences: store.evidences
+      .filter((evidence) => evidence.caseId === data.id)
+      .map(mapEvidence),
     createdAt: toDate(data.createdAt),
     updatedAt: toDate(data.updatedAt),
   });
@@ -310,6 +367,7 @@ function storeUser(user: User): StoredUser {
     email: user.email,
     name: user.name,
     passwordHash: user.passwordHash,
+    googleSubject: user.googleSubject,
     createdAt: user.createdAt.toISOString(),
     updatedAt: new Date().toISOString(),
   };
@@ -367,6 +425,7 @@ function storeEvidence(evidence: Evidence): StoredEvidence {
 function storeLifeRecord(record: LifeRecord): StoredLifeRecord {
   return {
     id: record.id,
+    sourceEvidenceId:record.sourceEvidenceId,
     userId: record.userId,
     caseId: record.caseId,
     type: record.type,
@@ -428,41 +487,81 @@ function upsertById<T extends { id: string }>(items: T[], item: T) {
 
 export class LocalJsonUserRepository implements IUserRepository {
   async findById(id: string): Promise<User | null> {
-    const data = readStore().users.find((user) => user.id === id && !user.deletedAt);
+    const data = (await readStore()).users.find(
+      (user) => user.id === id && !user.deletedAt,
+    );
     return data ? mapUser(data) : null;
   }
 
   async findByEmail(email: string): Promise<User | null> {
     const normalized = email.toLowerCase();
-    const data = readStore().users.find((user) => user.email.toLowerCase() === normalized && !user.deletedAt);
+    const data = (await readStore()).users.find(
+      (user) => user.email.toLowerCase() === normalized && !user.deletedAt,
+    );
     return data ? mapUser(data) : null;
   }
 
+  async findByGoogleSubject(subject:string):Promise<User|null> {
+    const data=(await readStore()).users.find(x=>x.googleSubject===subject&&!x.deletedAt);return data?mapUser(data):null;
+  }
+
   async save(user: User): Promise<User> {
-    return updateStore((store) => {
+    return await updateStore((store) => {
       const data = storeUser(user);
+      if (
+        store.users.some(
+          (x) =>
+            x.id !== data.id &&
+            !x.deletedAt &&
+            x.email.toLowerCase() === data.email.toLowerCase(),
+        )
+      )
+        throw new Error("이미 가입된 이메일입니다.");
+      if(data.googleSubject && store.users.some(x=>x.id!==data.id&&!x.deletedAt&&x.googleSubject===data.googleSubject)) throw new Error("이미 연결된 Google 계정입니다.");
       upsertById(store.users, data);
       return mapUser(data);
     });
   }
 
   async delete(id: string): Promise<void> {
-    updateStore((store) => {
-      const user = store.users.find((item) => item.id === id);
-      if (user) user.deletedAt = new Date().toISOString();
+    const fileIds = await updateStore((store) => {
+      const caseIds = new Set(
+        store.cases.filter((c) => c.userId === id).map((c) => c.id),
+      );
+      const files = [...caseIds].map((c) => c + ".analysis");
+      for (const e of store.evidences.filter((e) => caseIds.has(e.caseId))) {
+        if (e.fileUrl?.startsWith("local://")) files.push(e.fileUrl.slice(8));
+        files.push(e.id + ".analysis");
+      }
+      store.users = store.users.filter((u) => u.id !== id);
+      store.cases = store.cases.filter((c) => c.userId !== id);
+      store.events = store.events.filter((e) => !caseIds.has(e.caseId));
+      store.evidences = store.evidences.filter((e) => !caseIds.has(e.caseId));
+      store.analyses = store.analyses.filter((e) => !caseIds.has(e.caseId));
+      store.reports = store.reports.filter((e) => !caseIds.has(e.caseId));
+      store.lifeRecords = store.lifeRecords.filter((e) => e.userId !== id);
+      store.connectedSources = store.connectedSources.filter(
+        (e) => e.userId !== id,
+      );
+      store.memoryRecords = store.memoryRecords.filter((e) => e.userId !== id);
+      return files;
     });
+    await Promise.all(fileIds.map(removeEncrypted));
+    if (cloudStorage()) await deletePendingUploads(id);
   }
 }
 
 export class LocalJsonCaseRepository implements ICaseRepository {
   async findById(id: string): Promise<Case | null> {
-    const store = readStore();
-    const data = store.cases.find((caseData) => caseData.id === id && !caseData.deletedAt);
+    const store = await readStore();
+    const data = store.cases.find(
+      (caseData) => caseData.id === id && !caseData.deletedAt,
+    );
     return data ? mapCase(data, store) : null;
   }
 
   async findAllByUserId(userId: string): Promise<Case[]> {
-    const store = readStore();
+    const store = await readStore();
     return store.cases
       .filter((caseData) => caseData.userId === userId && !caseData.deletedAt)
       .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
@@ -470,7 +569,7 @@ export class LocalJsonCaseRepository implements ICaseRepository {
   }
 
   async save(caseData: Case): Promise<Case> {
-    return updateStore((store) => {
+    return await updateStore((store) => {
       const data = storeCase(caseData);
       upsertById(store.cases, data);
       return mapCase(data, store);
@@ -478,7 +577,7 @@ export class LocalJsonCaseRepository implements ICaseRepository {
   }
 
   async lock(id: string): Promise<void> {
-    updateStore((store) => {
+    await updateStore((store) => {
       const caseData = store.cases.find((item) => item.id === id);
       if (caseData) {
         caseData.isLocked = true;
@@ -488,7 +587,7 @@ export class LocalJsonCaseRepository implements ICaseRepository {
   }
 
   async delete(id: string): Promise<void> {
-    updateStore((store) => {
+    await updateStore((store) => {
       const caseData = store.cases.find((item) => item.id === id);
       if (caseData) caseData.deletedAt = new Date().toISOString();
     });
@@ -497,14 +596,16 @@ export class LocalJsonCaseRepository implements ICaseRepository {
 
 export class LocalJsonEventRepository implements IEventRepository {
   async findByCaseId(caseId: string): Promise<IncidentEvent[]> {
-    return readStore()
-      .events.filter((event) => event.caseId === caseId)
-      .sort((a, b) => (a.datetime ?? a.createdAt).localeCompare(b.datetime ?? b.createdAt))
+    return (await readStore()).events
+      .filter((event) => event.caseId === caseId)
+      .sort((a, b) =>
+        (a.datetime ?? a.createdAt).localeCompare(b.datetime ?? b.createdAt),
+      )
       .map(mapEvent);
   }
 
   async save(event: IncidentEvent): Promise<IncidentEvent> {
-    return updateStore((store) => {
+    return await updateStore((store) => {
       const data = storeEvent(event);
       upsertById(store.events, data);
       return mapEvent(data);
@@ -512,7 +613,7 @@ export class LocalJsonEventRepository implements IEventRepository {
   }
 
   async delete(id: string): Promise<void> {
-    updateStore((store) => {
+    await updateStore((store) => {
       store.events = store.events.filter((event) => event.id !== id);
     });
   }
@@ -520,14 +621,14 @@ export class LocalJsonEventRepository implements IEventRepository {
 
 export class LocalJsonEvidenceRepository implements IEvidenceRepository {
   async findByCaseId(caseId: string): Promise<Evidence[]> {
-    return readStore()
-      .evidences.filter((evidence) => evidence.caseId === caseId)
+    return (await readStore()).evidences
+      .filter((evidence) => evidence.caseId === caseId)
       .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
       .map(mapEvidence);
   }
 
   async save(evidence: Evidence): Promise<Evidence> {
-    return updateStore((store) => {
+    return await updateStore((store) => {
       const data = storeEvidence(evidence);
       upsertById(store.evidences, data);
       return mapEvidence(data);
@@ -535,32 +636,40 @@ export class LocalJsonEvidenceRepository implements IEvidenceRepository {
   }
 
   async delete(id: string): Promise<void> {
-    updateStore((store) => {
-      store.evidences = store.evidences.filter((evidence) => evidence.id !== id);
+    await updateStore((store) => {
+      store.evidences = store.evidences.filter(
+        (evidence) => evidence.id !== id,
+      );
       store.events.forEach((event) => {
-        event.evidenceIds = event.evidenceIds.filter((evidenceId) => evidenceId !== id);
+        event.evidenceIds = event.evidenceIds.filter(
+          (evidenceId) => evidenceId !== id,
+        );
       });
     });
   }
 
   async linkToEvent(evidenceId: string, eventId: string): Promise<void> {
-    updateStore((store) => {
+    await updateStore((store) => {
       const event = store.events.find((item) => item.id === eventId);
-      if (event && !event.evidenceIds.includes(evidenceId)) event.evidenceIds.push(evidenceId);
+      if (event && !event.evidenceIds.includes(evidenceId))
+        event.evidenceIds.push(evidenceId);
     });
   }
 
   async unlinkFromEvent(evidenceId: string, eventId: string): Promise<void> {
-    updateStore((store) => {
+    await updateStore((store) => {
       const event = store.events.find((item) => item.id === eventId);
-      if (event) event.evidenceIds = event.evidenceIds.filter((id) => id !== evidenceId);
+      if (event)
+        event.evidenceIds = event.evidenceIds.filter((id) => id !== evidenceId);
     });
   }
 }
 
 export class LocalJsonAnalysisRepository implements IAnalysisRepository {
   async findByCaseId(caseId: string): Promise<AnalysisResult | null> {
-    const data = readStore().analyses.find((analysis) => analysis.caseId === caseId);
+    const data = (await readStore()).analyses.find(
+      (analysis) => analysis.caseId === caseId,
+    );
     return data
       ? new AnalysisResult({
           ...data,
@@ -575,7 +684,7 @@ export class LocalJsonAnalysisRepository implements IAnalysisRepository {
   }
 
   async save(analysis: AnalysisResult): Promise<AnalysisResult> {
-    return updateStore((store) => {
+    return await updateStore((store) => {
       const data: StoredAnalysis = {
         id: analysis.id,
         caseId: analysis.caseId,
@@ -588,8 +697,11 @@ export class LocalJsonAnalysisRepository implements IAnalysisRepository {
         createdAt: analysis.createdAt.toISOString(),
         updatedAt: new Date().toISOString(),
       };
-      const index = store.analyses.findIndex((item) => item.caseId === analysis.caseId);
-      if (index >= 0) store.analyses[index] = { ...store.analyses[index], ...data };
+      const index = store.analyses.findIndex(
+        (item) => item.caseId === analysis.caseId,
+      );
+      if (index >= 0)
+        store.analyses[index] = { ...store.analyses[index], ...data };
       else store.analyses.push(data);
       return new AnalysisResult({
         ...data,
@@ -604,26 +716,45 @@ export class LocalJsonAnalysisRepository implements IAnalysisRepository {
   }
 }
 
-export class LocalJsonLegalReferenceRepository implements ILegalReferenceRepository {
-  async search(query: string, incidentType?: string): Promise<LegalReference[]> {
+export class LocalJsonLegalReferenceRepository
+  implements ILegalReferenceRepository
+{
+  async search(
+    query: string,
+    incidentType?: string,
+  ): Promise<LegalReference[]> {
     const normalizedQuery = query.toLowerCase();
     const normalizedType = incidentType?.toLowerCase();
-    return readStore()
-      .legalReferences.filter((reference) => {
-        const haystack = [reference.title, reference.description, reference.content, reference.category]
+    return (await readStore()).legalReferences
+      .filter((reference) => {
+        const haystack = [
+          reference.title,
+          reference.description,
+          reference.content,
+          reference.category,
+        ]
           .filter(Boolean)
           .join(" ")
           .toLowerCase();
-        const matchesQuery = !normalizedQuery || haystack.includes(normalizedQuery);
-        const matchesType = !normalizedType || reference.category?.toLowerCase().includes(normalizedType);
+        const matchesQuery =
+          !normalizedQuery || haystack.includes(normalizedQuery);
+        const matchesType =
+          !normalizedType ||
+          reference.category?.toLowerCase().includes(normalizedType);
         return matchesQuery && matchesType;
       })
       .slice(0, 8)
-      .map((reference) => new LegalReference({ ...reference, createdAt: toDate(reference.createdAt) }));
+      .map(
+        (reference) =>
+          new LegalReference({
+            ...reference,
+            createdAt: toDate(reference.createdAt),
+          }),
+      );
   }
 
   async save(reference: LegalReference): Promise<LegalReference> {
-    return updateStore((store) => {
+    return await updateStore((store) => {
       const data: StoredLegalReference = {
         id: reference.id,
         title: reference.title,
@@ -642,7 +773,9 @@ export class LocalJsonLegalReferenceRepository implements ILegalReferenceReposit
 
 export class LocalJsonReportRepository implements IReportRepository {
   async findByCaseId(caseId: string): Promise<Report | null> {
-    const data = readStore().reports.find((report) => report.caseId === caseId);
+    const data = (await readStore()).reports.find(
+      (report) => report.caseId === caseId,
+    );
     return data
       ? new Report({
           ...data,
@@ -654,7 +787,7 @@ export class LocalJsonReportRepository implements IReportRepository {
   }
 
   async save(report: Report): Promise<Report> {
-    return updateStore((store) => {
+    return await updateStore((store) => {
       const data: StoredReport = {
         id: report.id,
         caseId: report.caseId,
@@ -663,8 +796,11 @@ export class LocalJsonReportRepository implements IReportRepository {
         createdAt: report.createdAt.toISOString(),
         updatedAt: new Date().toISOString(),
       };
-      const index = store.reports.findIndex((item) => item.caseId === report.caseId);
-      if (index >= 0) store.reports[index] = { ...store.reports[index], ...data };
+      const index = store.reports.findIndex(
+        (item) => item.caseId === report.caseId,
+      );
+      if (index >= 0)
+        store.reports[index] = { ...store.reports[index], ...data };
       else store.reports.push(data);
       return new Report({
         ...data,
@@ -678,85 +814,129 @@ export class LocalJsonReportRepository implements IReportRepository {
 
 export class LocalJsonLifeRecordRepository implements ILifeRecordRepository {
   async findById(id: string): Promise<LifeRecord | null> {
-    const data = readStore().lifeRecords.find((record) => record.id === id);
+    const data = (await readStore()).lifeRecords.find(
+      (record) => record.id === id,
+    );
     return data ? mapLifeRecord(data) : null;
   }
 
   async findAllByUserId(userId: string): Promise<LifeRecord[]> {
-    return readStore()
-      .lifeRecords.filter((record) => record.userId === userId)
-      .sort((a, b) => (b.occurredAt ?? b.createdAt).localeCompare(a.occurredAt ?? a.createdAt))
+    return (await readStore()).lifeRecords
+      .filter((record) => record.userId === userId)
+      .sort((a, b) =>
+        (b.occurredAt ?? b.createdAt).localeCompare(
+          a.occurredAt ?? a.createdAt,
+        ),
+      )
       .map(mapLifeRecord);
   }
 
   async findByCaseId(caseId: string): Promise<LifeRecord[]> {
-    return readStore()
-      .lifeRecords.filter((record) => record.caseId === caseId)
-      .sort((a, b) => (a.occurredAt ?? a.createdAt).localeCompare(b.occurredAt ?? b.createdAt))
+    return (await readStore()).lifeRecords
+      .filter((record) => record.caseId === caseId)
+      .sort((a, b) =>
+        (a.occurredAt ?? a.createdAt).localeCompare(
+          b.occurredAt ?? b.createdAt,
+        ),
+      )
       .map(mapLifeRecord);
   }
 
   async save(record: LifeRecord): Promise<LifeRecord> {
-    return updateStore((store) => {
+    return await updateStore((store) => {
       const data = storeLifeRecord(record);
+      const existing=data.sourceEvidenceId?store.lifeRecords.find(x=>x.sourceEvidenceId===data.sourceEvidenceId):null;
+      if(existing){if(existing.userId!==data.userId)throw new Error("원본 소유자를 확인할 수 없습니다.");data.id=existing.id;data.createdAt=existing.createdAt;}
       upsertById(store.lifeRecords, data);
       return mapLifeRecord(data);
     });
   }
 
   async delete(id: string): Promise<void> {
-    updateStore((store) => {
-      store.lifeRecords = store.lifeRecords.filter((record) => record.id !== id);
+    await updateStore((store) => {
+      store.lifeRecords = store.lifeRecords.filter(
+        (record) => record.id !== id,
+      );
     });
   }
 }
 
-export class LocalJsonConnectedSourceRepository implements IConnectedSourceRepository {
+export class LocalJsonConnectedSourceRepository
+  implements IConnectedSourceRepository
+{
   async findByUserId(userId: string): Promise<ConnectedSource[]> {
-    return readStore()
-      .connectedSources.filter((source) => source.userId === userId)
+    return (await readStore()).connectedSources
+      .filter((source) => source.userId === userId)
       .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
       .map(mapConnectedSource);
   }
 
-  async findByUserAndProvider(userId: string, provider: IntegrationProvider): Promise<ConnectedSource | null> {
-    const data = readStore().connectedSources.find((source) => source.userId === userId && source.provider === provider);
+  async findByUserAndProvider(
+    userId: string,
+    provider: IntegrationProvider,
+  ): Promise<ConnectedSource | null> {
+    const data = (await readStore()).connectedSources.find(
+      (source) => source.userId === userId && source.provider === provider,
+    );
     return data ? mapConnectedSource(data) : null;
   }
 
   async save(source: ConnectedSource): Promise<ConnectedSource> {
-    return updateStore((store) => {
+    return await updateStore((store) => {
       const data = storeConnectedSource(source);
       const index = store.connectedSources.findIndex(
-        (item) => item.id === source.id || (item.userId === source.userId && item.provider === source.provider),
+        (item) =>
+          item.id === source.id ||
+          (item.userId === source.userId && item.provider === source.provider),
       );
-      if (index >= 0) store.connectedSources[index] = { ...store.connectedSources[index], ...data };
+      if (index >= 0)
+        store.connectedSources[index] = {
+          ...store.connectedSources[index],
+          ...data,
+        };
       else store.connectedSources.push(data);
       return mapConnectedSource(data);
     });
   }
 }
 
-export class LocalJsonMemoryRecordRepository implements IMemoryRecordRepository {
+export class LocalJsonMemoryRecordRepository
+  implements IMemoryRecordRepository
+{
   async findByUserId(userId: string): Promise<MemoryRecord[]> {
-    return readStore()
-      .memoryRecords.filter((record) => record.userId === userId)
-      .sort((a, b) => (b.occurredAt ?? b.createdAt).localeCompare(a.occurredAt ?? a.createdAt))
+    return (await readStore()).memoryRecords
+      .filter((record) => record.userId === userId)
+      .sort((a, b) =>
+        (b.occurredAt ?? b.createdAt).localeCompare(
+          a.occurredAt ?? a.createdAt,
+        ),
+      )
       .slice(0, 500)
       .map(mapMemoryRecord);
   }
 
-  async findByUserAndParticipant(userId: string, participantName: string): Promise<MemoryRecord[]> {
+  async findByUserAndParticipant(
+    userId: string,
+    participantName: string,
+  ): Promise<MemoryRecord[]> {
     const normalized = participantName.toLowerCase();
-    return readStore()
-      .memoryRecords.filter((record) => record.userId === userId && (record.participantName ?? "").toLowerCase().includes(normalized))
-      .sort((a, b) => (a.occurredAt ?? a.createdAt).localeCompare(b.occurredAt ?? b.createdAt))
+    return (await readStore()).memoryRecords
+      .filter(
+        (record) =>
+          record.userId === userId &&
+          (record.participantName ?? "").toLowerCase().includes(normalized),
+      )
+      .sort((a, b) =>
+        (a.occurredAt ?? a.createdAt).localeCompare(
+          b.occurredAt ?? b.createdAt,
+        ),
+      )
       .slice(0, 300)
       .map(mapMemoryRecord);
   }
 
   async saveMany(records: MemoryRecord[]): Promise<MemoryRecord[]> {
-    return updateStore((store) => {
+    return await updateStore((store) => {
       const stored = records.map(storeMemoryRecord);
       stored.forEach((record) => upsertById(store.memoryRecords, record));
       return stored.map(mapMemoryRecord);

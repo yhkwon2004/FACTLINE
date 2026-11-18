@@ -1,3 +1,5 @@
+import {GoogleSignIn} from "../../../presentation/components/GoogleSignIn";
+import {googleConfigured,passwordLoginEnabled} from "../../../infrastructure/security/GoogleIdentity";
 import { Scale } from "lucide-react";
 import { AuthNavigationPolicy } from "../../../application/services/AuthNavigationPolicy";
 import { LoginForm } from "../../../presentation/components/AuthForm";
@@ -22,7 +24,8 @@ export default async function LoginPage({
           <h1 className="text-2xl font-bold tracking-tight">로그인</h1>
           <p className="mt-2 text-sm leading-6 text-slate-600">사실관계 정리 작업공간으로 이동합니다.</p>
         </div>
-        <LoginForm next={next} isAuthRequired={isAuthRequired} />
+        <GoogleSignIn next={next}/>
+        {passwordLoginEnabled() ? (googleConfigured()?<details className="auth-email-fallback"><summary>이메일로 계속</summary><LoginForm next={next} isAuthRequired={isAuthRequired}/></details>:<LoginForm next={next} isAuthRequired={isAuthRequired}/>) : null}
       </Card>
     </main>
   );

@@ -1,0 +1,170 @@
+{
+  "startedAt": "2026-11-18T12:40:58.150950+00:00",
+  "model": "E5 + Ridge",
+  "events": [
+    {
+      "stage": "dataset_ready",
+      "at": "2026-11-18T12:40:58.150950+00:00",
+      "seconds": 0.0,
+      "examples": 973
+    },
+    {
+      "stage": "training_started",
+      "at": "2026-11-18T12:40:58.150950+00:00",
+      "seconds": 0.0,
+      "training": 816,
+      "testing": 157
+    },
+    {
+      "stage": "model_fitted",
+      "at": "2026-11-18T12:41:06.529805+00:00",
+      "seconds": 8.38
+    },
+    {
+      "stage": "evaluation_completed",
+      "at": "2026-11-18T12:41:06.682130+00:00",
+      "seconds": 8.53,
+      "accuracy": 0.8853503184713376
+    }
+  ],
+  "metrics": {
+    "model": "E5-small frozen embeddings + fitted Ridge relation head",
+    "training": 816,
+    "testing": 157,
+    "accuracy": 0.8853503184713376,
+    "evaluation": "Synthetic unseen names and held-out sentence templates; not real-world legal accuracy",
+    "labels": [
+      "communication",
+      "family",
+      "other",
+      "payment",
+      "threat",
+      "violence",
+      "work"
+    ],
+    "confusionMatrix": [
+      [
+        24,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        22,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        13,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        24,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        2,
+        0,
+        20,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        12,
+        0,
+        12,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        24
+      ]
+    ],
+    "perClass": {
+      "communication": {
+        "precision": 0.9230769230769231,
+        "recall": 1.0,
+        "f1-score": 0.96,
+        "support": 24.0
+      },
+      "family": {
+        "precision": 0.9166666666666666,
+        "recall": 0.9166666666666666,
+        "f1-score": 0.9166666666666666,
+        "support": 24.0
+      },
+      "other": {
+        "precision": 0.8666666666666667,
+        "recall": 1.0,
+        "f1-score": 0.9285714285714286,
+        "support": 13.0
+      },
+      "payment": {
+        "precision": 0.6666666666666666,
+        "recall": 1.0,
+        "f1-score": 0.8,
+        "support": 24.0
+      },
+      "threat": {
+        "precision": 1.0,
+        "recall": 0.8333333333333334,
+        "f1-score": 0.9090909090909091,
+        "support": 24.0
+      },
+      "violence": {
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1-score": 0.6666666666666666,
+        "support": 24.0
+      },
+      "work": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 24.0
+      },
+      "accuracy": 0.8853503184713376,
+      "macro avg": {
+        "precision": 0.9104395604395604,
+        "recall": 0.8928571428571429,
+        "f1-score": 0.8829993815708101,
+        "support": 157.0
+      },
+      "weighted avg": {
+        "precision": 0.9135064510860689,
+        "recall": 0.8853503184713376,
+        "f1-score": 0.8798064356026138,
+        "support": 157.0
+      }
+    }
+  },
+  "datasetSha256": "20ff4baf143073b727b75fd57aafed0c941b47ba4bf21b81814028e2a02e70b5",
+  "modelSha256": "525ec1c132b8aa1fee10fca6191c8215465710731838e193d1c2c1045cdb48b0"
+}

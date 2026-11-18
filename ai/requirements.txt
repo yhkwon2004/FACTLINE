@@ -1,0 +1,17 @@
+transformers>=4.51,<5
+peft>=0.15,<1
+accelerate>=1.6,<2
+scikit-learn>=1.6,<2
+kiwipiepy>=0.20,<1
+easyocr>=1.7,<2
+pypdf>=5,<7
+beautifulsoup4>=4.13,<5
+requests>=2.32,<3
+python-docx>=1.1,<2
+
+pypdfium2>=5,<6
+soundfile>=0.13,<1
+soxr>=1,<2
+langdetect==1.0.9
+
+av==16.1.0

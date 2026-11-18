@@ -17,10 +17,9 @@ import {
   RiskDetectionService,
   TimelineService,
 } from "../../domain/services";
-import { VercelAIService } from "../ai/VercelAIService";
 import { LocalLLMService } from "../ai/LocalLLMService";
-import { KoreanLawOpenApiSearchService } from "../legal/KoreanLawOpenApiSearchService";
-import { LocalMockStorageService } from "../storage/LocalMockStorageService";
+import { LocalLegalSearchService } from "../legal/LocalLegalSearchService";
+import { LocalEvidenceStorage } from "../storage/LocalEvidenceStorage";
 import {
   PrismaAnalysisRepository,
   PrismaCaseRepository,
@@ -50,7 +49,8 @@ import { JwtSessionService } from "../security/JwtSessionService";
 import { SecurityAuditWriter } from "../security/SecurityAuditWriter";
 
 function createRepositories() {
-  const shouldUseLocalStore = process.env.FACTLINE_STORAGE_MODE === "local" || !process.env.DATABASE_URL;
+  const shouldUseLocalStore =
+    process.env.FACTLINE_STORAGE_MODE === "local" || !process.env.DATABASE_URL;
 
   if (shouldUseLocalStore) {
     return {
@@ -82,21 +82,39 @@ function createRepositories() {
 }
 
 export function createContainer() {
-  const { users, cases, events, evidences, analyses, legalReferences, reports, lifeRecords, connectedSources, memoryRecords } =
-    createRepositories();
+  const {
+    users,
+    cases,
+    events,
+    evidences,
+    analyses,
+    legalReferences,
+    reports,
+    lifeRecords,
+    connectedSources,
+    memoryRecords,
+  } = createRepositories();
 
-  const ai = process.env.AI_PROVIDER === "local" || process.env.LOCAL_LLM_ENDPOINT
-    ? new LocalLLMService()
-    : new VercelAIService();
-  const legalSearch = new KoreanLawOpenApiSearchService();
-  const storage = new LocalMockStorageService();
-  const legalReferenceService = new LegalReferenceService(legalReferences, legalSearch);
+  const ai = new LocalLLMService();
+  const legalSearch = new LocalLegalSearchService();
+  const storage = new LocalEvidenceStorage();
+  const legalReferenceService = new LegalReferenceService(
+    legalReferences,
+    legalSearch,
+  );
 
   return {
-    authService: new AuthService(users, new HashService(), new JwtSessionService()),
+    authService: new AuthService(
+      users,
+      new HashService(),
+      new JwtSessionService(),
+    ),
     caseService: new CaseService(cases),
     interviewService: new InterviewService(cases, events, ai),
-    timelineService: new TimelineApplicationService(events, new TimelineService()),
+    timelineService: new TimelineApplicationService(
+      events,
+      new TimelineService(),
+    ),
     evidenceService: new EvidenceService(evidences, storage),
     analysisService: new AnalysisService(
       cases,
@@ -107,9 +125,23 @@ export function createContainer() {
     ),
     legalReferenceService,
     lifeRecordService: new LifeRecordService(lifeRecords, cases),
-    memoryIntegrationService: new MemoryIntegrationService(connectedSources, memoryRecords),
-    reportService: new ReportService(cases, analyses, reports, lifeRecords, ai, legalReferenceService),
-    securityAuditService: new SecurityAuditService(users, cases, new SecurityAuditWriter()),
+    memoryIntegrationService: new MemoryIntegrationService(
+      connectedSources,
+      memoryRecords,
+    ),
+    reportService: new ReportService(
+      cases,
+      analyses,
+      reports,
+      lifeRecords,
+      ai,
+      legalReferenceService,
+    ),
+    securityAuditService: new SecurityAuditService(
+      users,
+      cases,
+      new SecurityAuditWriter(),
+    ),
     sessionService: new JwtSessionService(),
   };
 }

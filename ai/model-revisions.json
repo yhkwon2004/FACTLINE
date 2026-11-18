@@ -1,0 +1,11 @@
+{
+  "models--intfloat--multilingual-e5-small": [
+    "614241f622f53c4eeff9890bdc4f31cfecc418b3"
+  ],
+  "models--openai--whisper-small": [
+    "973afd24965f72e36ca33b3055d56a652f456b4d"
+  ],
+  "models--Qwen--Qwen3-0.6B": [
+    "c1899de289a04d12100db370d81485cdf75e47ca"
+  ]
+}

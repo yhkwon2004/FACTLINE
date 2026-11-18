@@ -1,0 +1,5840 @@
+[
+  {
+    "text": "김민수는 이서연에게 12만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈에게 4000만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진에게 4000만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤에게 300만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈에게 4000만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수에게 12만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈에게 4000만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진에게 12만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤에게 12만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈에게 5만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수에게 5만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연에게 300만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진에게 4000만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤에게 5만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈에게 12만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수에게 12만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연에게 12만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈에게 5만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤에게 4000만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈에게 4000만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수에게 4000만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연에게 5만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈에게 300만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진에게 4000만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈에게 5만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수에게 300만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연에게 5만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈에게 12만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진에게 5만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤에게 5만원을 송금했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연에게 5만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈에게 4000만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진에게 12만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤에게 300만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈에게 4000만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수에게 4000만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈에게 12만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진에게 12만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤에게 5만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈에게 4000만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수에게 12만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연에게 5만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진에게 12만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤에게 12만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈에게 5만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수에게 5만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연에게 4000만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈에게 4000만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤에게 12만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈에게 300만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수에게 12만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연에게 4000만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈에게 300만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진에게 300만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈에게 4000만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수에게 4000만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연에게 300만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈에게 4000만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진에게 4000만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤에게 300만원을 빌려주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 이서연에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 박지훈에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 최유진에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 정도윤에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 한수빈에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 김민수에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 박지훈에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 최유진에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 정도윤에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 한수빈에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 김민수에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 이서연에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 최유진에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 정도윤에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 한수빈에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 김민수에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 이서연에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 박지훈에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 정도윤에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 한수빈에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 김민수에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 이서연에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 박지훈에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 최유진에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 한수빈에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 김민수에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 이서연에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 박지훈에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 최유진에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 정도윤에게 대금을 이체했다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤에게 돈을 갚아 주었다.",
+    "label": "payment",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 강지우에게 빌린 돈을 돌려주었다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 서지호에게 빌린 돈을 돌려주었다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 오다은에게 빌린 돈을 돌려주었다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 윤하늘에게 빌린 돈을 돌려주었다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 서지호에게 빌린 돈을 돌려주었다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 오다은에게 빌린 돈을 돌려주었다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 윤하늘에게 빌린 돈을 돌려주었다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 강지우에게 빌린 돈을 돌려주었다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 오다은에게 빌린 돈을 돌려주었다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 윤하늘에게 빌린 돈을 돌려주었다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 강지우에게 빌린 돈을 돌려주었다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 서지호에게 빌린 돈을 돌려주었다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘가 강지우에게 계좌로 비용을 입금했다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘가 서지호에게 계좌로 비용을 입금했다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘가 오다은에게 계좌로 비용을 입금했다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우가 윤하늘에게 계좌로 비용을 입금했다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우가 서지호에게 계좌로 비용을 입금했다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우가 오다은에게 계좌로 비용을 입금했다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호가 윤하늘에게 계좌로 비용을 입금했다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호가 강지우에게 계좌로 비용을 입금했다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호가 오다은에게 계좌로 비용을 입금했다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은가 윤하늘에게 계좌로 비용을 입금했다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은가 강지우에게 계좌로 비용을 입금했다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은가 서지호에게 계좌로 비용을 입금했다.",
+    "label": "payment",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤를 때렸다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 이서연의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 박지훈의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 최유진의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 정도윤의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 한수빈의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 김민수의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 박지훈의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 최유진의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 정도윤의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 한수빈의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 김민수의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 이서연의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 최유진의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 정도윤의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 한수빈의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 김민수의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 이서연의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 박지훈의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 정도윤의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 한수빈의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 김민수의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 이서연의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 박지훈의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 최유진의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 한수빈의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 김민수의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 이서연의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 박지훈의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 최유진의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 정도윤의 팔을 세게 잡아당겼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤를 밀쳤다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 이서연의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 박지훈의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 최유진의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 정도윤의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 한수빈의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 김민수의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 박지훈의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 최유진의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 정도윤의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 한수빈의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 김민수의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 이서연의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 최유진의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 정도윤의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 한수빈의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 김민수의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 이서연의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 박지훈의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 정도윤의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 한수빈의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 김민수의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 이서연의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 박지훈의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 최유진의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 한수빈의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 김민수의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 이서연의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 박지훈의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 최유진의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 정도윤의 몸을 발로 찼다.",
+    "label": "violence",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 강지우를 주먹으로 가격했다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 서지호를 주먹으로 가격했다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 오다은를 주먹으로 가격했다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 윤하늘를 주먹으로 가격했다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 서지호를 주먹으로 가격했다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 오다은를 주먹으로 가격했다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 윤하늘를 주먹으로 가격했다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 강지우를 주먹으로 가격했다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 오다은를 주먹으로 가격했다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 윤하늘를 주먹으로 가격했다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 강지우를 주먹으로 가격했다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 서지호를 주먹으로 가격했다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘가 강지우에게 맞았다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘가 서지호에게 맞았다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘가 오다은에게 맞았다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우가 윤하늘에게 맞았다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우가 서지호에게 맞았다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우가 오다은에게 맞았다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호가 윤하늘에게 맞았다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호가 강지우에게 맞았다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호가 오다은에게 맞았다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은가 윤하늘에게 맞았다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은가 강지우에게 맞았다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은가 서지호에게 맞았다.",
+    "label": "violence",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤에게 죽이겠다고 협박했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤에게 신고하면 해치겠다고 말했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 이서연에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 박지훈에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 최유진에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 정도윤에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 한수빈에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 김민수에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 박지훈에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 최유진에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 정도윤에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 한수빈에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 김민수에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 이서연에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 최유진에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 정도윤에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 한수빈에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 김민수에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 이서연에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 박지훈에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 정도윤에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 한수빈에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 김민수에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 이서연에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 박지훈에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 최유진에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 한수빈에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 김민수에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 이서연에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 박지훈에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 최유진에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 정도윤에게 가만두지 않겠다고 위협했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤에게 돈을 안 주면 보복하겠다고 했다.",
+    "label": "threat",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘가 강지우에게 가족을 다치게 하겠다고 했다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘가 서지호에게 가족을 다치게 하겠다고 했다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘가 오다은에게 가족을 다치게 하겠다고 했다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우가 윤하늘에게 가족을 다치게 하겠다고 했다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우가 서지호에게 가족을 다치게 하겠다고 했다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우가 오다은에게 가족을 다치게 하겠다고 했다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호가 윤하늘에게 가족을 다치게 하겠다고 했다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호가 강지우에게 가족을 다치게 하겠다고 했다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호가 오다은에게 가족을 다치게 하겠다고 했다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은가 윤하늘에게 가족을 다치게 하겠다고 했다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은가 강지우에게 가족을 다치게 하겠다고 했다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은가 서지호에게 가족을 다치게 하겠다고 했다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 강지우에게 신상을 공개하겠다고 겁을 주었다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 서지호에게 신상을 공개하겠다고 겁을 주었다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 오다은에게 신상을 공개하겠다고 겁을 주었다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 윤하늘에게 신상을 공개하겠다고 겁을 주었다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 서지호에게 신상을 공개하겠다고 겁을 주었다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 오다은에게 신상을 공개하겠다고 겁을 주었다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 윤하늘에게 신상을 공개하겠다고 겁을 주었다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 강지우에게 신상을 공개하겠다고 겁을 주었다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 오다은에게 신상을 공개하겠다고 겁을 주었다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 윤하늘에게 신상을 공개하겠다고 겁을 주었다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 강지우에게 신상을 공개하겠다고 겁을 주었다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 서지호에게 신상을 공개하겠다고 겁을 주었다.",
+    "label": "threat",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤에게 문자를 보냈다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 이서연에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 박지훈에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 최유진에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 정도윤에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 한수빈에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 김민수에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 박지훈에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 최유진에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 정도윤에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 한수빈에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 김민수에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 이서연에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 최유진에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 정도윤에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 한수빈에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 김민수에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 이서연에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 박지훈에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 정도윤에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 한수빈에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 김민수에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 이서연에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 박지훈에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 최유진에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 한수빈에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 김민수에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 이서연에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 박지훈에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 최유진에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 정도윤에게 전화했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤와 만나 이야기를 나눴다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 이서연에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 박지훈에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 최유진에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 정도윤에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 한수빈에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 김민수에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 박지훈에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 최유진에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 정도윤에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 한수빈에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 김민수에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 이서연에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 최유진에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 정도윤에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 한수빈에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 김민수에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 이서연에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 박지훈에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 정도윤에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 한수빈에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 김민수에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 이서연에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 박지훈에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 최유진에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 한수빈에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 김민수에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 이서연에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 박지훈에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 최유진에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 정도윤에게 상황을 설명했다.",
+    "label": "communication",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 강지우에게 메시지로 연락했다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 서지호에게 메시지로 연락했다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 오다은에게 메시지로 연락했다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 윤하늘에게 메시지로 연락했다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 서지호에게 메시지로 연락했다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 오다은에게 메시지로 연락했다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 윤하늘에게 메시지로 연락했다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 강지우에게 메시지로 연락했다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 오다은에게 메시지로 연락했다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 윤하늘에게 메시지로 연락했다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 강지우에게 메시지로 연락했다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 서지호에게 메시지로 연락했다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 강지우와 대화를 주고받았다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 서지호와 대화를 주고받았다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 오다은와 대화를 주고받았다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 윤하늘와 대화를 주고받았다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 서지호와 대화를 주고받았다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 오다은와 대화를 주고받았다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 윤하늘와 대화를 주고받았다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 강지우와 대화를 주고받았다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 오다은와 대화를 주고받았다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 윤하늘와 대화를 주고받았다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 강지우와 대화를 주고받았다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 서지호와 대화를 주고받았다.",
+    "label": "communication",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤의 배우자다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수와 이서연는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수와 박지훈는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수와 최유진는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수와 정도윤는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수와 한수빈는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연와 김민수는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연와 박지훈는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연와 최유진는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연와 정도윤는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연와 한수빈는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈와 김민수는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈와 이서연는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈와 최유진는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈와 정도윤는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈와 한수빈는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진와 김민수는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진와 이서연는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진와 박지훈는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진와 정도윤는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진와 한수빈는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤와 김민수는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤와 이서연는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤와 박지훈는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤와 최유진는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤와 한수빈는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈와 김민수는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈와 이서연는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈와 박지훈는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈와 최유진는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈와 정도윤는 형제다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤의 아버지다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수와 이서연는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수와 박지훈는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수와 최유진는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수와 정도윤는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수와 한수빈는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연와 김민수는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연와 박지훈는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연와 최유진는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연와 정도윤는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연와 한수빈는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈와 김민수는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈와 이서연는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈와 최유진는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈와 정도윤는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈와 한수빈는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진와 김민수는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진와 이서연는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진와 박지훈는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진와 정도윤는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진와 한수빈는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤와 김민수는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤와 이서연는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤와 박지훈는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤와 최유진는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤와 한수빈는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈와 김민수는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈와 이서연는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈와 박지훈는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈와 최유진는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈와 정도윤는 부부다.",
+    "label": "family",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 강지우의 언니다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 서지호의 언니다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 오다은의 언니다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 윤하늘의 언니다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 서지호의 언니다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 오다은의 언니다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 윤하늘의 언니다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 강지우의 언니다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 오다은의 언니다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 윤하늘의 언니다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 강지우의 언니다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 서지호의 언니다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 강지우의 자녀다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 서지호의 자녀다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 오다은의 자녀다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 윤하늘의 자녀다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 서지호의 자녀다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 오다은의 자녀다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 윤하늘의 자녀다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 강지우의 자녀다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 오다은의 자녀다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 윤하늘의 자녀다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 강지우의 자녀다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 서지호의 자녀다.",
+    "label": "family",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤와 같은 회사에서 일한다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤를 고용했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 이서연의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 박지훈의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 최유진의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 정도윤의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 한수빈의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 김민수의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 박지훈의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 최유진의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 정도윤의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 한수빈의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 김민수의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 이서연의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 최유진의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 정도윤의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 한수빈의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 김민수의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 이서연의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 박지훈의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 정도윤의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 한수빈의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 김민수의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 이서연의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 박지훈의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 최유진의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 한수빈의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 김민수의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 이서연의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 박지훈의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 최유진의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 정도윤의 회사에 입사했다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤와 업무 계약을 맺었다.",
+    "label": "work",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 강지우와 직장 동료다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 서지호와 직장 동료다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 오다은와 직장 동료다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 윤하늘와 직장 동료다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 서지호와 직장 동료다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 오다은와 직장 동료다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 윤하늘와 직장 동료다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 강지우와 직장 동료다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 오다은와 직장 동료다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 윤하늘와 직장 동료다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 강지우와 직장 동료다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 서지호와 직장 동료다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 강지우가 운영하는 가게의 직원이다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 서지호가 운영하는 가게의 직원이다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘는 오다은가 운영하는 가게의 직원이다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 윤하늘가 운영하는 가게의 직원이다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 서지호가 운영하는 가게의 직원이다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우는 오다은가 운영하는 가게의 직원이다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 윤하늘가 운영하는 가게의 직원이다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 강지우가 운영하는 가게의 직원이다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호는 오다은가 운영하는 가게의 직원이다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 윤하늘가 운영하는 가게의 직원이다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 강지우가 운영하는 가게의 직원이다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은는 서지호가 운영하는 가게의 직원이다.",
+    "label": "work",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 오늘 비가 온다고 적었다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 오늘 비가 온다고 적었다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 오늘 비가 온다고 적었다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 오늘 비가 온다고 적었다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 오늘 비가 온다고 적었다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 오늘 비가 온다고 적었다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 이서연와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 박지훈와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 최유진와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 정도윤와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 한수빈와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 김민수와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 박지훈와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 최유진와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 정도윤와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 한수빈와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 김민수와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 이서연와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 최유진와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 정도윤와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 한수빈와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 김민수와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 이서연와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 박지훈와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 정도윤와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 한수빈와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 김민수와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 이서연와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 박지훈와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 최유진와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 한수빈와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 김민수와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 이서연와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 박지훈와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 최유진와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 정도윤와 관련 있는지는 알 수 없다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 이서연라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 박지훈라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 최유진라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 정도윤라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수는 한수빈라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 김민수라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 박지훈라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 최유진라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 정도윤라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연는 한수빈라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 김민수라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 이서연라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 최유진라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 정도윤라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈는 한수빈라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 김민수라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 이서연라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 박지훈라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 정도윤라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진는 한수빈라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 김민수라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 이서연라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 박지훈라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 최유진라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤는 한수빈라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 김민수라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 이서연라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 박지훈라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 최유진라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈는 정도윤라는 이름을 기억하지 못했다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 이서연를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 박지훈를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 최유진를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 정도윤를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "김민수가 한수빈를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 김민수를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 박지훈를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 최유진를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 정도윤를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "이서연가 한수빈를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 김민수를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 이서연를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 최유진를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 정도윤를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "박지훈가 한수빈를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 김민수를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 이서연를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 박지훈를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 정도윤를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "최유진가 한수빈를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 김민수를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 이서연를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 박지훈를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 최유진를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "정도윤가 한수빈를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 김민수를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 이서연를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 박지훈를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 최유진를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "한수빈가 정도윤를 때렸는지는 모른다.",
+    "label": "other",
+    "split": "train",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘가 강지우에게 무엇을 했는지는 확인되지 않았다.",
+    "label": "other",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘가 서지호에게 무엇을 했는지는 확인되지 않았다.",
+    "label": "other",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "윤하늘가 오다은에게 무엇을 했는지는 확인되지 않았다.",
+    "label": "other",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우가 윤하늘에게 무엇을 했는지는 확인되지 않았다.",
+    "label": "other",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우가 서지호에게 무엇을 했는지는 확인되지 않았다.",
+    "label": "other",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "강지우가 오다은에게 무엇을 했는지는 확인되지 않았다.",
+    "label": "other",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호가 윤하늘에게 무엇을 했는지는 확인되지 않았다.",
+    "label": "other",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호가 강지우에게 무엇을 했는지는 확인되지 않았다.",
+    "label": "other",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "서지호가 오다은에게 무엇을 했는지는 확인되지 않았다.",
+    "label": "other",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은가 윤하늘에게 무엇을 했는지는 확인되지 않았다.",
+    "label": "other",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은가 강지우에게 무엇을 했는지는 확인되지 않았다.",
+    "label": "other",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오다은가 서지호에게 무엇을 했는지는 확인되지 않았다.",
+    "label": "other",
+    "split": "test",
+    "synthetic": true
+  },
+  {
+    "text": "오늘 일기에는 날씨와 점심 메뉴만 적혀 있다.",
+    "label": "other",
+    "split": "test",
+    "synthetic": true
+  }
+]

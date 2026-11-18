@@ -17,6 +17,8 @@ class InMemoryUserRepository implements IUserRepository {
     return Array.from(this.users.values()).find((user) => user.email === email) ?? null;
   }
 
+  async findByGoogleSubject(subject:string) { return Array.from(this.users.values()).find(x=>x.googleSubject===subject) ?? null; }
+
   async save(user: User) {
     this.users.set(user.id, user);
     return user;
@@ -54,4 +56,19 @@ describe("AuthService", () => {
       /이름은 2자 이상/,
     );
   });
+});
+
+it("never links an existing private account by email without password reauthentication",async()=>{
+ const service=createService();const owner=await service.register({name:"테스터",email:"owner@example.test",password:"Factline123"});
+ const identity={subject:"google-subject-1",email:"owner@example.test",name:"소유자"};
+ await assert.rejects(service.googleLogin(identity),/기존 계정/);
+ await assert.rejects(service.googleLogin(identity,{userId:owner.user.id,password:"wrong"}),/기존 계정/);
+ const linked=await service.googleLogin(identity,{userId:owner.user.id,password:"Factline123"});
+ assert.equal(linked.user.id,owner.user.id);assert(linked.user.googleConnected);
+ assert.equal((await service.googleLogin({...identity,email:"changed@example.test"})).user.id,owner.user.id);
+});
+it("creates Google-only accounts using the stable subject",async()=>{
+ const service=createService();const a=await service.googleLogin({subject:"google-new",email:"new@example.test",name:"신규"});
+ assert.equal((await service.googleLogin({subject:"google-new",email:"new@example.test",name:"신규"})).user.id,a.user.id);
+ await assert.rejects(service.login({email:"new@example.test",password:"Factline123"}));
 });

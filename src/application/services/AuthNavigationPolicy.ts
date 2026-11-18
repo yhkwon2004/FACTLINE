@@ -1,6 +1,5 @@
 export type NavigationDecision =
-  | { kind: "allow" }
-  | { kind: "redirect"; location: string };
+  { kind: "allow" } | { kind: "redirect"; location: string };
 
 export interface NavigationInput {
   pathname: string;
@@ -9,7 +8,15 @@ export interface NavigationInput {
 }
 
 const PUBLIC_PATHS = new Set(["/", "/login", "/register"]);
-const PROTECTED_PREFIXES = ["/dashboard", "/cases", "/settings", "/mypage", "/life", "/integrations"];
+const PROTECTED_PREFIXES = [
+  "/dashboard",
+  "/cases",
+  "/settings",
+  "/mypage",
+  "/life",
+  "/integrations",
+  "/models",
+];
 
 export class AuthNavigationPolicy {
   decide(input: NavigationInput): NavigationDecision {
@@ -19,7 +26,10 @@ export class AuthNavigationPolicy {
 
     if (!input.isAuthenticated && this.isProtected(input.pathname)) {
       const next = encodeURIComponent(`${input.pathname}${input.search ?? ""}`);
-      return { kind: "redirect", location: `/login?next=${next}&reason=auth-required` };
+      return {
+        kind: "redirect",
+        location: `/login?next=${next}&reason=auth-required`,
+      };
     }
 
     return { kind: "allow" };
@@ -28,7 +38,12 @@ export class AuthNavigationPolicy {
   normalizeReturnPath(value: unknown) {
     if (typeof value !== "string" || value.length === 0) return "/dashboard";
     if (!value.startsWith("/") || value.startsWith("//")) return "/dashboard";
-    if (value.startsWith("/api/") || value === "/login" || value === "/register") return "/dashboard";
+    if (
+      value.startsWith("/api/") ||
+      value === "/login" ||
+      value === "/register"
+    )
+      return "/dashboard";
     return value;
   }
 
@@ -38,6 +53,8 @@ export class AuthNavigationPolicy {
 
   private isProtected(pathname: string) {
     if (PUBLIC_PATHS.has(pathname)) return false;
-    return PROTECTED_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+    return PROTECTED_PREFIXES.some(
+      (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+    );
   }
 }

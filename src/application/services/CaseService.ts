@@ -29,10 +29,12 @@ export class CaseService {
 
   async rename(input: { caseId: string; userId: string; title: string }) {
     const title = input.title.trim();
-    if (title.length < 2) throw new Error("사건 이름은 2자 이상 입력해 주세요.");
+    if (title.length < 2)
+      throw new Error("사건 이름은 2자 이상 입력해 주세요.");
 
     const caseData = await this.get(input.caseId);
-    if (caseData.userId !== input.userId) throw new Error("사건을 찾을 수 없습니다.");
+    if (caseData.userId !== input.userId)
+      throw new Error("사건을 찾을 수 없습니다.");
 
     caseData.title = title;
     caseData.updatedAt = new Date();
@@ -43,13 +45,20 @@ export class CaseService {
     await this.cases.lock(caseId);
   }
 
+  async unlock(caseId: string) {
+    const item = await this.get(caseId);
+    item.unlock();
+    return this.cases.save(item);
+  }
+
   async delete(caseId: string) {
     await this.cases.delete(caseId);
   }
 
   async deleteForUser(input: { caseId: string; userId: string }) {
     const caseData = await this.get(input.caseId);
-    if (caseData.userId !== input.userId) throw new Error("사건을 찾을 수 없습니다.");
+    if (caseData.userId !== input.userId)
+      throw new Error("사건을 찾을 수 없습니다.");
     await this.cases.delete(input.caseId);
   }
 }

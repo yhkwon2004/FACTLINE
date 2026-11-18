@@ -1,3 +1,5 @@
+import {GoogleSignIn} from "../../../presentation/components/GoogleSignIn";
+import {googleConfigured,passwordLoginEnabled} from "../../../infrastructure/security/GoogleIdentity";
 import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
 import { AuthNavigationPolicy } from "../../../application/services/AuthNavigationPolicy";
@@ -22,7 +24,8 @@ export default async function RegisterPage({
           <h1 className="text-2xl font-bold tracking-tight">회원가입</h1>
           <p className="mt-2 text-sm leading-6 text-slate-600">사건 자료는 계정 단위로 분리하여 관리합니다.</p>
         </div>
-        <RegisterForm next={next} />
+        <GoogleSignIn next={next}/>
+        {passwordLoginEnabled() ? (googleConfigured()?<details className="auth-email-fallback"><summary>이메일로 가입</summary><RegisterForm next={next}/></details>:<RegisterForm next={next}/>) : null}
         <p className="text-center text-sm text-slate-600">
           이미 계정이 있나요?{" "}
           <Link href={`/login?next=${encodeURIComponent(next)}`} className="font-semibold text-emerald-800">

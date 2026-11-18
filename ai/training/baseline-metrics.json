@@ -1,0 +1,49 @@
+{
+  "trainingExamples": 360,
+  "heldOutExamples": 120,
+  "split": "행위 표현군 단위 분리 (같은 문형 변형은 같은 split)",
+  "accuracy": 0.7083333333333334,
+  "corpusChunks": 2105,
+  "limitation": "합성 소규모 평가. 실제 상담·사건에 대한 정확도, 법적 판단 성능을 의미하지 않음.",
+  "llm": {
+    "base": "Qwen/Qwen3-0.6B",
+    "adapter": "LoRA r8 q_proj/v_proj",
+    "steps": 152,
+    "syntheticSFT": 120,
+    "legalContextSamples": 32,
+    "finalMeanTrainingLoss": 0.38413213165476917,
+    "seconds": 32,
+    "device": "cuda:0",
+    "baseRetrained": false,
+    "limitation": "학습 loss만 측정. 생성 성능은 별도 검증 필요."
+  },
+  "lexicalAccuracy": 0.16666666666666666,
+  "semanticEncoder": "intfloat/multilingual-e5-small (frozen)",
+  "classifier": "Ridge fitted on E5 embeddings, alpha=0.05",
+  "perClass": {
+    "금품·강요": {
+      "examples": 20,
+      "correct": 5
+    },
+    "따돌림·사이버": {
+      "examples": 20,
+      "correct": 10
+    },
+    "상담·정서": {
+      "examples": 20,
+      "correct": 20
+    },
+    "신체 피해": {
+      "examples": 20,
+      "correct": 20
+    },
+    "언어·협박": {
+      "examples": 20,
+      "correct": 19
+    },
+    "일반 기록": {
+      "examples": 20,
+      "correct": 11
+    }
+  }
+}

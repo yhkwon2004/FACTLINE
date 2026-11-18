@@ -9,7 +9,9 @@ export interface SessionPayload {
 
 export class JwtSessionService {
   private secret() {
-    return encoder.encode(process.env.JWT_SECRET ?? "factline-development-secret-change-me");
+    const value=process.env.JWT_SECRET;
+    if(process.env.NODE_ENV==="production" && (!value || value.length<32)) throw new Error("JWT_SECRET 설정이 필요합니다.");
+    return encoder.encode(value ?? "factline-development-secret-change-me");
   }
 
   async sign(payload: SessionPayload) {

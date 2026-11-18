@@ -34,12 +34,13 @@ import type {
 
 type PrismaCaseWithRelations = Awaited<ReturnType<ReturnType<typeof getPrismaClient>["case"]["findUnique"]>>;
 
-function mapUser(data: { id: string; email: string; name: string; passwordHash: string; createdAt: Date; updatedAt: Date }) {
+function mapUser(data: { id: string; email: string; name: string; passwordHash: string; googleSubject?: string | null; createdAt: Date; updatedAt: Date }) {
   return new User({
     id: data.id,
     email: data.email,
     name: data.name,
     passwordHash: data.passwordHash,
+    googleSubject: data.googleSubject ?? undefined,
     createdAt: data.createdAt,
     updatedAt: data.updatedAt,
   });
@@ -99,6 +100,7 @@ function mapCase(data: any) {
 function mapLifeRecord(data: any) {
   return new LifeRecord({
     id: data.id,
+    sourceEvidenceId:data.sourceEvidenceId,
     userId: data.userId,
     caseId: data.caseId,
     type: data.type as LifeRecordType,
@@ -183,6 +185,10 @@ export class PrismaUserRepository implements IUserRepository {
     return data ? mapUser(data) : null;
   }
 
+  async findByGoogleSubject(subject:string):Promise<User|null> {
+    const data=await getPrismaClient().user.findFirst({where:{googleSubject:subject,deletedAt:null}});return data?mapUser(data):null;
+  }
+
   async save(user: User): Promise<User> {
     const data = await getPrismaClient().user.upsert({
       where: { id: user.id },
@@ -190,12 +196,14 @@ export class PrismaUserRepository implements IUserRepository {
         email: user.email,
         name: user.name,
         passwordHash: user.passwordHash ?? "",
+        googleSubject: user.googleSubject ?? null,
       },
       create: {
         id: user.id,
         email: user.email,
         name: user.name,
         passwordHash: user.passwordHash ?? "",
+        googleSubject: user.googleSubject ?? null,
       },
     });
 
@@ -503,9 +511,10 @@ export class PrismaLifeRecordRepository implements ILifeRecordRepository {
 
   async save(record: LifeRecord): Promise<LifeRecord> {
     const data = await getPrismaClient().lifeRecord.upsert({
-      where: { id: record.id },
+      where: record.sourceEvidenceId?{sourceEvidenceId:record.sourceEvidenceId}:{id:record.id},
       update: {
         caseId: record.caseId,
+        sourceEvidenceId:record.sourceEvidenceId,
         type: record.type,
         title: record.title,
         content: record.content,
@@ -519,6 +528,7 @@ export class PrismaLifeRecordRepository implements ILifeRecordRepository {
         id: record.id,
         userId: record.userId,
         caseId: record.caseId,
+        sourceEvidenceId:record.sourceEvidenceId,
         type: record.type,
         title: record.title,
         content: record.content,

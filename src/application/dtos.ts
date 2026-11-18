@@ -1,4 +1,8 @@
-import type { IncidentType, IntegrationProvider, LifeRecordType } from "../domain/types";
+import type {
+  IncidentType,
+  IntegrationProvider,
+  LifeRecordType,
+} from "../domain/types";
 
 export interface RegisterInput {
   email: string;
@@ -19,6 +23,8 @@ export interface CreateCaseInput {
 }
 
 export interface InterviewInput {
+  isApproximateTime?: boolean;
+  source?: "INTERVIEW" | "EVIDENCE" | "MANUAL";
   caseId: string;
   answer: string;
   previousQuestions?: string[];
@@ -33,6 +39,7 @@ export interface InterviewInput {
 }
 
 export interface EvidenceInput {
+  encoding?: "base64";
   caseId: string;
   name: string;
   type: string;
@@ -44,6 +51,7 @@ export interface EvidenceInput {
 export interface LifeRecordInput {
   userId: string;
   caseId?: string | null;
+  sourceEvidenceId?:string|null;
   type?: LifeRecordType;
   title: string;
   content: string;
@@ -102,6 +110,7 @@ export interface StatementDraftInput {
 }
 
 export interface StructuredInterviewOutput {
+  isApproximateTime?: boolean;
   title: string;
   cleanedStatement: string;
   datetime: string | null;

@@ -1,11 +1,21 @@
 "use client";
 
-import { AlertTriangle, CheckCircle2, Info, ShieldCheck, X } from "lucide-react";
+import { useEffect, useId, useRef } from "react";
+import {
+  AlertTriangle,
+  CheckCircle2,
+  Info,
+  ShieldCheck,
+  X,
+} from "lucide-react";
 import { Button, cn } from "./UI";
 
 type NoticeTone = "info" | "success" | "warning" | "danger";
 
-const toneStyles: Record<NoticeTone, { icon: typeof Info; box: string; iconWrap: string; title: string }> = {
+const toneStyles: Record<
+  NoticeTone,
+  { icon: typeof Info; box: string; iconWrap: string; title: string }
+> = {
   info: {
     icon: Info,
     box: "border-sky-100 bg-sky-50",
@@ -51,24 +61,54 @@ export function NoticeModal({
   onClose: () => void;
   onAction?: () => void;
 }) {
-  if (!open) return null;
+  const dialog = useRef<HTMLDialogElement>(null);
+  const titleId = useId();
+  useEffect(() => {
+    if (open && !dialog.current?.open) dialog.current?.showModal();
+    else if (!open && dialog.current?.open) dialog.current.close();
+  }, [open]);
 
   const styles = toneStyles[tone];
   const Icon = styles.icon;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/35 px-4 py-6 backdrop-blur-sm" role="dialog" aria-modal="true">
+    <dialog
+      ref={dialog}
+      aria-labelledby={titleId}
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
+      className="m-auto w-[calc(100%-2rem)] max-w-md max-h-[90dvh] overflow-auto rounded-2xl p-0 backdrop:bg-slate-950/35"
+    >
       <div className="w-full max-w-md overflow-hidden rounded-lg border border-white/60 bg-white shadow-2xl">
         <div className={cn("border-b p-5", styles.box)}>
           <div className="flex items-start gap-3">
-            <div className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-lg", styles.iconWrap)}>
+            <div
+              className={cn(
+                "flex h-11 w-11 shrink-0 items-center justify-center rounded-lg",
+                styles.iconWrap,
+              )}
+            >
               <Icon size={21} />
             </div>
             <div className="min-w-0 flex-1">
-              <h2 className={cn("text-lg font-bold tracking-tight", styles.title)}>{title}</h2>
-              <p className="mt-2 whitespace-pre-line text-sm leading-6 text-slate-700">{description}</p>
+              <h2
+                id={titleId}
+                className={cn("text-lg font-bold tracking-tight", styles.title)}
+              >
+                {title}
+              </h2>
+              <p className="mt-2 whitespace-pre-line text-sm leading-6 text-slate-700">
+                {description}
+              </p>
             </div>
-            <button type="button" onClick={onClose} className="rounded-lg p-1.5 text-slate-500 transition hover:bg-white/70 hover:text-slate-800" aria-label="닫기">
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-lg p-1.5 text-slate-500 transition hover:bg-white/70 hover:text-slate-800"
+              aria-label="닫기"
+            >
               <X size={18} />
             </button>
           </div>
@@ -79,11 +119,21 @@ export function NoticeModal({
               {secondaryLabel}
             </Button>
           ) : null}
-          <Button type="button" variant={tone === "danger" ? "danger" : tone === "success" ? "secondary" : "primary"} onClick={onAction ?? onClose}>
+          <Button
+            type="button"
+            variant={
+              tone === "danger"
+                ? "danger"
+                : tone === "success"
+                  ? "secondary"
+                  : "primary"
+            }
+            onClick={onAction ?? onClose}
+          >
             {actionLabel}
           </Button>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 }

@@ -14,13 +14,12 @@ export class EvidenceService {
   }
 
   async upload(input: EvidenceInput) {
-    const savedFile = input.fileHash
-      ? { fileUrl: `mock://evidence/${encodeURIComponent(input.name)}`, fileHash: input.fileHash }
-      : await this.storage.save({
-          name: input.name,
-          type: input.type,
-          content: input.content ?? `${input.name}:${input.description ?? ""}`,
-        });
+    const savedFile = await this.storage.save({
+      name: input.name,
+      type: input.type,
+      encoding: input.encoding,
+      content: input.content ?? `${input.name}:${input.description ?? ""}`,
+    });
 
     const evidence = new Evidence({
       id: crypto.randomUUID(),

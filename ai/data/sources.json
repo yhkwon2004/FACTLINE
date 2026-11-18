@@ -1,0 +1,97 @@
+[
+  {
+    "id": "precedent-213305",
+    "title": "학교폭력가해학생처분취소",
+    "category": "판례",
+    "url": "https://www.law.go.kr/precInfoP.do?precSeq=213305",
+    "sha256": "059402334b98ef992cf0a394de6327fb2099f2ba1da4f8c8f1a482237c5c8e53",
+    "characters": 6304,
+    "rights": "대한민국 저작권법 제7조 법령·판결문. 사이트 UI 제외.",
+    "retrievedAt": "2026-11-18T11:52:53.699783"
+  },
+  {
+    "id": "precedent-609519",
+    "title": "학교폭력 조치 집행정지",
+    "category": "판례",
+    "url": "https://law.go.kr/LSW/precInfoP.do?mode=0&precSeq=609519",
+    "sha256": "0758b0d2382424c6fb5c57afd038b15b2a953f365ba881087bc859e3764a9f9d",
+    "characters": 5798,
+    "rights": "대한민국 저작권법 제7조 법령·판결문. 사이트 UI 제외.",
+    "retrievedAt": "2026-11-18T11:52:53.944679"
+  },
+  {
+    "id": "school-law",
+    "title": "학교폭력예방및대책에관한법률",
+    "category": "법령",
+    "url": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=286361&efYd=20260602&ancYnChk=0&chrClsCd=010202",
+    "canonicalUrl": "https://www.law.go.kr/법령/학교폭력예방및대책에관한법률",
+    "sha256": "7170adf94e275d591bed1fd09bd8bb5f7622f6abaf2e519c27857403b8e75605",
+    "characters": 33675,
+    "rights": "대한민국 저작권법 제7조 법령",
+    "retrievedAt": "2026-11-18T12:01:39.202207"
+  },
+  {
+    "id": "school-decree",
+    "title": "학교폭력예방및대책에관한법률시행령",
+    "category": "법령",
+    "url": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=280967&efYd=20260102&ancYnChk=0&chrClsCd=010202",
+    "canonicalUrl": "https://www.law.go.kr/법령/학교폭력예방및대책에관한법률시행령",
+    "sha256": "eb555e968af65a484ea703ce65e2b982ccb6bb0c44c0c406880357549b51fd4f",
+    "characters": 26739,
+    "rights": "대한민국 저작권법 제7조 법령",
+    "retrievedAt": "2026-11-18T12:01:40.256120"
+  },
+  {
+    "id": "criminal-law",
+    "title": "형법",
+    "category": "법령",
+    "url": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290185&efYd=20261002&ancYnChk=0&chrClsCd=010202",
+    "canonicalUrl": "https://www.law.go.kr/법령/형법",
+    "sha256": "24af1b4317cc1c90f2689604acb51e917b6c32e32de8ce061759fb6ea424827a",
+    "characters": 70808,
+    "rights": "대한민국 저작권법 제7조 법령",
+    "retrievedAt": "2026-11-18T12:01:41.916509"
+  },
+  {
+    "id": "civil-law",
+    "title": "민법",
+    "category": "법령",
+    "url": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=284415&efYd=20260317&ancYnChk=0&chrClsCd=010202",
+    "canonicalUrl": "https://www.law.go.kr/법령/민법",
+    "sha256": "e38430c04c0d996abd6031a1088d78ebd5a8e5624f424fa4e6d5c102f8163ac3",
+    "characters": 177135,
+    "rights": "대한민국 저작권법 제7조 법령",
+    "retrievedAt": "2026-11-18T12:01:44.072423"
+  },
+  {
+    "id": "privacy-law",
+    "title": "개인정보보호법",
+    "category": "법령",
+    "url": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=283839&efYd=20260911&ancYnChk=0&chrClsCd=010202",
+    "canonicalUrl": "https://www.law.go.kr/법령/개인정보보호법",
+    "sha256": "cf9d44753cd389378bca37ef8e1b9f4b47fe1d0e67f8fbb34a159a2f6f5c18c0",
+    "characters": 89076,
+    "rights": "대한민국 저작권법 제7조 법령",
+    "retrievedAt": "2026-11-18T12:01:45.282584"
+  },
+  {
+    "id": "precedent-158543",
+    "title": "사기 · 대법원 2011도8829",
+    "category": "판례",
+    "url": "https://www.law.go.kr/precInfoP.do?precSeq=158543",
+    "sha256": "adce7bd3b278ad739f92e76e1b7bc3891b7aabd1e365b6fbcf97e8292f283172",
+    "characters": 6988,
+    "rights": "대한민국 저작권법 제7조 판결문. 사이트 UI 제외.",
+    "retrievedAt": "2026-11-18T12:59:30.630739+00:00"
+  },
+  {
+    "id": "precedent-614371",
+    "title": "손해배상(기) · 대법원 2025다211430",
+    "category": "판례",
+    "url": "https://www.law.go.kr/precInfoP.do?precSeq=614371",
+    "sha256": "d1026d356ddf0de92173062fb810e5baf64ce33f77d562139f00ac1add93d751",
+    "characters": 6532,
+    "rights": "대한민국 저작권법 제7조 판결문. 사이트 UI 제외.",
+    "retrievedAt": "2026-11-18T12:59:30.888063+00:00"
+  }
+]

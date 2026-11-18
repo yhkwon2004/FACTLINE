@@ -52,6 +52,7 @@ function parseRecordDate(record: LifeRecordView) {
 }
 
 function formatDate(value: string | null, fallback: string | null) {
+  if(fallback) return fallback;
   if (value) return new Intl.DateTimeFormat("ko-KR", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value));
   return fallback ?? "시점 미정";
 }

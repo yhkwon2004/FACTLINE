@@ -6,9 +6,11 @@ const OVERLAP_WINDOW_MS = 60 * 60 * 1000;
 export class ConsistencyCheckService {
   check(events: IncidentEvent[]): ContradictionItem[] {
     const contradictions: ContradictionItem[] = [];
-    const sorted = [...events].filter((event) => event.datetime).sort((a, b) => {
-      return (a.datetime?.getTime() ?? 0) - (b.datetime?.getTime() ?? 0);
-    });
+    const sorted = [...events]
+      .filter((event) => event.datetime && !event.isApproximateTime)
+      .sort((a, b) => {
+        return (a.datetime?.getTime() ?? 0) - (b.datetime?.getTime() ?? 0);
+      });
 
     for (let index = 0; index < sorted.length - 1; index += 1) {
       const current = sorted[index];
@@ -35,7 +37,8 @@ export class ConsistencyCheckService {
       ) {
         contradictions.push({
           type: "LOCATION",
-          description: "같은 인물이 가까운 시간대에 서로 다른 장소에 있는 것으로 기록되어 있습니다.",
+          description:
+            "같은 인물이 가까운 시간대에 서로 다른 장소에 있는 것으로 기록되어 있습니다.",
           eventIds: [current.id, next.id],
         });
       }
@@ -54,4 +57,3 @@ export class ConsistencyCheckService {
     return contradictions;
   }
 }
-

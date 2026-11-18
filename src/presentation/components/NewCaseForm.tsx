@@ -28,9 +28,13 @@ export function NewCaseForm() {
         throw new Error(payload.error ?? "사건을 생성할 수 없습니다.");
       }
 
-      router.push(`/cases/${payload.case.id}/interview`);
+      router.push(`/cases/${payload.case.id}/evidence`);
     } catch (submitError) {
-      setError(submitError instanceof Error ? submitError.message : "사건을 생성할 수 없습니다.");
+      setError(
+        submitError instanceof Error
+          ? submitError.message
+          : "사건을 생성할 수 없습니다.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -42,8 +46,12 @@ export function NewCaseForm() {
         <Field label="사건 제목">
           <Input name="title" placeholder="정리할 사건의 제목" required />
         </Field>
-        <Field label="사건 유형">
-          <select name="type" className="h-11 rounded-lg border border-stone-300 bg-white px-3 text-sm">
+        <Field label="정리할 내용">
+          <select
+            name="type"
+            className="h-11 rounded-lg border border-stone-300 bg-white px-3 text-sm"
+          >
+            <option value="VIOLENCE">학교폭력 / 피해 기록</option>
             <option value="FRAUD">사기/재산</option>
             <option value="VIOLENCE">폭행/상해</option>
             <option value="DEFAMATION">명예훼손/모욕</option>
@@ -52,13 +60,16 @@ export function NewCaseForm() {
           </select>
         </Field>
         <Field label="간단한 설명">
-          <Textarea name="description" placeholder="현재 기억나는 범위에서만 적어 주세요." />
+          <Textarea
+            name="description"
+            placeholder="현재 기억나는 범위에서만 적어 주세요."
+          />
         </Field>
         <Card className="bg-stone-100 shadow-none">
           <div className="flex gap-3">
             <ShieldCheck className="mt-1 shrink-0 text-emerald-800" size={18} />
             <p className="text-sm leading-6 text-slate-700">
-              본 서비스는 법률 자문을 제공하지 않습니다. 입력 내용은 사실 정리와 상담 준비 자료 생성에만 사용됩니다.
+              기억나는 범위만 적어 주세요. 자료는 나중에 추가할 수 있어요.
             </p>
           </div>
         </Card>

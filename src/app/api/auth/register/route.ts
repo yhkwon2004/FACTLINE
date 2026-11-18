@@ -1,3 +1,4 @@
+import {passwordLoginEnabled} from "../../../../infrastructure/security/GoogleIdentity";
 import { NextResponse, type NextRequest } from "next/server";
 import { createContainer } from "../../../../infrastructure/di/container";
 import { jsonError, parseRequestBody, redirectToPath, setSessionCookie } from "../../_utils";
@@ -5,6 +6,7 @@ import { AuthNavigationPolicy } from "../../../../application/services/AuthNavig
 
 export async function POST(request: NextRequest) {
   try {
+    if(!passwordLoginEnabled()) throw new Error("Google 로그인으로 계속해 주세요.");
     const body = await parseRequestBody(request);
     const { user, token } = await createContainer().authService.register({
       email: String(body.email),

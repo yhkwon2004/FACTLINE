@@ -1,290 +1,166 @@
-# FACTLINE
-
-FACTLINE은 평소에는 다이어리처럼 일상과 대화를 기록하고, 문제가 생겼을 때 흩어진 기록과 증거를 시간순 사실관계로 정리하도록 돕는 모바일 우선 웹 애플리케이션입니다.
-
-핵심 원칙은 다음과 같습니다.
-
-> AI does not judge. AI organizes facts.
-
-FACTLINE은 법률 자문, 유무죄 판단, 죄명 결론, 법적 결과 예측을 제공하지 않습니다. 사용자가 제공한 기록, 대화 원문, 증거 메타데이터만 구조화합니다.
-
-## 무엇을 할 수 있나요?
-
-- 매일 다이어리처럼 생활 기록, 일정, 불편했던 일, 기억할 사람과 장소를 남길 수 있습니다.
-- 카카오톡 내보내기 텍스트, 이메일, 문자, 인스타그램 등 외부 기록을 동의 기반으로 가져오는 구조를 제공합니다.
-- 이름, 사람, 사건, 날짜, 키워드 여러 개로 일상 기록과 증거물을 검색하고 연결할 수 있습니다.
-- 사건이 생기면 기존 다이어리와 증거물을 골라 시간순 블록으로 정리합니다.
-- AI가 답변 내용에 따라 금액, 반복성, 제3자, 대화 매체, 원본 자료, 시점/장소 등 부족한 부분을 한 번에 하나씩 질문합니다.
-- 업로드 증거는 파일 원문을 AI로 보내지 않고 이름, 설명, SHA-256 해시, 연결 이벤트 중심으로 관리합니다.
-- 실제 기록과 증거만 사용해 진술서 초안과 상담 준비 보고서를 생성합니다.
-- 법령/판례 검색은 참고자료로만 표시하며 판단이나 대응 조언을 하지 않습니다.
-
-## 화면
-
-### 진입 화면
-
-![FACTLINE 진입 화면](docs/screenshots/landing.png)
-
-처음 방문한 사용자는 FACTLINE을 일상 기록 앱으로 이해하고, 로그인 또는 회원가입으로 작업공간에 들어갑니다.
-
-### 기록 허브
-
-![기록 허브](docs/screenshots/dashboard.png)
-
-대시보드는 오늘 다이어리, 대화 가져오기, 문제 정리 시작을 한 화면에서 보여줍니다. 일상 기록 수, 가져온 메시지 수, 증거 연결 수, 최근 사건 정리를 함께 확인합니다.
-
-### 라이프 다이어리
-
-![라이프 다이어리](docs/screenshots/life-diary.png)
-
-일상, 일정, 생활 사건, 불편/갈등 기록을 캘린더 색상으로 구분합니다. 현재 시각 입력, 대략적인 시간, 위치 참조, 관련 사람, 태그를 함께 저장할 수 있습니다.
-
-### 기억 연동
-
-![기억 연동](docs/screenshots/integrations.png)
-
-카카오톡 내보내기 텍스트를 우선 지원하고, Gmail, Outlook, SMS, Instagram, 수동 입력은 동의 기반 커넥터 구조로 확장할 수 있게 설계했습니다. 가져온 메시지는 날짜, 참여자, 방향, 내용 기준으로 검색됩니다.
-
-### 셀프 기록
-
-![셀프 기록](docs/screenshots/self-record.png)
-
-사건 안에서는 다이어리와 증거물을 자료 보드에서 선택해 셀프 기록에 이어 씁니다. AI 연관성순과 날짜순을 전환하며, 선택한 자료를 기반으로 다음 질문을 생성합니다.
-
-## 유스케이스 흐름도
-
-```mermaid
-flowchart TD
-  A["평소 생활 기록"] --> B["라이프 다이어리 저장"]
-  C["카카오톡/이메일/문자/인스타 자료"] --> D["동의 기반 가져오기"]
-  D --> E["메시지·자료 검색"]
-  B --> E
-  E --> F["문제 발생 시 관련 기록 선택"]
-  F --> G["새 정리 시작"]
-  G --> H["셀프 기록 챗봇"]
-  H --> I["시간순 타임라인"]
-  H --> J["누락·위험 표현·모순 점검"]
-  I --> K["진술서 초안/상담 준비 보고서"]
-  J --> K
-  K --> L["전문가 상담 준비"]
-```
-
-```mermaid
-sequenceDiagram
-  actor User as 사용자
-  participant Diary as 라이프 다이어리
-  participant Import as 기억 연동
-  participant Case as 사건 정리
-  participant AI as AI 질문 엔진
-  participant Report as 보고서 생성
-
-  User->>Diary: 일상/일정/불편 기록 저장
-  User->>Import: 카카오톡 내보내기 텍스트 가져오기
-  Import-->>Case: 날짜·참여자·문구 메타데이터 제공
-  User->>Case: 관련 다이어리와 증거 선택
-  Case->>AI: 사용자가 제공한 사실만 전달
-  AI-->>User: 부족한 정보 한 가지 질문
-  User->>Case: 추가 셀프 기록 작성
-  Case->>Report: 실제 기록과 증거만 취합
-  Report-->>User: 진술서 초안 및 상담 준비 자료
-```
-
-## 데이터 구조
-
-| 데이터 | 용도 | 주요 필드 |
-| --- | --- | --- |
-| User | 계정 분리와 세션 인증 | email, name, passwordHash |
-| Case | 문제 발생 시 묶는 정리 단위 | title, type, description, status, isLocked |
-| LifeRecord | 평소 다이어리 기록 | type, title, content, occurredAt, location, people, tags |
-| ConnectedSource | 동의한 외부 출처 | provider, displayName, consentScopes, lastSyncedAt |
-| MemoryRecord | 가져온 대화/자료 원문 단위 | provider, participantName, direction, content, occurredAt |
-| IncidentEvent | 셀프 기록에서 만든 행위 단위 | rawStatement, description, datetime, actor, action, damage |
-| Evidence | 업로드/가져온 증거 메타데이터 | name, type, description, fileHash, fileUrl |
-| AnalysisResult | 누락·위험 표현·모순 점검 | missingInfo, riskStatements, contradictions |
-| LegalReference | 참고 법령/판례 | title, citation, content, sourceUrl |
-| Report | 진술서 초안/상담 준비 보고서 | content, generatedAt |
-| AuditLog | 보안 감사 기록 | userId, action, entityType, createdAt |
-
-## 주요 기능 상세
-
-### 1. 다이어리 기록
-
-- `NOTE`, `SCHEDULE`, `EVENT`, `ISSUE` 카테고리로 기록을 분류합니다.
-- 정확한 시각과 대략적인 시간을 함께 저장할 수 있습니다.
-- 현재 위치 참조를 선택하면 브라우저 위치 권한 기반으로 좌표와 정확도를 장소 항목에 남깁니다.
-- 캘린더에서 날짜별 기록을 시각적으로 확인합니다.
-
-### 2. 외부 기록 연동
-
-- 카카오톡 내보내기 텍스트의 날짜 헤더와 `[참여자] [오전/오후 시간] 메시지` 형식을 파싱합니다.
-- 보낸 메시지와 받은 메시지를 `OUTBOUND`, `INBOUND`로 구분합니다.
-- Gmail, Outlook, SMS, Instagram은 커넥터 추상화와 동의 UI를 먼저 구현해 실제 API 또는 사용자가 제공한 내보내기 파일로 확장할 수 있습니다.
-- 비공식 API는 사용자의 명시적 동의와 서비스 약관 검토가 전제되어야 하며, 기본 MVP는 사용자가 직접 내보낸 자료를 우선 처리합니다.
-
-### 3. 사건 정리와 셀프 기록
-
-- 로그인하지 않은 사용자가 사건 생성, 다이어리, 연동 기능에 접근하면 로그인 화면으로 안내합니다.
-- 사건 안에서는 셀프 기록, 타임라인, 증거, 분석, 참고자료, 보고서 페이지가 분리되어 있습니다.
-- 자료 보드에서 다이어리와 증거물을 검색해 기록에 연결합니다.
-- 타임라인은 시간, 사건 요약, 제3자 개입 여부, 증거 여부를 행위 단위 블록으로 정리합니다.
-
-### 4. AI 질문 엔진
-
-AI는 다음 시스템 규칙을 따릅니다.
-
-```text
-You must only use user-provided facts.
-Do not invent or assume anything.
-Do not provide legal judgment.
-Remove emotional or exaggerated language.
-Only structure, clean, and organize.
-```
-
-현재 구현은 `IAIService` 인터페이스 아래 세 가지 모드를 지원합니다.
-
-- `MockAIService`: 로컬 개발과 테스트용 규칙 기반 엔진
-- `VercelAIService`: Vercel AI SDK / AI Gateway 설정 시 사용
-- `LocalLLMService`: `LOCAL_LLM_ENDPOINT`가 있는 온디바이스 또는 로컬 OpenAI 호환 서버용
-
-질문 우선순위는 고정 문항 반복이 아니라 직전 답변의 단서에 따라 달라집니다.
-
-- 시점, 장소/매체, 관련자 같은 기본 누락 정보
-- 금액/입금/송금/계좌 등 돈의 흐름
-- 반복성, 첫 시점, 최근 시점, 횟수와 간격
-- 제3자, 목격자, 직접 본 내용과 전해 들은 내용
-- 카카오톡/문자/전화/이메일 등 대화 매체와 원문 보관 여부
-- 증거 자료가 어떤 말이나 행동을 뒷받침하는지
-- 항상, 계속, 매번, 모두, 분명히, 고의로, 악의적으로 같은 위험 표현
-
-### 5. 분석과 보고서
-
-- 육하원칙 누락: when, where, who, action, damage, evidence
-- 위험 표현: 항상, 계속, 매번, 모두, 분명히, 고의로, 악의적으로
-- 모순 점검: 시간 겹침, 장소 충돌, 관련자 누락, 순서 오류
-- 보고서 구조: 사건 개요, 타임라인, 육하원칙, 피해 내용, 증거 목록, 누락 정보, 위험 표현, 참고 법령/판례, 상담 준비 질문, 법적 고지
-
-모든 출력에는 다음 안내가 포함됩니다.
-
-```text
-본 자료는 법률 자문이 아닙니다.
-참고용으로 제공되며 최종 판단은 전문가 상담이 필요합니다.
-```
-
-## 시스템 아키텍처
-
-```text
-src/domain          순수 OOP 엔티티, 값 객체, 도메인 서비스
-src/application     유스케이스, DTO, 포트 인터페이스, 서비스 오케스트레이션
-src/infrastructure  Prisma, AI, 저장소, 보안, DI 컨테이너
-src/presentation    재사용 가능한 한국어 UI 컴포넌트와 클라이언트 상태
-src/app             Next.js App Router 페이지와 Route Handler
-```
-
-```mermaid
-classDiagram
-  class User
-  class Case
-  class LifeRecord
-  class MemoryRecord
-  class IncidentEvent
-  class Evidence
-  class AnalysisResult
-  class Report
-  class IAIService
-  class ICaseRepository
-  class IEvidenceRepository
-  class CaseService
-  class InterviewService
-  class EvidenceService
-  class AnalysisService
-  class ReportService
-
-  User "1" --> "*" Case
-  User "1" --> "*" LifeRecord
-  Case "1" --> "*" IncidentEvent
-  Case "1" --> "*" Evidence
-  Case "1" --> "*" AnalysisResult
-  Case "1" --> "*" Report
-  InterviewService --> IAIService
-  CaseService --> ICaseRepository
-  EvidenceService --> IEvidenceRepository
-  AnalysisService --> AnalysisResult
-  ReportService --> Report
-```
-
-자세한 폴더 구조와 UML 스타일 설계는 `docs/architecture.md`를 참고하세요.
-
-## 보안과 개인정보
-
-- JWT 기반 HTTP-only 세션 쿠키를 사용합니다.
-- 민감 필드 암호화 유틸리티와 감사 로그 구조를 포함합니다.
-- 사용자 데이터와 사건 데이터는 사용자 ID 기준으로 분리됩니다.
-- 증거 파일 원문은 AI에 전달하지 않고, 파일명·설명·해시·연결 이벤트만 사용합니다.
-- 계정 삭제, 사건 잠금, 보안 안내 페이지를 제공합니다.
-- 배포 환경에서는 HTTPS를 전제로 합니다.
-
-## 기술 스택
-
-- Next.js App Router, React, TypeScript
-- TailwindCSS, lucide-react
-- Zustand
-- Prisma ORM, PostgreSQL
-- Supabase PostgreSQL 연결 가능
-- Vercel AI SDK / AI Gateway, Mock AI, Local LLM fallback
-- Local mock storage, S3-compatible storage abstraction
-- JWT cookie session, bcrypt, jose, crypto-js
-
-## 로컬 실행
-
-```bash
-npm install
-copy .env.example .env.local
-npx prisma db push
-npm run dev
-```
-
-브라우저에서 `http://localhost:3000`을 엽니다.
-
-PostgreSQL이 없는 개발 환경에서는 `.env.local`에 아래 값을 설정해 JSON 기반 로컬 저장소를 사용할 수 있습니다.
-
-```bash
-FACTLINE_STORAGE_MODE="local"
-```
-
-빌드 검증만 수행하려면 문법상 유효한 `DATABASE_URL`이 필요합니다.
-
-```powershell
-$env:DATABASE_URL="postgresql://postgres:postgres@localhost:5432/factline?schema=public"
-npm run build
-```
-
-## 환경 변수
-
-| 변수 | 설명 |
-| --- | --- |
-| DATABASE_URL | Prisma/PostgreSQL 연결 문자열 |
-| DIRECT_URL | Supabase 등 직접 연결 URL이 필요한 경우 사용 |
-| JWT_SECRET | 세션 토큰 서명 키 |
-| ENCRYPTION_KEY | 민감 데이터 암호화 키 |
-| FACTLINE_STORAGE_MODE | `local`이면 개발용 JSON 저장소 사용 |
-| AI_GATEWAY_API_KEY | Vercel AI Gateway 사용 시 API 키 |
-| VERCEL_OIDC_TOKEN | Vercel AI Gateway OIDC 사용 시 토큰 |
-| AI_MODEL | 사용할 AI Gateway 모델 |
-| LOCAL_LLM_ENDPOINT | 로컬 OpenAI 호환 LLM 엔드포인트 |
-| LOCAL_LLM_MODEL | 로컬 LLM 모델명 |
-| LAW_API_OC | 국가법령정보 API OC 키 |
-| LAW_API_TARGET | 법령 API target 값 |
-
-## 검증
-
-```bash
+# EUMLOG · 이음로그
+
+**녹음과 흩어진 자료를, 근거가 연결된 사건 기록으로.**
+
+[앱 열기](https://eumlog-evidence.vercel.app) · [학습 데이터](ai/data/README.md) · [학습 실행 기록](ai/training/README.md) · [설치·운영](README-LOCAL.md)
+
+FACTLINE을 기반으로 만든 모바일 우선 증거정리 앱입니다. 녹음·대화·사진·문서를 실제로 읽고 인물과 행위의 연결을 원문과 함께 보여줍니다. AI 제안과 사용자가 확인한 기록을 구분합니다. 상담·법률 검토에 필요한 자료를 준비하는 제품이며 유무죄·승소 확률을 판정하지 않습니다.
+
+## 제품 흐름
+
+~~~mermaid
+flowchart LR
+ A["녹음 / 대화 / 사진 / 문서"] --> B["암호화 원본 + SHA-256"]
+ B --> C["전사·OCR·텍스트 추출"]
+ C --> D["인물 / 행위 / 날짜 / 금액"]
+ D --> E["실시간 관계도 + 원문 위치"]
+ E --> F["사용자 확인"]
+ F --> G["하루 기록 / 타임라인"]
+ G --> H["법령·판례·누락 자료 검토"]
+ H --> I["상담 준비 보고서 / JSON / PDF 인쇄"]
+~~~
+
+1. **오늘의 기록**에서 녹음 기준일과 M4A·MP3·WAV 등 파일을 선택합니다.
+2. 로컬 Whisper가 변환한 구간을 누르면 원본의 해당 위치를 재생합니다.
+3. 문장을 골라 하루 기록으로 보관합니다. 원본 증거와 연결되며 같은 원본의 중복 저장을 막습니다.
+4. **증거** 화면의 인물·행위·금액 관계도가 처리 단계에 따라 갱신됩니다. 별도 웹 화면도 보이는 동안 약 2초 간격으로 동기화합니다.
+5. 연결을 눌러 원문을 확인한 뒤 타임라인에 반영합니다. 전체 검토에서는 공식 원문, 확인 질문, 내 과거 기록을 함께 봅니다.
+
+## 실제 화면
+
+화면의 인물과 사건은 소프트웨어 설명용 합성이며 실제 사건·상담 기록이 아닙니다.
+
+![실제 학습 결과와 실행 기록](docs/screenshots/training-current.jpg)
+
+![실제 LoRA 단계별 손실](docs/screenshots/lora-curve.jpg)
+
+| 모바일 녹음 기록 | 근거가 연결된 인물 관계도 |
+|---|---|
+| ![녹음 기록](docs/screenshots/voice-mobile.jpg) | ![관계도](docs/screenshots/relationships-mobile.jpg) |
+
+Pretendard를 자체 호스팅하고 기존 민트·아이보리 인상을 유지합니다. 모바일은 날짜·파일 선택을 먼저 배치하고 메모·언어 분석·해시는 펼쳐 봅니다. 관계도는 세로 배치·중심 인물 선택·연결 목록을 지원합니다.
+
+## 실제 AI와 학습 범위
+
+외부 LLM·음성 인식 추론 API를 호출하지 않습니다. 설치 때 공개 모델 파일을 내려받고 연결된 Python 분석기에서 실행합니다. Google 로그인과 Vercel 저장소·웹 호스팅은 네트워크 서비스입니다.
+
+| 구성 | 구현 | 자체 학습 / 검증 |
+|---|---|---|
+| 한국어 분석 | Kiwi 형태소·품사·문장 분리 | 사전학습 모델 사용 |
+| 의미 표현 | multilingual-e5-small, 384차원 | 인코더 고정, 기본 모델 재학습 없음 |
+| 사건 유형 | E5 + Ridge 6종 | 합성 360개 학습 / 표현군 분리 120개 평가, **70.83%** |
+| 관계 유형 | E5 + Ridge 7종 | 합성 816개 학습 / 새로운 이름·문형 157개 평가, **88.54%**, Macro F1 **0.883** |
+| 인물·방향·부인 | Kiwi 조사·품사와 원문 구간 검증 | 문법 규칙 + 학습 유형, 완전 학습형 NER 아님 |
+| 구조화 LLM | Qwen3-0.6B + LoRA r8, q/v projection | 합성 구조화·질문 120개 + 공식 원문 맥락 32개, 152회 최적화 |
+| 자유 질의응답 | Qwen3 기본 모델 + 내 자료·법령 RAG | 구조화 전용 어댑터는 자유 응답 때 비활성화 |
+| 녹음 | Whisper small + PyAV | 사전학습 사용, M4A·WAV·WebM 실제 디코딩 검사 |
+| 사진·스캔 | EasyOCR 한국어·영어 | 사전학습 사용, PDF·이미지 검사 |
+| 원문 검색 | E5 의미 60% + Kiwi TF-IDF 40% | 법령 5종·판례 4건, **2,105개 검색 구간** |
+| 자료 비교 | 의미·형태소 유사도와 PMI | 유사도·공동 출현은 인과관계가 아님 |
+
+**평가는 소규모 합성 데이터의 내부 측정입니다.** 관계 유형의 신체 행위 재현율은 50%, 금전 유형 정밀도는 약 66.7%입니다. 이 수치를 실제 사건 판단 정확도나 사용자 효용으로 광고하지 않습니다. LLM loss는 답변 정확도가 아닙니다. 실제 사건·상담 및 법률 판단 성능은 별도 검증이 필요합니다.
+
+[관계 실행 로그](ai/training/latest-run.json), [LoRA 실행 로그](ai/training/lora-run.json), [모델 지표](ai/training/baseline-metrics.json)에 실제 수치·설정·해시가 있습니다. 학습 화면은 해당 기록을 읽습니다. 가짜 epoch·학습 곡선을 만들지 않습니다.
+
+## 데이터와 출처
+
+| 자료 | 파일 | 사용 |
+|---|---|---|
+| 자체 합성 상담 480문장 | [supervision.json](ai/data/supervision.json) | 사건 유형 분류, 구조화 예시 |
+| 자체 합성 관계 973문장 | [relation-supervision.json](ai/data/relation-supervision.json) | 관계 학습·분리 평가 |
+| 이번 LoRA의 정확한 152쌍 | [lora-samples.json](ai/training/lora-samples.json) | 실제 입력·정답 |
+| 공식 법령·판결 원문 | [sources.json](ai/data/sources.json) | URL·수집일·SHA-256·본문 길이·권리 근거 |
+| 실제 음성 검사 | [audio-check.json](ai/training/audio-check.json) | 합성 한국어 녹음의 실제 전사·구간 |
+
+법령은 학교폭력예방법·시행령, 형법, 민법, 개인정보보호법입니다. 판례는 학교폭력 행정·집행정지, [사기 2011도8829](https://www.law.go.kr/precInfoP.do?precSeq=158543), [손해배상 2025다211430](https://www.law.go.kr/precInfoP.do?precSeq=614371) 등 선별 **4건**입니다. 전국 판례 전체 검색을 대체하지 않습니다. 조문별 구간은 원문 링크·해시를 유지합니다. 사건 당시 시행 법령·부칙은 별도로 확인하세요.
+
+실제 상담 개인정보·사용자 증거는 학습에 넣지 않으며 자동 재학습하지 않습니다. 첨부 뉴스 관계도는 시각적 참고이며 학습·데모 사실 데이터로 쓰지 않았습니다. 권리·출처가 불명확한 상담·상용 판례 데이터는 포함하지 않았습니다. [모델 라이선스](ai/MODEL-NOTICES.md)를 확인하세요.
+
+## 시스템과 데이터 흐름
+
+~~~mermaid
+flowchart TB
+ subgraph Client["모바일 / 데스크톱"]
+  UI["Next.js / React / Pretendard"]
+  MAP["SVG 관계도 / 원문 재생 / 연결 목록"]
+  UI --> MAP
+ end
+ subgraph Web["Vercel"]
+  AUTH["세션 / 계정별 권한 / Google 토큰 검증"]
+  API["증거·기록·검토 API"]
+  JOB["암호화 작업 상태 / lease / 재시도"]
+  VAULT["비공개 Blob · AES-256-GCM"]
+  AUTH --> API --> JOB
+  API --> VAULT
+ end
+ subgraph Worker["연결 PC · Python / CUDA"]
+  BRIDGE["인증된 제한 작업 브리지"]
+  MEDIA["PyAV / Whisper / EasyOCR"]
+  NLP["Kiwi / E5 / Ridge / Qwen LoRA"]
+  INDEX["공식 법령·판결 인덱스"]
+  BRIDGE --> MEDIA --> NLP --> INDEX
+ end
+ UI --> AUTH
+ JOB --> BRIDGE
+ NLP --> JOB
+ UI -->|"보이는 동안 polling · ETag"| API
+~~~
+
+웹은 Vercel, 모델은 연결된 PC의 RTX 3080 10GB에서 실행합니다. 인증 토큰과 허용 작업 목록을 가진 브리지로만 접근합니다. PC를 끄면 원본은 보관되고 분석은 대기합니다. 자동 재시작·연결 갱신을 제공하지만 현재 PC·임시 터널에는 24시간 운영 보장이 없습니다.
+
+~~~mermaid
+erDiagram
+ USER ||--o{ CASE : owns
+ USER ||--o{ LIFE_RECORD : owns
+ CASE ||--o{ EVIDENCE : contains
+ CASE ||--o{ EVENT : confirms
+ EVIDENCE ||--o{ ANALYSIS : produces
+ ANALYSIS ||--o{ RELATION : proposes
+ EVIDENCE ||--o| LIFE_RECORD : source
+ EVENT }o--o{ EVIDENCE : cites
+~~~
+
+관계는 원문 인용·원본 ID·후보 ID·UTF-16 구간·방향·부인/불확실/예정 상태·녹음 위치를 유지합니다. 자동 관계를 확정 사실로 저장하지 않습니다. 같은 사건의 명시된 이름은 묶고 대명사·별칭은 원본별로 나누지만, 같은 이름의 동일 실인물 여부를 검증하지는 못합니다.
+
+법률 검토는 금전·신체·위협 관련 **원문 언급 / 추가 확인 질문**입니다. 단순 송금을 사기로 확정하지 않고 당시 설명·지급과의 연결·당시 의사와 능력을 구분합니다. 이 목록은 규칙 기반이며 법률 요건 충족 판정 모델이 아닙니다. 과거 기록은 내 계정의 잠기지 않은 최근 30개 정리의 설명·확인 진술만 의미 비교합니다.
+
+## Google 로그인 · ID는 나중에
+
+연결 코드는 준비되었습니다. **현재 배포에는 Client ID가 없으므로 Google 로그인은 비활성**이며 기존 이메일 로그인을 유지합니다.
+
+1. Google 웹 OAuth 클라이언트의 승인된 JavaScript 출처에 https://eumlog-evidence.vercel.app 과 http://localhost:3000 을 등록합니다.
+2. Vercel eumlog-evidence의 Production 변수 **GOOGLE_CLIENT_ID**를 추가하고 재배포합니다. GIS ID-token 방식으로 Client Secret은 사용하지 않습니다.
+3. 공식 Google 버튼의 실제 로그인을 확인합니다. 기존 이메일 계정은 마이페이지에서 **현재 비밀번호 재확인 후 명시적으로 연결**합니다.
+4. 연결을 확인한 뒤 원할 때 **PASSWORD_LOGIN_ENABLED=false**로 전환합니다.
+
+Google 서명·issuer·audience·만료·검증 이메일·nonce·안정적인 sub를 확인합니다. ID가 없는 현재 상태에서는 실제 Google 계정 E2E를 수행하지 않았습니다. 검증 로직은 로컬 서명 토큰으로 검사했습니다. [Google 공식 문서](https://developers.google.com/identity/gsi/web/guides/verify-google-id-token)를 기준으로 구현했습니다.
+
+## 실행과 검증
+
+상세 명령은 [설치·운영](README-LOCAL.md)을 참고하세요. 설정된 PC에서는 Start-EUMLOG.cmd로 로컬 앱을, Start-EUMLOG-Cloud.cmd로 공개 웹의 분석기를 실행합니다.
+
+~~~powershell
+npm ci
+node scripts/init-local.mjs
+# Python·PyTorch·공개 기본 모델 설치: README-LOCAL.md
+npm run ai:relations
+npm run ai:check-relations
+npm run ai:check-audio
 npm test
-npm run lint
 npm run build
-```
+npm run start
+~~~
 
-이번 README에 포함된 화면은 `agent-browser`로 로컬 서버를 실제로 열어 캡처했습니다.
+작은 자체 분류기·LoRA 어댑터·검색 인덱스는 Git에 포함합니다. 대형 기본 모델 캐시·원본 증거·비밀키·가상환경은 제외합니다. Pickle은 신뢰하는 이 저장소 또는 직접 학습한 파일만 로드하세요. [검증 기록](docs/verification.md)에 확인 범위와 제외 사항을 남깁니다.
 
-## 라이선스
+## 사업화 가설
 
-이 저장소는 오픈소스가 아닙니다. `LICENSE` 파일에 명시된 대로 무단 복제, 수정, 배포, 상업적 이용, 재라이선스, 역설계, 파생 서비스 제작을 금지합니다.
+가치는 **상담을 시작하기까지 드는 자료 정리 시간 감소**입니다. 개인·보호자가 평소 음성을 하루 기록으로 보관하고 필요할 때 근거 묶음을 만드는 흐름을 우선합니다. 상담기관·학교 지원기관·법률사무소 협력은 검증할 가설이며 실제 제휴·매출·고객 수를 확보했다고 주장하지 않습니다.
+
+| 가설 | 측정 지표 | 유료화 후보 |
+|---|---|---|
+| 음성 입력이 기록 부담을 줄인다 | 첫 기록 완료율·시간·전사 수정량 | 보관 용량·월 녹음 처리량 |
+| 근거 연결이 상담 준비를 줄인다 | 원문 확인율·정리 시간·재작업 | 사건별 정리·내보내기 |
+| 기관의 자료 접수에 쓸 수 있다 | 동의 기반 접수율·누락 감소 | 기관 워크스페이스·권한 관리 |
+
+결제·기관 공유·전문가 연결은 아직 구현하지 않았습니다. GPU·저장·전사 비용을 실측한 뒤 가격을 검증해야 합니다. 암호화 JSON 상태는 소규모 배포용으로 상용 운영에는 DB·큐·감사·보관 정책 검증이 필요합니다. 원본 진위·취득 적법성·법적 증거능력을 보장하지 않습니다.

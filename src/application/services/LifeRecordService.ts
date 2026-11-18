@@ -20,6 +20,7 @@ export class LifeRecordService {
     if (input.caseId) {
       const caseData = await this.cases.findById(input.caseId);
       if (!caseData || caseData.userId !== input.userId) throw new Error("연결할 사건을 찾을 수 없습니다.");
+      if(input.sourceEvidenceId&&!caseData.evidences.some(e=>e.id===input.sourceEvidenceId)) throw new Error("연결할 원본을 찾을 수 없습니다.");
     }
 
     return this.records.save(
@@ -27,6 +28,7 @@ export class LifeRecordService {
         id: crypto.randomUUID(),
         userId: input.userId,
         caseId: input.caseId,
+        sourceEvidenceId:input.sourceEvidenceId,
         type: input.type ?? "NOTE",
         title: input.title,
         content: input.content,

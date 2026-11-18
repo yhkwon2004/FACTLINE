@@ -1,23 +1,37 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createContainer } from "../../../../infrastructure/di/container";
-import { jsonError, parseRequestBody, requireSession } from "../../_utils";
+import {
+  requireCaseAccess,
+  jsonError,
+  parseRequestBody,
+  requireSession,
+} from "../../_utils";
 
-export async function GET(_request: NextRequest, context: { params: Promise<{ caseId: string }> }) {
+export async function GET(
+  _request: NextRequest,
+  context: { params: Promise<{ caseId: string }> },
+) {
   try {
     const session = await requireSession();
     const params = await context.params;
+    await requireCaseAccess(params.caseId);
     const caseData = await createContainer().caseService.get(params.caseId);
-    if (caseData.userId !== session.userId) throw new Error("사건을 찾을 수 없습니다.");
+    if (caseData.userId !== session.userId)
+      throw new Error("사건을 찾을 수 없습니다.");
     return NextResponse.json({ case: caseData });
   } catch (error) {
     return jsonError(error);
   }
 }
 
-export async function PATCH(request: NextRequest, context: { params: Promise<{ caseId: string }> }) {
+export async function PATCH(
+  request: NextRequest,
+  context: { params: Promise<{ caseId: string }> },
+) {
   try {
     const session = await requireSession();
     const params = await context.params;
+    await requireCaseAccess(params.caseId, true);
     const body = await parseRequestBody(request);
     const caseData = await createContainer().caseService.rename({
       caseId: params.caseId,
@@ -30,11 +44,18 @@ export async function PATCH(request: NextRequest, context: { params: Promise<{ c
   }
 }
 
-export async function DELETE(_request: NextRequest, context: { params: Promise<{ caseId: string }> }) {
+export async function DELETE(
+  _request: NextRequest,
+  context: { params: Promise<{ caseId: string }> },
+) {
   try {
     const session = await requireSession();
     const params = await context.params;
-    await createContainer().caseService.deleteForUser({ caseId: params.caseId, userId: session.userId });
+    await requireCaseAccess(params.caseId);
+    await createContainer().caseService.deleteForUser({
+      caseId: params.caseId,
+      userId: session.userId,
+    });
     return NextResponse.json({ ok: true });
   } catch (error) {
     return jsonError(error);

@@ -7,7 +7,10 @@ const authNavigationPolicy = new AuthNavigationPolicy();
 export function proxy(request: NextRequest) {
   const proto = request.headers.get("x-forwarded-proto");
 
-  if (process.env.NODE_ENV === "production" && proto === "http") {
+  const local = ["localhost", "127.0.0.1", "[::1]"].includes(
+    request.nextUrl.hostname,
+  );
+  if (process.env.NODE_ENV === "production" && proto === "http" && !local) {
     const url = request.nextUrl.clone();
     url.protocol = "https:";
     return NextResponse.redirect(url);

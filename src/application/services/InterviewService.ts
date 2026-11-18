@@ -1,5 +1,8 @@
 import { IncidentEvent } from "../../domain/entities";
-import type { ICaseRepository, IEventRepository } from "../../domain/repositories";
+import type {
+  ICaseRepository,
+  IEventRepository,
+} from "../../domain/repositories";
 import type { InterviewInput } from "../dtos";
 import type { IAIService } from "../ports";
 
@@ -27,7 +30,10 @@ export class InterviewService {
     if (!caseData) throw new Error("사건을 찾을 수 없습니다.");
     if (caseData.isLocked) throw new Error("잠긴 사건은 수정할 수 없습니다.");
 
-    const structured = await this.ai.structureInterview({ answer: input.answer, context: caseData.title });
+    const structured = await this.ai.structureInterview({
+      answer: input.answer,
+      context: caseData.title,
+    });
     const datetime = input.datetime ?? structured.datetime;
     const validEvidenceIds = (input.evidenceIds ?? []).filter((id) =>
       caseData.evidences.some((evidence) => evidence.id === id),
@@ -40,13 +46,22 @@ export class InterviewService {
       rawStatement: input.answer,
       description: structured.cleanedStatement,
       datetime: datetime ? new Date(datetime) : null,
-      isApproximateTime: !datetime && Boolean(input.approximateTimeText ?? structured.approximateTimeText),
-      approximateTimeText: input.approximateTimeText ?? structured.approximateTimeText,
+      isApproximateTime:
+        input.isApproximateTime ??
+        (input.datetime
+          ? false
+          : (structured.isApproximateTime ??
+            (!datetime &&
+              Boolean(
+                input.approximateTimeText ?? structured.approximateTimeText,
+              )))),
+      approximateTimeText:
+        input.approximateTimeText ?? structured.approximateTimeText,
       location: input.location ?? structured.location,
       actor: input.actor ?? structured.actor,
       action: input.action ?? structured.action,
       damage: input.damage ?? structured.damage,
-      source: "INTERVIEW",
+      source: input.source ?? "INTERVIEW",
       evidenceIds: validEvidenceIds,
     });
 
@@ -82,7 +97,9 @@ export class InterviewService {
       nextQuestion: followUp.question,
       isComplete: followUp.isComplete,
       followUpReason: followUp.reason,
-      followUpQuestions: followUp.question ? [followUp.question] : structured.followUpQuestions,
+      followUpQuestions: followUp.question
+        ? [followUp.question]
+        : structured.followUpQuestions,
     };
   }
 }

@@ -15,6 +15,7 @@ model User {
   id           String     @id @default(uuid())
   email        String     @unique
   name         String
+  googleSubject String? @unique
   passwordHash String
   cases        Case[]
   lifeRecords  LifeRecord[]
@@ -80,6 +81,7 @@ model Evidence {
 }
 
 model LifeRecord {
+  sourceEvidenceId String? @unique
   id                  String   @id @default(uuid())
   userId              String
   user                User     @relation(fields: [userId], references: [id])
