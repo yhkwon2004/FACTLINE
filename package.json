@@ -10,7 +10,7 @@
     "preview": "next start",
     "clean": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\"",
     "lint": "tsc --noEmit",
-    "test": "node --test --import tsx src/domain/services/domain-services.test.ts src/application/services/auth-navigation-policy.test.ts src/application/services/auth-service.test.ts src/application/services/memory-integration-service.test.ts src/infrastructure/ai/mock-ai-service.test.ts src/infrastructure/storage/local-storage.test.ts src/domain/services/evidence-graph.test.ts src/infrastructure/security/google-identity.test.ts src/infrastructure/storage/byte-range.test.ts src/domain/services/relationship-graph.test.ts",
+    "test": "node --test --import tsx src/domain/services/domain-services.test.ts src/application/services/auth-navigation-policy.test.ts src/application/services/auth-service.test.ts src/application/services/memory-integration-service.test.ts src/infrastructure/ai/mock-ai-service.test.ts src/infrastructure/storage/local-storage.test.ts src/domain/services/evidence-graph.test.ts src/infrastructure/security/google-identity.test.ts src/infrastructure/storage/byte-range.test.ts src/domain/services/relationship-graph.test.ts src/domain/services/diagram.test.ts",
     "check:local": "node scripts/check-local.mjs",
     "ai:train": "node scripts/python.mjs train.py",
     "ai:semantic": "node scripts/python.mjs train_semantic.py",
@@ -20,7 +20,8 @@
     "ai:check-relations": "node scripts/python.mjs check_relations.py",
     "ai:check-audio": "node scripts/python.mjs check_audio.py",
     "ai:index": "node scripts/python.mjs rebuild_legal_index.py",
-    "ai:check-training": "node scripts/python.mjs check_training.py"
+    "ai:check-training": "node scripts/python.mjs check_training.py",
+    "ai:layout": "node scripts/python.mjs train_layout.py"
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.170",

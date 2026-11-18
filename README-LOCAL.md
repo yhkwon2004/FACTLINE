@@ -76,6 +76,8 @@ vercel --prod
 npm run lint
 npm test
 npm run ai:check-relations
+npm run ai:check-training
+node scripts/check-diagram.mjs
 npm run ai:check-audio
 .venv\Scripts\python.exe ai/legal_review.py
 npm run ai:check
@@ -89,7 +91,7 @@ node scripts/check-voice.mjs
 
 - 20MB / 녹음 20분. PDF 본문 80쪽·스캔 12쪽. 추출 본문 6만 자·최대 90개 후보·화면 형태소 600개.
 - 화자 분리·실시간 통화 수집 없음. 녹음 상대 시간은 재생 위치이며 발생 시각이 아닙니다. 기준일은 사용자가 선택합니다.
-- 관계도는 최근 12개 원본·최대 36개 연결을 구성합니다. 모바일은 한 번에 8개를 표시하고 인물 필터·목록으로 나머지를 봅니다.
+- 자동 관계는 최근 12개 원본·최대 36개 연결입니다. 새 편집기는 전체를 확대·이동하며 편집하고 직접 요소 60개·연결 120개·묶음 30개를 추가할 수 있습니다. 사진 포함 SVG는 총 30MB까지 내보냅니다.
 - 관계 유형·방향·이름 추출은 오류가 가능합니다. 이름 일치가 동일 인물의 증명이 아닙니다.
 - 법률 확인 목록은 금전·신체·위협에 한정한 규칙입니다. 판례는 선별 4건입니다.
 - 작업 상태·lease를 저장하고 열린 화면의 polling으로 재개합니다. 상시 큐·24시간 GPU가 아닙니다.

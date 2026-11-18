@@ -16,10 +16,12 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  // A cookie can outlive a deleted account; keep sign-in pages reachable without trusting cookie presence.
+  const authPage = ["/login", "/register"].includes(request.nextUrl.pathname);
   const decision = authNavigationPolicy.decide({
     pathname: request.nextUrl.pathname,
     search: request.nextUrl.search,
-    isAuthenticated: Boolean(request.cookies.get(SESSION_COOKIE)?.value),
+    isAuthenticated: !authPage && Boolean(request.cookies.get(SESSION_COOKIE)?.value),
   });
 
   if (decision.kind === "redirect") {

@@ -6,3 +6,5 @@ ai/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 *.woff2 -text
 *.jpg -text
 *.png -text
+
+src/domain/services/layout-ranker.json -text whitespace=cr-at-eol

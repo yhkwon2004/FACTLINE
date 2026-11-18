@@ -23,7 +23,7 @@ const key = () => {
   return createHash("sha256").update(process.env.ENCRYPTION_KEY).digest();
 };
 function safeId(id: string) {
-  if (!/^[a-f0-9-]{36}(?:\.analysis)?$/.test(id))
+  if (!/^[a-f0-9-]{36}(?:\.(?:analysis|diagram))?$/.test(id))
     throw new Error("잘못된 파일 식별자입니다.");
   return id;
 }

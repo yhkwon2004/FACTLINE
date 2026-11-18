@@ -1,0 +1,14 @@
+{
+  "startedAt": "2026-11-18T14:02:20.141461+00:00",
+  "completedAt": "2026-11-18T14:02:20.620113+00:00",
+  "seed": 61,
+  "trainingGraphs": 480,
+  "heldOutGraphs": 120,
+  "trainingLayouts": 2880,
+  "heldOutLayouts": 720,
+  "top1Agreement": 0.6166666666666667,
+  "meanOracleRegret": 0.1185004003918861,
+  "datasetSha256": "053a5bd2a779a1870ebdc46c066097aaead3bcc7d4f2c2eedc75c0c4c5ac5b6b",
+  "modelSha256": "31904557b2d10f870f41570c6626b388dadaa1134e7a7822358b745e82a7e19a",
+  "limitation": "Agreement with a synthetic geometric oracle, not real diagrams, human taste, entity extraction or legal accuracy."
+}

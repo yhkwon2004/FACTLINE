@@ -10,3 +10,5 @@
 - ai: 공개 감독 데이터·공식 원문·Kiwi/E5/Ridge/Whisper/Qwen LoRA·학습/검사 스크립트.
 
 현재 배포는 PostgreSQL이 아닌 암호화 Blob JSON 상태를 사용합니다. Prisma 어댑터와 스키마는 별도 DB 전환용이며 이번 배포의 검증 대상은 아닙니다. 원본 전체를 암호화해 보관하고 실제 추출·분석합니다. 단순 mock URL이나 메타데이터 전용 분석이 아닙니다.
+
+관계도 편집은 DiagramDocument의 제한된 문서 스키마와 DiagramLayout의 배치·라우팅을 사용합니다. 브라우저 내장 layout-ranker.json은 자체 합성 기하 데이터로 학습한 정렬 랭커입니다. 사건별 .diagram 문서는 기존 암호화 저장소에 보관하고 revision과 Blob CAS로 저장 충돌을 거부합니다. 사용자 표시·수동 선과 자동 추출된 원문 사실은 별도입니다. 계정 삭제는 관계도 문서도 함께 제거합니다.

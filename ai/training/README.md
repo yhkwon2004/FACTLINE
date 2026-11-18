@@ -33,3 +33,9 @@ npm run ai:check-audio
 ~~~
 
 재실행은 해당 로그와 학습 가중치를 갱신합니다. 비교가 필요하면 실행 전 이전 로그를 별도 버전으로 보관하세요. 장비·라이브러리·원문 코퍼스가 바뀌면 수치와 해시도 달라집니다. 첨부 샘플·설정·버전과 함께 검토해야 합니다.
+
+## 관계도 배치 랭커
+
+train_layout.py가 seed 61로 합성 그래프 600개를 생성합니다. 그래프 단위 480/120 분리, 후보별 실제 좌표·8개 기하 특징·기하 목표 점수를 data/layout-supervision.json에 기록합니다. 표준화 Ridge의 가중치는 src/domain/services/layout-ranker.json에 포함해 브라우저에서 실행합니다. 실행 로그·해시는 layout-run.json에 있습니다. 분리 평가의 목표 최상위 일치율은 61.67%입니다. 기하식으로 생성한 선호에 대한 수치이며 사람이 라벨링한 미적 평가가 아닙니다.
+
+Python/TypeScript 특징 일치는 layout-parity.json과 diagram.test.ts로 검사합니다. 명령은 npm run ai:layout입니다.

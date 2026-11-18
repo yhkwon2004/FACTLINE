@@ -22,3 +22,10 @@ assert [e['step'] for e in lora['events']]==list(range(1,153))
 assert all(math.isfinite(e['loss']) and e['loss']>=0 for e in lora['events'])
 assert abs(sum(e['loss'] for e in lora['events'][-20:])/20-lora['model']['finalMeanTrainingLoss'])<1e-8
 print('PASS actual dataset splits, evaluation counts, weights, 152 real LoRA losses and SHA-256 consistency')
+
+layout=load('training/layout-run.json');data=load('data/layout-supervision.json')
+assert len(data)==600 and sum(g['split']=='train' for g in data)==480
+assert layout['datasetSha256']==digest('data/layout-supervision.json')
+assert layout['modelSha256']==hashlib.sha256((ROOT.parent/'src/domain/services/layout-ranker.json').read_bytes()).hexdigest()
+assert all(len(g['layouts'])==6 for g in data)
+print('PASS layout ranker data, graph-level holdout and browser model hash')

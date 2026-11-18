@@ -309,7 +309,7 @@ export function EvidenceUploader({
             </form>
           </details>
         </div>
-        <div className="min-w-0"><div className="inspector-tabs" aria-label="관계도 보기"><button type="button" aria-pressed={graphView==="people"} onClick={()=>setGraphView("people")}>인물·행위</button><button type="button" aria-pressed={graphView==="sources"} onClick={()=>setGraphView("sources")}>자료·사실</button></div>{graphView==="people"?<RelationshipCanvas graph={relationships} caseId={caseId} busy={Boolean(busy)} syncError={syncError} onSelect={id=>{const item=items.find(x=>x.id===id);if(item)select(item);}} onAccept={(id,candidate)=>void accept(id,[candidate])}/>:(<EvidenceGraph
+        <div className="min-w-0"><div className="inspector-tabs" aria-label="관계도 보기"><button type="button" aria-pressed={graphView==="people"} onClick={()=>setGraphView("people")}>인물·행위</button><button type="button" aria-pressed={graphView==="sources"} onClick={()=>setGraphView("sources")}>자료·사실</button></div>{graphView==="people"?<RelationshipCanvas graph={relationships} caseId={caseId} imageEvidence={items.filter(x=>x.type.startsWith("image/")||/\.(png|jpe?g|webp)$/i.test(x.name)).map(x=>({id:x.id,name:x.name}))} busy={Boolean(busy)} syncError={syncError} onSelect={id=>{const item=items.find(x=>x.id===id);if(item)select(item);}} onAccept={(id,candidate)=>void accept(id,[candidate])}/>:(<EvidenceGraph
           graph={graph}
           draft={draft}
           selected={selected?.id}

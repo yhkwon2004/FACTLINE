@@ -528,7 +528,7 @@ export class LocalJsonUserRepository implements IUserRepository {
       const caseIds = new Set(
         store.cases.filter((c) => c.userId === id).map((c) => c.id),
       );
-      const files = [...caseIds].map((c) => c + ".analysis");
+      const files = [...caseIds].flatMap((c) => [c + ".analysis",c + ".diagram"]);
       for (const e of store.evidences.filter((e) => caseIds.has(e.caseId))) {
         if (e.fileUrl?.startsWith("local://")) files.push(e.fileUrl.slice(8));
         files.push(e.id + ".analysis");

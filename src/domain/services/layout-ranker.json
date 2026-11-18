@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "model": "standardized Ridge layout preference ranker",
+  "features": [
+    "node_overlap",
+    "edge_crossing",
+    "label_overlap",
+    "mean_length",
+    "length_variation",
+    "area",
+    "aspect",
+    "density"
+  ],
+  "mean": [
+    0.05530283952158962,
+    0.15314806789450225,
+    0.09760366483314625,
+    1.4435470327388997,
+    0.3218556469932053,
+    0.8014295313132457,
+    0.292669748155548,
+    1.1856044765419784
+  ],
+  "scale": [
+    0.08299948404158602,
+    0.0917914793530359,
+    0.11578155328849914,
+    0.3930825576695695,
+    0.25856867618687013,
+    0.2671017177763551,
+    0.2516658442782992,
+    0.2695605402309907
+  ],
+  "weights": [
+    -1.0074835617470908,
+    -0.562574973153332,
+    -0.2638432747039725,
+    -0.0762000704906503,
+    -0.07325899601196603,
+    0.21559552831578752,
+    0.018216164569463532,
+    -0.04805780354494509
+  ],
+  "bias": -2.7567638504294654,
+  "trainedGraphs": 480,
+  "testGraphs": 120,
+  "candidates": 6,
+  "provenance": "Procedural synthetic graphs and geometric preference labels; no user evidence or human preference labels"
+}
