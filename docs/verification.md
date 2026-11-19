@@ -42,3 +42,5 @@
 - [정밀 구현 설계](precision-design.md)는 차기 개발 조건과 현재 제약을 구분한 문서. 장애물 회피·안정 실체 ID·글리프 실측 등의 고도화가 이번 UI 수정에 구현되었다고 주장하지 않음.
 
 세로 경로의 바깥 후보가 x 좌표를 사용하던 공용 계산을 y 축으로 교정했습니다. 같은 그래프를 가로로 10,000 이동할 때 세로 경로가 변하는 재현 검사가 수정 전 실패하고 수정 후 통과했습니다. 화면과 SVG 출력이 같은 boardRoutes를 사용합니다.
+
+공개 배포 확인: 기능 커밋 4364ce3, Vercel dpl_DZAGAbuktqaSh786yZr2RfpPzpAs. https://eumlog-evidence.vercel.app 에서 실제 Google 공식 버튼과 Client ID 설정 응답 확인. check-voice.mjs의 실제 M4A 전사·원본 Range·하루 기록 중복 방지·금액/부인 관계·법률 확인·계정별 과거 검색 9개 흐름 통과. check-diagram.mjs의 저장/충돌/동시성/권한/사진 참조/상한/Origin/잠금 8개 흐름 및 삭제 계정 쿠키의 로그인 접근 검사 통과. 검사용 계정과 자료는 finally에서 삭제했습니다.
