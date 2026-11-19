@@ -52,7 +52,7 @@ ai:index는 추가 공식 판결을 다운로드하고 법령의 조문 단위 �
 | ENCRYPTION_KEY | 암호화 키, 기존 자료와 함께 안전하게 별도 백업 |
 | BLOB_READ_WRITE_TOKEN | 서버 전용 비공개 Blob 자격 증명 |
 | AI_WORKER_TOKEN | 웹·PC 브리지 공유 인증, 서버 전용 |
-| GOOGLE_CLIENT_ID | 나중에 추가할 Google 웹 Client ID |
+| GOOGLE_CLIENT_ID | Google 웹 Client ID · 현재 로컬/Production 설정됨 |
 | PASSWORD_LOGIN_ENABLED | 기본 true, Google 연결 확인 후에만 false |
 | LOCAL_PYTHON | 선택적인 Python 실행 경로 |
 
@@ -96,4 +96,6 @@ node scripts/check-voice.mjs
 - 법률 확인 목록은 금전·신체·위협에 한정한 규칙입니다. 판례는 선별 4건입니다.
 - 작업 상태·lease를 저장하고 열린 화면의 polling으로 재개합니다. 상시 큐·24시간 GPU가 아닙니다.
 - 로컬 JSON은 단일 웹 프로세스용입니다. Blob JSON은 ETag 조건부 갱신으로 충돌을 재시도하지만 전체 상태를 읽고 쓰는 소규모 구성입니다. 상용 다중 사용자 운영에는 DB·큐가 필요합니다.
-- 별도 침투·대규모 부하·실제 사건·미성년자 상담 평가는 수행하지 않았습니다. Google 실제 로그인은 Client ID 추가 후 확인해야 합니다.
+- 별도 침투·대규모 부하·실제 사건·미성년자 상담 평가는 수행하지 않았습니다. Google 공식 버튼은 활성화되었으며 개인 계정 동의 후 세션 E2E는 별도 확인해야 합니다.
+
+Windows CPython 3.12에서는 검증한 regex==2025.11.3 wheel을 고정합니다. 2026.11.18 wheel은 이 장비의 앱 제어 정책에 차단되어 공식 PyPI의 호환 버전으로 교체했습니다. OS 보안 설정은 변경하지 않았습니다.

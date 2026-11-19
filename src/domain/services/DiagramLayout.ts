@@ -61,7 +61,7 @@ export function boardRoutes(nodes:BoardNode[],edges:BoardEdge[],document:Diagram
  const start=horizontal?{x:a.x+sign*padA,y:a.y+startOffset}:{x:a.x+startOffset,y:a.y+(sign>0?120:-65)},end=horizontal?{x:b.x-sign*padB,y:b.y+endOffset}:{x:b.x+endOffset,y:b.y+(sign>0?-65:120)};
  let points:Point[];
  if(e.route==="straight")points=[start,end];else{const lane=horizontal?patch?.viaX:patch?.viaY,mid=horizontal?(start.x+end.x)/2:(start.y+end.y)/2;
- const options=(lane!==undefined?[lane]:[mid,mid-90,mid+90,Math.min(a.x,b.x)-180,Math.max(a.x,b.x)+180]).map(v=>horizontal?[start,{x:v,y:start.y},{x:v,y:end.y},end]:[start,{x:start.x,y:v},{x:end.x,y:v},end]);
+ const options=(lane!==undefined?[lane]:[mid,mid-90,mid+90,Math.min(horizontal?a.x:a.y,horizontal?b.x:b.y)-180,Math.max(horizontal?a.x:a.y,horizontal?b.x:b.y)+180]).map(v=>horizontal?[start,{x:v,y:start.y},{x:v,y:end.y},end]:[start,{x:start.x,y:v},{x:end.x,y:v},end]);
  points=options.sort((p,q)=>{const cost=(v:Point[])=>nodes.filter(n=>n.id!==a.id&&n.id!==b.id&&hitsNode(v,n)).length*10000+pathLength(v);return cost(p)-cost(q);})[0];}
  let longest=0,index=0;for(let i=0;i<points.length-1;i++){const length=distance(points[i],points[i+1]);if(length>longest){longest=length;index=i;}}
  const mid={x:(points[index].x+points[index+1].x)/2,y:(points[index].y+points[index+1].y)/2};let label={x:patch?.labelX??mid.x,y:patch?.labelY??mid.y};

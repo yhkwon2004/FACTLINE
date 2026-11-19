@@ -2,7 +2,7 @@
 
 **녹음과 흩어진 자료를, 근거가 연결된 사건 기록으로.**
 
-[앱 열기](https://eumlog-evidence.vercel.app) · [학습 데이터](ai/data/README.md) · [학습 실행 기록](ai/training/README.md) · [설치·운영](README-LOCAL.md)
+[앱 열기](https://eumlog-evidence.vercel.app) · [학습 데이터](ai/data/README.md) · [학습 실행 기록](ai/training/README.md) · [정밀 구현 설계](docs/precision-design.md) · [설치·운영](README-LOCAL.md)
 
 FACTLINE을 기반으로 만든 모바일 우선 증거정리 앱입니다. 녹음·대화·사진·문서를 실제로 읽고 인물과 행위의 연결을 원문과 함께 보여줍니다. AI 제안과 사용자가 확인한 기록을 구분합니다. 상담·법률 검토에 필요한 자료를 준비하는 제품이며 유무죄·승소 확률을 판정하지 않습니다.
 
@@ -38,7 +38,11 @@ flowchart LR
 |---|---|
 | ![녹음 기록](docs/screenshots/voice-mobile.jpg) | ![관계도](docs/screenshots/diagram-mobile.jpg) |
 
-Pretendard를 자체 호스팅하고 기존 민트·아이보리 인상을 유지합니다. 모바일은 날짜·파일 선택을 먼저 배치하고 메모·언어 분석·해시는 펼쳐 봅니다. 관계도는 세로 배치·중심 인물 선택·연결 목록을 지원합니다.
+Pretendard를 자체 호스팅합니다. 흰색·연한 회색과 파랑, 넓은 여백으로 화면을 정리하고 홈에는 음성 기록·자료 추가·대화 가져오기를 우선 배치했습니다. 모바일은 날짜·파일 선택을 먼저 배치하고 메모·언어 분석·해시는 펼쳐 봅니다. 관계도의 출처·부인 진술·저장 상태는 유지합니다.
+
+| 홈 · 데스크톱 | 홈 · 모바일 |
+|---|---|
+| ![홈](docs/screenshots/home-desktop.jpg) | ![모바일 홈](docs/screenshots/home-mobile.jpg) |
 
 ## 관계도 편집 스튜디오
 
@@ -60,6 +64,8 @@ Pretendard를 자체 호스팅하고 기존 민트·아이보리 인상을 유�
 ![관계도 편집 스튜디오](docs/screenshots/diagram-studio.jpg)
 
 [실제 벡터 SVG 예시](docs/screenshots/diagram-example.svg)
+
+[정밀 구현 설계](docs/precision-design.md)에는 안정적인 인물·진술 식별, 폰트 실측, 장애물 회피, 편집 단위 실행 취소, 추출 평가의 구현 순서와 통과 기준을 정리했습니다. 현재 구현과 향후 설계를 구분합니다.
 
 ## 실제 AI와 학습 범위
 
@@ -145,16 +151,16 @@ erDiagram
 
 법률 검토는 금전·신체·위협 관련 **원문 언급 / 추가 확인 질문**입니다. 단순 송금을 사기로 확정하지 않고 당시 설명·지급과의 연결·당시 의사와 능력을 구분합니다. 이 목록은 규칙 기반이며 법률 요건 충족 판정 모델이 아닙니다. 과거 기록은 내 계정의 잠기지 않은 최근 30개 정리의 설명·확인 진술만 의미 비교합니다.
 
-## Google 로그인 · ID는 나중에
+## Google 로그인
 
-연결 코드는 준비되었습니다. **현재 배포에는 Client ID가 없으므로 Google 로그인은 비활성**이며 기존 이메일 로그인을 유지합니다.
+2026-11-19 로컬과 Vercel Production에 **GOOGLE_CLIENT_ID**를 반영했습니다. 사용자가 승인된 JavaScript 출처 등록을 확인했습니다. 공식 Google 버튼을 우선 제공하고 기존 이메일 계정의 로그인·연결 경로를 유지합니다.
 
 1. Google 웹 OAuth 클라이언트의 승인된 JavaScript 출처에 https://eumlog-evidence.vercel.app 과 http://localhost:3000 을 등록합니다.
 2. Vercel eumlog-evidence의 Production 변수 **GOOGLE_CLIENT_ID**를 추가하고 재배포합니다. GIS ID-token 방식으로 Client Secret은 사용하지 않습니다.
 3. 공식 Google 버튼의 실제 로그인을 확인합니다. 기존 이메일 계정은 마이페이지에서 **현재 비밀번호 재확인 후 명시적으로 연결**합니다.
 4. 연결을 확인한 뒤 원할 때 **PASSWORD_LOGIN_ENABLED=false**로 전환합니다.
 
-Google 서명·issuer·audience·만료·검증 이메일·nonce·안정적인 sub를 확인합니다. ID가 없는 현재 상태에서는 실제 Google 계정 E2E를 수행하지 않았습니다. 검증 로직은 로컬 서명 토큰으로 검사했습니다. [Google 공식 문서](https://developers.google.com/identity/gsi/web/guides/verify-google-id-token)를 기준으로 구현했습니다.
+Google 서명·issuer·audience·만료·검증 이메일·nonce·안정적인 sub를 확인합니다. 공식 버튼 표시와 공개 설정 응답을 확인했습니다. 실제 개인 Google 계정 선택·동의 이후 세션 발급까지의 E2E는 미검증입니다. 검증 로직은 로컬 서명 토큰으로 검사했습니다. [Google 공식 문서](https://developers.google.com/identity/gsi/web/guides/verify-google-id-token)를 기준으로 구현했습니다.
 
 ## 실행과 검증
 

@@ -48,9 +48,9 @@ export default async function EvidencePage({
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">증거 보관함</h1>
+        <h1 className="text-2xl font-bold tracking-tight">자료와 관계도</h1>
         <p className="mt-2 text-sm leading-6 text-slate-600">
-          원본을 지키고, 확인한 사실을 연결하세요.
+          자료에서 연결을 찾으세요.
         </p>
       </div>
       <EvidenceUploader

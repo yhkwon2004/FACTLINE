@@ -38,10 +38,10 @@ export function Button({
   variant?: "primary" | "secondary" | "outline" | "danger" | "ghost";
 }) {
   const variants = {
-    primary: "bg-teal-800 text-white hover:bg-teal-900",
-    secondary: "bg-emerald-700 text-white hover:bg-emerald-800",
+    primary: "button-primary",
+    secondary: "button-secondary",
     outline:
-      "border border-stone-300 bg-white text-slate-800 hover:bg-stone-50",
+      "button-outline",
     danger: "bg-rose-700 text-white hover:bg-rose-800",
     ghost: "text-slate-700 hover:bg-stone-100",
   };
@@ -65,7 +65,7 @@ export function Input({
   return (
     <input
       className={cn(
-        "h-11 w-full rounded-lg border border-stone-300 bg-white px-3 text-sm text-slate-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100",
+        "h-11 w-full rounded-lg border border-stone-300 bg-white px-3 text-sm text-slate-900 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100",
         className,
       )}
       {...props}
@@ -80,7 +80,7 @@ export function Textarea({
   return (
     <textarea
       className={cn(
-        "min-h-32 w-full rounded-lg border border-stone-300 bg-white px-3 py-3 text-sm leading-6 text-slate-900 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100",
+        "min-h-32 w-full rounded-lg border border-stone-300 bg-white px-3 py-3 text-sm leading-6 text-slate-900 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100",
         className,
       )}
       {...props}

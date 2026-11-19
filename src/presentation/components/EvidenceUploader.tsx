@@ -240,20 +240,18 @@ export function EvidenceUploader({
       <div className="evidence-studio">
         <div className="evidence-composer">
           <section
-            className={"upload-panel" + (items.length ? " has-items" : "")}
+            className="evidence-addbar"
             onDragOver={(e) => e.preventDefault()}
             onDrop={(e) => {
               e.preventDefault();
               void upload(e.dataTransfer.files);
             }}
           >
-            <Upload size={26} />
-            <h2>자료를 여기에 놓아 주세요</h2>
-            <p>사진, PDF, 대화, 녹음 / 파일당 20MB, 녹음 20분</p>
-            <label>
+            <label className="file-upload-action"><Upload size={18}/>자료 추가
               <span className="sr-only">증거 파일 선택</span>
               <input
                 type="file"
+                className="sr-only"
                 multiple
                 accept=".txt,.csv,.json,.md,.log,.pdf,.docx,.png,.jpg,.jpeg,.webp,.bmp,.wav,.mp3,.flac,.ogg,.m4a,.aac,.mp4,.webm,.opus,.3gp"
                 disabled={Boolean(busy)}
@@ -263,12 +261,14 @@ export function EvidenceUploader({
                 }}
               />
             </label>
+            <span className="upload-hint">사진 · 문서 · 녹음</span>
+            <details className="upload-limits"><summary>파일 안내</summary><p>파일당 20MB · 녹음 20분 이내</p></details>
           </section>
           {busy ? (
             <div className="notice" role="status">
               <progress aria-label="처리 중" className="mr-3 w-20" />
               {busy === "analyze"
-                ? "전용 모델이 본문과 연결 관계를 분석하고 있어요."
+                ? "자료를 분석하고 있어요."
                 : busy === "upload"
                   ? "원본을 암호화해 보관하고 있어요."
                   : "처리하고 있어요."}
@@ -285,11 +285,11 @@ export function EvidenceUploader({
             </p>
           ) : null}
           <details
-            className="mt-4 rounded-xl border border-stone-200 bg-white p-4"
+            className="memo-add"
           >
             <summary className="flex cursor-pointer items-center gap-2 text-sm font-semibold">
               <Plus size={15} />
-              파일 없이 메모 추가
+              메모 추가
             </summary>
             <form onSubmit={note} className="mt-4 grid gap-4">
               <Field label="자료 이름">

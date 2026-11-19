@@ -10,7 +10,7 @@ export default async function Cases() {
       <div className="page-heading">
         <div>
           <h1>내 사건</h1>
-          <p>자료와 기록을 사건별로 모아두세요.</p>
+          <p>{cases.length}개의 사건</p>
         </div>
         <Link className="primary-link" href="/cases/new">
           새 사건
@@ -22,7 +22,7 @@ export default async function Cases() {
             <span className="case-symbol">
               <FolderOpen size={22} />
             </span>
-            <div>
+            <div className="min-w-0">
               <h3>{c.title}</h3>
               <p>
                 증거 {c.evidences.length} · 기록 {c.events.length}

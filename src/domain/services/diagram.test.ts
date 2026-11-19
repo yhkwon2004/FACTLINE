@@ -25,3 +25,9 @@ assert.ok(boardBounds(board.nodes).width>0);assert.deepEqual(wrapDiagramText("ab
 console.log("PASS trained layout parity, immutable source facts, manual provenance, routing, validation and version conflicts");
 
 const portNodes=board.nodes.map((n,i)=>({...n,x:i===2?400:i*400,y:i===2?700:100}));const portEdges=[{...board.edges[0],id:"in:one",source:portNodes[0].id,target:portNodes[2].id},{...board.edges[0],id:"in:two",source:portNodes[1].id,target:portNodes[2].id}];const portRoutes=boardRoutes(portNodes,portEdges,emptyDiagram());assert.notDeepEqual(portRoutes[0].points.at(-1),portRoutes[1].points.at(-1),"Incoming arrows need separate connection ports");
+
+// Moving the graph horizontally must not change the y lanes of a vertical edge.
+const axisNodes=board.nodes.map((n,i)=>({...n,x:[0,500,250][i],y:[3000,4000,3500][i]}));
+const axisRoute=boardRoutes(axisNodes,[board.edges[0]],emptyDiagram())[0];
+const shiftedRoute=boardRoutes(axisNodes.map(n=>({...n,x:n.x+10000})),[board.edges[0]],emptyDiagram())[0];
+assert.deepEqual(shiftedRoute.points.map(p=>({...p,x:p.x-10000})),axisRoute.points,"Vertical routing must use y coordinates for outer lanes");

@@ -15,3 +15,6 @@ soxr>=1,<2
 langdetect==1.0.9
 
 av==16.1.0
+
+# Validated Windows CPython 3.12 wheel; newer wheel was blocked by app control.
+regex==2025.11.3

@@ -36,7 +36,7 @@ pypdfium2==5.15.2
 python-bidi==0.6.12
 python-docx==1.2.0
 PyYAML==6.0.3
-regex==2026.11.18
+regex==2025.11.3
 requests==2.34.2
 safetensors==0.8.0
 scikit-image==0.26.0
