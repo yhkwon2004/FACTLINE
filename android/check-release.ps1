@@ -12,6 +12,8 @@ if ($LASTEXITCODE -ne 0) { throw 'Invalid bundle.' }
 [xml]$manifest=(& $java -jar $Bundletool dump manifest "--bundle=$Bundle") -join [Environment]::NewLine
 if ($LASTEXITCODE -ne 0) { throw 'Cannot inspect the manifest.' }
 $namespace='http://schemas.android.com/apk/res/android'
+$manageSpace=$manifest.manifest.application.GetAttribute('manageSpaceActivity',$namespace)
+if (!$manageSpace -or $manageSpace -notin @($manifest.manifest.application.activity | ForEach-Object { $_.GetAttribute('name',$namespace) })) { throw 'Missing browser site-settings activity. The launcher would exit at startup.' }
 $package='io.github.yhkwon2004.eumlog'
 $sdk=$manifest.manifest.'uses-sdk'
 if ($manifest.manifest.package -ne $package -or [int]$sdk.GetAttribute('targetSdkVersion',$namespace) -lt 36) { throw 'Wrong application id or target SDK.' }

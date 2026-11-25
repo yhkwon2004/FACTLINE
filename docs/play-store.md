@@ -21,7 +21,7 @@
 
 ## 제출 파일과 확인 순서
 
-1. 서명한 `EUMLOG-1.0.0-release.aab`의 SHA-256은 `F64860BE1E1C8F539C7C3C3A9ECA180F7E2E79907AD9B855970CDE16856CAAC3`입니다. 재빌드는 JDK와 Android SDK 36이 있는 Windows에서 `android/release.ps1`을 실행합니다. 기존 업로드 키는 현재 Windows 사용자의 로컬 키 보관 경로에서 읽습니다. 다음 배포에서는 버전 코드를 올리세요.
+1. 서명한 `EUMLOG-1.0.0-release.aab`의 SHA-256은 `35B81B93CBFE55E8023D0A94BBFB2E96ECADAA33515B2BAE74D59767C30FC537`입니다. 재빌드는 JDK와 Android SDK 36이 있는 Windows에서 `android/release.ps1`을 실행합니다. 기존 업로드 키는 현재 Windows 사용자의 로컬 키 보관 경로에서 읽습니다. 다음 배포에서는 버전 코드를 올리세요.
 2. 스토어 그래픽은 [아이콘 512×512](../android/store/icon.png), [그래픽 1024×500](../android/store/feature.png), [모바일 타임라인](screenshots/demo-mobile.jpg), [모바일 관계도](screenshots/demo-graph.jpg)입니다. 두 화면은 합성 사건을 모바일 브라우저에서 연 실제 캡처입니다. [Google 스토어 그래픽 안내](https://support.google.com/googleplay/android-developer/answer/9866151)
 3. Play Console에서 개발자 연락처와 지원 이메일, 대상 연령, 콘텐츠 등급, 데이터 보안 및 앱 액세스 항목을 운영 주체에 맞게 입력합니다. 리뷰어는 공개 시연을 바로 열 수 있습니다. 회원 전용 기능을 검토할 수 있도록 운영자가 심사용 접근 수단과 기기 보관함 열기 절차를 제공합니다.
 4. 데이터 보안 설문에는 Google 로그인 식별 정보, 계정 관리, 선택한 익명 본문·질문의 기기 밖 일시 처리, 인프라 및 SDK 제공자, 보관·삭제 절차를 실제 운영 설정과 대조해 답합니다. 원본 녹음·사진은 기기에서 처리합니다. 제공자가 처리하는 접속 정보와 서버에 보관하는 계정 정보도 함께 검토하세요. [Google 데이터 보안 안내](https://support.google.com/googleplay/android-developer/answer/10787469)

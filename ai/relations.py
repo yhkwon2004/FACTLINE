@@ -53,10 +53,11 @@ def extract_relations(text,kiwi):
         action=sentence[action_start:].strip(' .!?\n')[:60] or LABELS[kind]+' 언급'
         denied=bool(re.search(r'지\s*않|지\s*못|아니|(?:^|\s)안\s|없었다|부인(?:했|하였|한다|하는|한\s)|하지\s*않',sentence))
         if kind=='threat' and re.search(r'협박|위협',action) and not re.search(r'(?:협박|위협)(?:하|을\s*하|를\s*하)?지\s*않|협박한\s*적.*없|위협한\s*적.*없',action):denied=False
-        hearsay=bool(re.search(r'들었다|들었|전해\s*들|전달받|소문|전언|이야기를\s*들|얘기를\s*들',sentence))
-        uncertain=bool(re.search(r'같다|같았다|듯|의혹|추정|모르|확인되지|했는지|인가요|\?',sentence)) or confidence<0.5 or len(subjects)>1 or hearsay
+        hearsay=bool(re.search(r'전해\s*들|소문|전언|(?:[다라]고|(?:이야기|얘기|소식|말)(?:를|을)?)\s*들[었은으]',sentence))
+        uncertain=bool(re.search(r'같다|같았다|듯|의혹|추정|모르|확인되지|했는지|인가요|\?',sentence))
         planned=bool(re.search(r'겠|예정|기로|달라|요청|부탁',action)) and not denied
-        polarity='denied' if denied else 'uncertain' if hearsay or len(subjects)>1 else 'planned' if planned else 'uncertain' if uncertain else 'reported'
+        # The relation classifier scores the action category. Attribution comes from the wording.
+        polarity='uncertain' if hearsay or len(subjects)>1 else 'denied' if denied else 'planned' if planned else 'uncertain' if uncertain else 'reported'
         if target and re.search(r'맞았|폭행당|협박당',action):actor,target=target,actor
         if target and kind=='payment' and re.search(r'받았다|받았다고|수령했다',action):actor,target=target,actor
         # Embedded testimony and unclear subjects retain the quote without inventing an interpersonal direction.

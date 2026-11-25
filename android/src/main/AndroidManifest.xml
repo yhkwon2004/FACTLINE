@@ -4,9 +4,15 @@
         android:label="이음로그"
         android:icon="@drawable/eumlog"
         android:allowBackup="false"
+        android:manageSpaceActivity="com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity"
         android:usesCleartextTraffic="false"
         android:theme="@android:style/Theme.Translucent.NoTitleBar">
         <meta-data android:name="asset_statements" android:resource="@string/asset_statements" />
+        <activity android:name="com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity"
+            android:exported="false" android:excludeFromRecents="true">
+            <meta-data android:name="android.support.customtabs.trusted.MANAGE_SPACE_URL"
+                android:value="@string/start_url" />
+        </activity>
         <activity android:name=".MainActivity" android:exported="true">
             <meta-data android:name="android.support.customtabs.trusted.DEFAULT_URL" android:value="@string/start_url" />
             <meta-data android:name="android.support.customtabs.trusted.FALLBACK_STRATEGY" android:value="customtabs" />
