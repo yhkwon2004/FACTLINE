@@ -1,0 +1,8 @@
+{
+  "pipeline": "local Kiwi/E5/Ridge + conservative timeline parser, original synthetic text",
+  "files": 4,
+  "relations": 6,
+  "candidates": 6,
+  "scenarioSha256": "8c0c7f24e8e4eed1b029061b35472ae17d6d25c3cb52ea0842d24daf37cf057a",
+  "notice": "인물·단체·거래와 날짜는 제품 설명을 위한 허구입니다. 실제 사건·법률 판단 결과가 아닙니다."
+}

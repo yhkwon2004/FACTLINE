@@ -1,4 +1,5 @@
 import model from "./layout-ranker.json";
+import coordinates from "./layout-generator.json";
 import type {DiagramDocument} from "./DiagramDocument";
 import type {RelationshipMap,RelationshipEdge} from "./RelationshipGraph";
 export type Point={x:number;y:number};
@@ -19,19 +20,54 @@ export function layoutFeatures(points:Point[],edges:Array<[number,number]>):numb
  return [overlap/Math.max(1,n*(n-1)/2),cross/Math.max(1,edges.length*(edges.length-1)/2),label/Math.max(1,edges.length*(edges.length-1)/2),mean,variation,w*h/(n*350*350),Math.abs(Math.log(w/h)),edges.length/Math.max(1,n)];
 }
 export function rankLayout(features:number[]){return model.bias+features.reduce((sum,v,i)=>sum+(v-model.mean[i])/model.scale[i]*model.weights[i],0);}
+export function predictCoordinates(n:number,links:Array<[number,number]>):Point[]{
+ const seed=Array.from({length:n},(_,i)=>{const radius=Math.sqrt((i+1)/n),angle=i*2.399963229728653;return {x:Math.cos(angle)*radius,y:Math.sin(angle)*radius};});
+ const adjacent=seed.map(()=>new Set<number>());
+ for(const [a,b] of links)if(a!==b){adjacent[a].add(b);adjacent[b].add(a);}
+ const aggregate=(points:Point[])=>adjacent.map(near=>{
+   let x=0,y=0;for(const other of near){x+=points[other].x;y+=points[other].y;}
+   return {x:x/Math.max(1,near.size),y:y/Math.max(1,near.size)};
+ });
+ const neighbors=aggregate(seed),second=aggregate(neighbors);
+ return seed.map((p,i)=>{
+   let v=[p.x,p.y,neighbors[i].x,neighbors[i].y,second[i].x,second[i].y,adjacent[i].size/n,n/14];
+   for(const [layer,weights] of coordinates.weights.entries()){
+     const out=coordinates.biases[layer].slice();
+     for(let j=0;j<out.length;j++){for(let k=0;k<v.length;k++)out[j]+=v[k]*weights[k][j];}
+     v=layer===coordinates.weights.length-1?out:out.map(x=>Math.max(0,x));
+   }
+   return {x:v[0],y:v[1]};
+ });
+}
 export function proposeLayouts(nodes:Array<{id:string}>,edges:Array<{source:string;target:string}>){
  if(!nodes.length)return [];
  const indexes=new Map(nodes.map((n,i)=>[n.id,i])),links=edges.filter(e=>indexes.has(e.source)&&indexes.has(e.target)).map(e=>[indexes.get(e.source)!,indexes.get(e.target)!] as [number,number]),degree=Array(nodes.length).fill(0);
  for(const [a,b] of links){degree[a]++;degree[b]++;}
  const order=nodes.map((_,i)=>i).sort((a,b)=>degree[b]-degree[a]||a-b),cols=Math.max(2,Math.ceil(Math.sqrt(nodes.length))),names=["인물 중심","사건 흐름","균등 격자","원형 연결","두 줄 구성","가로 흐름"];
- return names.map((name,mode)=>{const points:Point[]=Array(nodes.length);order.forEach((i,rank)=>{let x:number,y:number;
+ const layouts=names.map((name,mode)=>{const points:Point[]=Array(nodes.length);order.forEach((i,rank)=>{let x:number,y:number;
  if(mode===0){x=rank===0?650:230+((rank-1)%3)*360;y=rank===0?160:470+Math.floor((rank-1)/3)*330;}
  else if(mode===1){x=210+(rank%3)*380;y=180+Math.floor(rank/3)*310;}
  else if(mode===2){x=180+(rank%cols)*330;y=180+Math.floor(rank/cols)*300;}
  else if(mode===3){const angle=rank/Math.max(1,nodes.length)*Math.PI*2,r=Math.max(360,nodes.length*48);x=r+200+Math.cos(angle)*r;y=r+200+Math.sin(angle)*r;}
  else if(mode===4){x=200+(rank%2)*420;y=180+Math.floor(rank/2)*280;}
  else{x=210+Math.floor(rank/3)*380;y=180+(rank%3)*310;}points[i]={x,y};});
- const features=layoutFeatures(points,links);return {name,positions:Object.fromEntries(nodes.map((n,i)=>[n.id,points[i]])),score:rankLayout(features),features};}).sort((a,b)=>Number(a.features[0]>0)-Number(b.features[0]>0)||b.score-a.score);
+ const features=layoutFeatures(points,links);return {name,positions:Object.fromEntries(nodes.map((n,i)=>[n.id,points[i]])),score:rankLayout(features),features};});
+ // Training covers 3–14 elements; larger boards retain the geometric layouts.
+ if(nodes.length>=3&&nodes.length<=14){
+   const predicted=predictCoordinates(nodes.length,links);
+   let scale=260*Math.sqrt(nodes.length);
+   for(let i=0;i<predicted.length;i++)for(let j=i+1;j<predicted.length;j++){
+     const dx=Math.abs(predicted[i].x-predicted[j].x),dy=Math.abs(predicted[i].y-predicted[j].y);
+     scale=Math.max(scale,Math.min(245/Math.max(dx,.001),245/Math.max(dy,.001)));
+   }
+   if(scale<4000){
+     const left=Math.min(...predicted.map(p=>p.x)),top=Math.min(...predicted.map(p=>p.y));
+     const points=predicted.map(p=>({x:160+Math.round((p.x-left)*scale),y:140+Math.round((p.y-top)*scale)}));
+     const features=layoutFeatures(points,links);
+     layouts.push({name:"학습 좌표",positions:Object.fromEntries(nodes.map((n,i)=>[n.id,points[i]])),score:rankLayout(features),features});
+   }
+ }
+ return layouts.sort((a,b)=>Number(a.features[0]>0)-Number(b.features[0]>0)||b.score-a.score);
 }
 export function composeBoard(graph:RelationshipMap,document:DiagramDocument){
  const rawNodes=[...graph.nodes.map(n=>({id:n.id,label:n.label,kind:n.kind==="action"?"note" as const:n.kind,ambiguous:n.ambiguous,manual:false})),...document.manualNodes.map(n=>({...n,ambiguous:false,manual:true}))];
@@ -69,4 +105,14 @@ export function boardRoutes(nodes:BoardNode[],edges:BoardEdge[],document:Diagram
  labels.push(label);return {id:e.id,points,label,handle:points.length>2?{x:(points[1].x+points[2].x)/2,y:(points[1].y+points[2].y)/2}:mid,path:points.map((p,i)=>(i?"L":"M")+p.x+","+p.y).join(" ")};
  });
 }
-export function wrapDiagramText(text:string,maxCharacters=16,maxLines=3){const rows:string[]=[];for(const line of text.split("\n")){let rest=line;while(rest.length>maxCharacters){rows.push(rest.slice(0,maxCharacters));rest=rest.slice(maxCharacters);}rows.push(rest);}return rows.slice(0,maxLines).map((s,i)=>i===maxLines-1&&rows.length>maxLines?s.slice(0,-1)+"…":s);}
+const diagramSegmenter=new Intl.Segmenter('ko',{granularity:'grapheme'});
+let measuring:CanvasRenderingContext2D|null|undefined;
+export function wrapDiagramText(text:string,maxCharacters=16,maxLines=3){
+ if(measuring===undefined&&typeof globalThis.document!=='undefined')measuring=globalThis.document.createElement('canvas').getContext('2d');
+ if(measuring)measuring.font='650 13px Pretendard, "Malgun Gothic", sans-serif';
+ const width=(s:string)=>measuring?measuring.measureText(s).width:[...diagramSegmenter.segment(s)].length;
+ const limit=measuring?maxCharacters*13:maxCharacters,rows:string[]=[];
+ for(const line of text.split('\n')){let rest=line.trim();while(width(rest)>limit){const chars=[...diagramSegmenter.segment(rest)].map(s=>s.segment);let count=1;while(count<chars.length&&width(chars.slice(0,count+1).join(''))<=limit)count++;let cut=chars.slice(0,count).join(''),space=cut.lastIndexOf(' ');if(space>cut.length*.4)cut=cut.slice(0,space);rows.push(cut.trimEnd());rest=rest.slice(cut.length).trimStart();}rows.push(rest);}
+ if(rows.length<=maxLines)return rows;
+ const result=rows.slice(0,maxLines);let last=result[maxLines-1];while(last&&width(last+'…')>limit){const parts=[...diagramSegmenter.segment(last)];last=parts.slice(0,-1).map(s=>s.segment).join('');}result[maxLines-1]=last+'…';return result;
+}

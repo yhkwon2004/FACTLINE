@@ -124,11 +124,11 @@ export function ModelStatus() {
                 </tr>
                 <tr>
                   <th scope="row">녹음 인식</th>
-                  <td>Whisper small · 로컬 사전학습 모델</td>
+                  <td>기기 내 Whisper tiny 또는 small</td>
                 </tr>
                 <tr>
                   <th scope="row">이미지 인식</th>
-                  <td>EasyOCR 한국어·영어 · 사전학습 가중치</td>
+                  <td>기기 내 Tesseract · 한국어·영어</td>
                 </tr>
               </tbody>
             </table>
@@ -164,8 +164,7 @@ export function ModelStatus() {
             <p className="muted mt-3 leading-7">
               학습에 사용한 상담 예시는 직접 작성한 합성 데이터입니다. 실제
               상담기록을 수집하거나 사용자의 자료를 자동으로 재학습하지
-              않습니다. 분석 시 모델 파일은 연결된 분석기에서만 읽습니다. 파일 원본과
-              분석 결과는 암호화해 저장합니다.
+              않습니다. 음성과 사진은 사용자 기기에서 읽고, 확인한 익명 본문만 연결된 분석기로 보냅니다.
             </p>
           </Card>
         </>

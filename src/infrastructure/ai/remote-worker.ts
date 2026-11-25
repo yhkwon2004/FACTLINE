@@ -1,6 +1,22 @@
 import { createHash, timingSafeEqual } from "node:crypto";
+import { z } from "zod";
+import { residualIdentifiers } from "../../domain/services/PrivateData";
+import { localPrivacy } from "../security/AccountPrivacy";
 import { readVault, writeVault } from "../storage/PrivateVault";
 import { seal, unseal } from "../storage/LocalEvidenceStorage";
+
+const anonymousText = z.string().min(1).max(20000).refine(value => !residualIdentifiers(value).length);
+const privateJob = z.discriminatedUnion("task", [
+  z.object({ task: z.literal("status"), payload: z.strictObject({}) }),
+  z.object({ task: z.literal("inspect"), payload: z.strictObject({ text: anonymousText, referenceDate: z.iso.date().optional() }) }),
+  z.object({ task: z.literal("legal"), payload: z.strictObject({ text: anonymousText }) }),
+  z.object({ task: z.literal("chat"), payload: z.strictObject({ context: anonymousText, question: anonymousText.max(1000) }) }),
+]);
+
+export function checkWorkerPayload(task: string, payload: unknown) {
+  if (localPrivacy() && !privateJob.safeParse({task, payload}).success)
+    throw new Error("이 분석기에는 확인한 익명 텍스트만 보낼 수 있습니다.");
+}
 export function workerAuthorized(header: string | null) {
   const secret = process.env.AI_WORKER_TOKEN;
   return (
@@ -53,6 +69,7 @@ export async function connectWorker(endpoint: string) {
   );
 }
 export async function remoteAI<T>(task: string, payload: unknown): Promise<T> {
+  checkWorkerPayload(task, payload);
   const record = await readVault("system/worker.bin");
   if (!record || !process.env.AI_WORKER_TOKEN)
     throw new Error(

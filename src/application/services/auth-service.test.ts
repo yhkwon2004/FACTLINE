@@ -41,7 +41,9 @@ describe("AuthService", () => {
       password: "Factline123",
     });
 
-    assert.equal(result.user.email, "user@example.com");
+    assert.match(result.user.email, /@accounts\.local$/);
+    assert.equal(result.user.name,"사용자");
+    assert.equal((await createService().register({name:"테스터",email:"new@example.test",password:"Factline123"})).user.name,"사용자");
     assert.ok(result.token.length > 20);
   });
 
@@ -71,4 +73,22 @@ it("creates Google-only accounts using the stable subject",async()=>{
  const service=createService();const a=await service.googleLogin({subject:"google-new",email:"new@example.test",name:"신규"});
  assert.equal((await service.googleLogin({subject:"google-new",email:"new@example.test",name:"신규"})).user.id,a.user.id);
  await assert.rejects(service.login({email:"new@example.test",password:"Factline123"}));
+});
+
+it("private registration remains signable without storing the original email or name",async()=>{const service=createService(),email="private@example.test";const created=await service.register({name:"합성 이름",email,password:"Factline123"});const first=await service.login({email,password:"Factline123"}),second=await service.login({email,password:"Factline123"});assert.equal(first.user.id,created.user.id);assert.equal(second.user.id,created.user.id);assert(!first.user.email.includes("private@"));assert.equal(first.user.name,"사용자");});
+
+it("migrates an existing session profile and preserves password and Google sign-in", async () => {
+  const repo = new InMemoryUserRepository(), hash = new HashService();
+  const service = new AuthService(repo, hash, new JwtSessionService());
+  const email = "legacy@accounts.local", subject = "123456789", password = "Fixture1234";
+  const old = await repo.save(new User({
+    id: crypto.randomUUID(), email, name: "가상 이전 계정", googleSubject: subject,
+    passwordHash: await hash.hashPassword(password),
+  }));
+  const migrated = await service.activeUser(old.id);
+  assert.match(migrated!.email, /^[a-f0-9]{64}@accounts\.local$/);
+  assert.equal(await repo.findByEmail(email), null);
+  assert.equal(await repo.findByGoogleSubject(subject), null);
+  assert.equal((await service.login({email,password})).user.id, old.id);
+  assert.equal((await service.googleLogin({email,subject,name:"합성 이름"})).user.id, old.id);
 });

@@ -1,25 +1,12 @@
-"""Index saved official statutes by article; add explicitly curated official judgments."""
+"""Index the verified official texts listed in data/sources.json."""
 import json,re,hashlib,pickle
-from datetime import datetime,timezone
 from pathlib import Path
-import requests,numpy as np
-from bs4 import BeautifulSoup
+import numpy as np
 from kiwipiepy import Kiwi
 from sklearn.feature_extraction.text import TfidfVectorizer
 from semantic import embed
 ROOT=Path(__file__).resolve().parent;DATA=ROOT/'data';MODEL=ROOT/'models'
 sources=json.loads((DATA/'sources.json').read_text(encoding='utf-8'))
-for seq,title in [('158543','사기 · 대법원 2011도8829'),('614371','손해배상(기) · 대법원 2025다211430')]:
-    sid='precedent-'+seq;url='https://www.law.go.kr/precInfoP.do?precSeq='+seq
-    r=requests.get(url,timeout=60);r.raise_for_status();r.encoding='utf-8'
-    soup=BeautifulSoup(r.text,'html.parser');main=soup.select_one('#contentBody')
-    if main is None:raise ValueError('Official judgment body missing: '+seq)
-    for x in main(['script','style','button','input']):x.decompose()
-    text=main.get_text('\n',strip=True)
-    assert len(text)>1000 and '판결' in text and '판결요지' in text
-    (DATA/(sid+'.txt')).write_text(text,encoding='utf-8')
-    sources=[s for s in sources if s['id']!=sid]
-    sources.append(dict(id=sid,title=title,category='판례',url=url,sha256=hashlib.sha256(text.encode()).hexdigest(),characters=len(text),rights='대한민국 저작권법 제7조 판결문. 사이트 UI 제외.',retrievedAt=datetime.now(timezone.utc).isoformat()))
 corpus=[]
 for s in sources:
     text=(DATA/(s['id']+'.txt')).read_text(encoding='utf-8')

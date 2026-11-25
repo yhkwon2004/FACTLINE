@@ -3,7 +3,7 @@
   "heldOutExamples": 120,
   "split": "행위 표현군 단위 분리 (같은 문형 변형은 같은 split)",
   "accuracy": 0.7083333333333334,
-  "corpusChunks": 2105,
+  "corpusChunks": 2603,
   "limitation": "합성 소규모 평가. 실제 상담·사건에 대한 정확도, 법적 판단 성능을 의미하지 않음.",
   "llm": {
     "base": "Qwen/Qwen3-0.6B",

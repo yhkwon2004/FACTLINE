@@ -40,9 +40,8 @@ export async function currentSession() {
   if (!token) return null;
   const container = createContainer();
   const session = await container.sessionService.verify(token);
-  return session && (await container.authService.activeUser(session.userId))
-    ? session
-    : null;
+  const user = session && await container.authService.activeUser(session.userId);
+  return user ? { userId: user.id, email: user.email } : null;
 }
 
 export async function requireSession() {

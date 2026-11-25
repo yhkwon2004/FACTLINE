@@ -1,8 +1,10 @@
 import { createServer } from "node:http";
-import { readFile, mkdir } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { timingSafeEqual, createHash } from "node:crypto";
 import { localAI } from "../src/infrastructure/ai/local-worker";
+import { checkWorkerPayload } from "../src/infrastructure/ai/remote-worker";
+import { localPrivacy } from "../src/infrastructure/security/AccountPrivacy";
 process.loadEnvFile(".env.local");
 process.env.FACTLINE_STORAGE_MODE = "local";
 const config = JSON.parse(await readFile(".data/cloud-worker.json", "utf8"));
@@ -40,7 +42,8 @@ const server = createServer(async (request, response) => {
       JSON.stringify({
         ready:
           existsSync("ai/models/cache") &&
-          existsSync("ai/models/semantic_classifier.pkl"),
+          existsSync("ai/models/semantic_classifier.pkl") &&
+          existsSync("ai/models/dialogue-adapter/adapter_model.safetensors"),
       }),
     );
     return;
@@ -54,7 +57,7 @@ const server = createServer(async (request, response) => {
     const parts: Buffer[] = [];
     for await (const part of request) {
       size += part.length;
-      if (size > 29 * 1024 * 1024) throw new Error("Request too large");
+      if (size > (localPrivacy() ? 144 * 1024 : 29 * 1024 * 1024)) throw new Error("Request too large");
       parts.push(part);
     }
     const body = JSON.parse(Buffer.concat(parts).toString());
@@ -65,6 +68,7 @@ const server = createServer(async (request, response) => {
       Array.isArray(body.payload)
     )
       throw new Error("Invalid task");
+    checkWorkerPayload(body.task, body.payload);
     const result = await localAI(body.task, body.payload);
     response.end(JSON.stringify({ result }));
   } catch (error) {

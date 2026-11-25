@@ -1,0 +1,1 @@
+export function notifyAuthChange(userId:string|null){if(typeof BroadcastChannel==='undefined')return;const channel=new BroadcastChannel('eumlog-auth-v1');channel.postMessage({userId});channel.close();}

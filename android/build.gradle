@@ -1,0 +1,30 @@
+plugins { id 'com.android.application' version '8.13.2' }
+
+android {
+    namespace 'io.github.yhkwon2004.eumlog'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'io.github.yhkwon2004.eumlog'
+        minSdk 24
+        targetSdk 36
+        versionCode 1
+        versionName '1.0.0'
+    }
+    signingConfigs {
+        if (System.getenv('EUMLOG_KEYSTORE')) {
+            upload {
+                storeFile file(System.getenv('EUMLOG_KEYSTORE'))
+                storePassword System.getenv('EUMLOG_STORE_PASSWORD')
+                keyAlias System.getenv('EUMLOG_KEY_ALIAS') ?: 'upload'
+                keyPassword System.getenv('EUMLOG_KEY_PASSWORD') ?: System.getenv('EUMLOG_STORE_PASSWORD')
+            }
+        }
+    }
+    buildTypes {
+        release {
+            if (signingConfigs.findByName('upload')) signingConfig signingConfigs.upload
+        }
+    }
+}
+
+dependencies { implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.7.4' }

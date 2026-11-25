@@ -22,7 +22,7 @@ export default async function Home() {
           <h1 className="!text-4xl md:!text-5xl !leading-tight">
             흩어진 기록을
             <br />
-            하나의 사실로.
+            근거 있는 기록으로.
           </h1>
           <p className="muted mt-7 !text-base leading-8">
             사진 한 장, 대화 한 줄부터.
@@ -33,9 +33,10 @@ export default async function Home() {
             내 기록 시작하기
             <ArrowRight size={17} />
           </Link>
+          <Link className="mt-5 block text-sm text-blue-700" href="/demo">가상 사건 먼저 둘러보기 →</Link>
           <p className="mt-6 text-xs text-slate-500 flex gap-2 items-center">
             <ShieldCheck size={14} />
-            내 자료를 지키는 전용 AI 분석
+            원본은 기기에 · 승인한 익명 자료만 분석
           </p>
         </section>
         <section

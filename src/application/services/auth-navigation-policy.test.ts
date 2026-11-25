@@ -42,6 +42,8 @@ describe("AuthNavigationPolicy", () => {
   it("normalizes unsafe return paths to dashboard", () => {
     assert.equal(policy.normalizeReturnPath("https://example.com/phish"), "/dashboard");
     assert.equal(policy.normalizeReturnPath("//example.com/phish"), "/dashboard");
+    assert.equal(policy.normalizeReturnPath("/\\example.test"), "/dashboard");
+    assert.equal(policy.normalizeReturnPath("/\n/example.test"), "/dashboard");
     assert.equal(policy.normalizeReturnPath("/cases/new"), "/cases/new");
   });
 });

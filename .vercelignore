@@ -24,3 +24,9 @@ coverage
 *.tsbuildinfo
 /scripts/diagnose-vault.ts
 /scripts/cloud-env.mjs
+
+/public/onnx
+/public/ocr
+/public/device-speech.js
+/public/pdf.worker.min.mjs
+/android

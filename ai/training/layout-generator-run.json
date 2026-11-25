@@ -1,0 +1,60 @@
+{
+  "model": "8-24-16-2 ReLU coordinate MLP",
+  "seed": 42,
+  "geometryTeacherIterations": 40,
+  "epochs": 212,
+  "trainGraphs": 480,
+  "testGraphs": 120,
+  "trainNodes": 4132,
+  "testNodes": 962,
+  "normalizedCoordinateMAE": 0.0222297931060346,
+  "initialPlacementMAE": 0.23027016489284852,
+  "datasetSHA256": "053a5bd2a779a1870ebdc46c066097aaead3bcc7d4f2c2eedc75c0c4c5ac5b6b",
+  "modelSHA256": "03ec86525bd4cf7720701a5046234f46a20b5c48b212a8a1126413293979ce7f",
+  "parity": {
+    "nodes": 10,
+    "edges": [
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        5,
+        0
+      ],
+      [
+        6,
+        2
+      ],
+      [
+        7,
+        2
+      ],
+      [
+        8,
+        7
+      ],
+      [
+        9,
+        2
+      ]
+    ],
+    "firstCoordinate": [
+      0.25942977802192857,
+      -0.09333274895633305
+    ]
+  },
+  "limitation": "Synthetic geometric teacher fidelity; no human design preference or legal accuracy labels."
+}

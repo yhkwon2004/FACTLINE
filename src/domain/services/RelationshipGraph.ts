@@ -3,10 +3,12 @@ export type RelationshipNode={id:string;label:string;kind:"person"|"organization
 export type RelationshipEdge={id:string;source:string;target:string;action:string;kind:string;amount:string|null;polarity:SourceRelation["polarity"];directed:boolean;confirmed:boolean;quote:string;evidenceId:string|null;candidateId:string|null;score:number;audioRange?:{start:number;end:number}};
 export type RelationshipMap={nodes:RelationshipNode[];edges:RelationshipEdge[];totalRelations:number;shownRelations:number};
 type Input={id:string;name:string;analysis?:{relations?:SourceRelation[];candidates?:Array<{id:string;quote:string;actor?:string|null;audioRange?:{start:number;end:number}}> }|null};
-type Fact={id:string;title:string;rawStatement:string;actor?:string|null;evidenceIds:string[]};
+type Fact={id:string;title:string;rawStatement:string;actor?:string|null;evidenceIds:string[];candidateId?:string};
+export const participantId=(label:string,kind:"person"|"organization",fileId:string,ambiguous=false)=>
+ kind+":"+label.normalize("NFC").trim()+(ambiguous?":"+fileId:"");
 export function relationshipGraph(files:Input[],facts:Fact[]):RelationshipMap {
  const nodes=new Map<string,RelationshipNode>(),edges:RelationshipEdge[]=[];let total=0;
- function entity(label:string,kind:"person"|"organization",fileId:string,ambiguous=false){const id=kind+":"+label.normalize("NFC").trim()+(ambiguous?":"+fileId:"");const existing=nodes.get(id);if(existing){if(!existing.evidenceIds.includes(fileId))existing.evidenceIds.push(fileId);}else nodes.set(id,{id,label,kind,evidenceIds:[fileId],ambiguous});return id;}
+ function entity(label:string,kind:"person"|"organization",fileId:string,ambiguous=false){const id=participantId(label,kind,fileId,ambiguous);const existing=nodes.get(id);if(existing){if(!existing.evidenceIds.includes(fileId))existing.evidenceIds.push(fileId);}else nodes.set(id,{id,label,kind,evidenceIds:[fileId],ambiguous});return id;}
  for(const file of files.slice(0,12)) {
   for(const relation of file.analysis?.relations??[]) {
    if(!relation.actor || !relation.quote.includes(relation.actor) || (relation.target && !relation.quote.includes(relation.target)) || !relation.quote.includes(relation.action))continue;
@@ -15,13 +17,13 @@ export function relationshipGraph(files:Input[],facts:Fact[]):RelationshipMap {
    const target=relation.target?entity(relation.target,relation.targetKind??"person",file.id,relation.targetAmbiguous):"action:"+file.id+":"+relation.id;
    if(!relation.target)nodes.set(target,{id:target,label:relation.action,kind:"action",evidenceIds:[file.id],quote:relation.quote});
    if(source===target)continue;
-   const confirmed=facts.some(f=>f.evidenceIds.includes(file.id)&&f.rawStatement===relation.quote);
+   const confirmed=facts.some(f=>f.evidenceIds.includes(file.id)&&f.rawStatement===relation.quote&&(f.candidateId===undefined||f.candidateId===relation.candidateId));
    const candidate=file.analysis?.candidates?.find(x=>x.id===relation.candidateId);
    edges.push({id:file.id+":"+relation.id,source,target,action:relation.action,kind:relation.kind,amount:relation.amount,polarity:relation.polarity,directed:relation.target?relation.directed:true,confirmed,quote:relation.quote,evidenceId:file.id,candidateId:relation.candidateId,score:relation.score,audioRange:candidate?.audioRange});
   }
  }
  // Older approved records remain visible; they do not acquire a guessed recipient or relationship.
- for(const fact of facts.filter(f=>!edges.some(e=>e.quote===f.rawStatement&&e.confirmed)).slice(0,Math.max(0,36-edges.length))) {
+ for(const fact of facts.filter(f=>!edges.some(e=>e.quote===f.rawStatement&&e.confirmed&&e.evidenceId&&f.evidenceIds.includes(e.evidenceId)&&(f.candidateId===undefined||f.candidateId===e.candidateId))).slice(0,Math.max(0,36-edges.length))) {
   if(!fact.actor || !fact.rawStatement.includes(fact.actor))continue;
   const source=entity(fact.actor,"person",fact.evidenceIds[0]??"manual"),target="action:approved:"+fact.id;
   nodes.set(target,{id:target,label:fact.title,kind:"action",evidenceIds:fact.evidenceIds,quote:fact.rawStatement});

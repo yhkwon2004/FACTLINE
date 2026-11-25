@@ -5,7 +5,8 @@ import {
   writeConflict,
   deletePendingUploads,
 } from "../storage/PrivateVault";
-import { seal, unseal, removeEncrypted } from "../storage/LocalEvidenceStorage";
+import { seal, unseal, removeEncrypted,readEncrypted } from "../storage/LocalEvidenceStorage";
+import {createHash} from "node:crypto";
 import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -485,6 +486,13 @@ function upsertById<T extends { id: string }>(items: T[], item: T) {
   else items.push(item);
 }
 
+export async function legacySnapshot(userId:string){
+ const store=await readStore(),cases=store.cases.filter(c=>c.userId===userId),ids=new Set(cases.map(c=>c.id));
+ const data={cases,events:store.events.filter(e=>ids.has(e.caseId)),evidences:store.evidences.filter(e=>ids.has(e.caseId)),analyses:store.analyses.filter(e=>ids.has(e.caseId)),reports:store.reports.filter(e=>ids.has(e.caseId)),lifeRecords:store.lifeRecords.filter(e=>e.userId===userId),connectedSources:store.connectedSources.filter(e=>e.userId===userId),memoryRecords:store.memoryRecords.filter(e=>e.userId===userId)};
+ const fileIds=[...cases.flatMap(c=>[c.id+'.analysis',c.id+'.diagram']),...data.evidences.flatMap(e=>[...(e.fileUrl?.startsWith('local://')?[e.fileUrl.slice(8)]:[]),e.id+'.analysis'])];
+ return {data,fileIds:[...new Set(fileIds)],digest:createHash('sha256').update(JSON.stringify(data)).digest('hex')};
+}
+
 export class LocalJsonUserRepository implements IUserRepository {
   async findById(id: string): Promise<User | null> {
     const data = (await readStore()).users.find(
@@ -523,7 +531,11 @@ export class LocalJsonUserRepository implements IUserRepository {
     });
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: string,keepAccount=false,expectedDigest?:string): Promise<void> {
+    const snapshot=await legacySnapshot(id);
+    if(expectedDigest&&snapshot.digest!==expectedDigest)throw Error('서버 자료가 변경되었습니다. 다시 가져온 뒤 확인해 주세요.');
+    for(const e of snapshot.data.evidences){try{const p=JSON.parse((await readEncrypted(e.id+'.analysis')).toString());if(['extracting','linking'].includes(p.phase)&&p.leaseUntil>Date.now())throw Error('진행 중인 이전 분석이 끝난 뒤 다시 시도해 주세요.');}catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;}}
+    await Promise.all(snapshot.fileIds.map(removeEncrypted));
     const fileIds = await updateStore((store) => {
       const caseIds = new Set(
         store.cases.filter((c) => c.userId === id).map((c) => c.id),
@@ -533,7 +545,7 @@ export class LocalJsonUserRepository implements IUserRepository {
         if (e.fileUrl?.startsWith("local://")) files.push(e.fileUrl.slice(8));
         files.push(e.id + ".analysis");
       }
-      store.users = store.users.filter((u) => u.id !== id);
+      if(!keepAccount)store.users = store.users.filter((u) => u.id !== id);
       store.cases = store.cases.filter((c) => c.userId !== id);
       store.events = store.events.filter((e) => !caseIds.has(e.caseId));
       store.evidences = store.evidences.filter((e) => !caseIds.has(e.caseId));
@@ -546,7 +558,6 @@ export class LocalJsonUserRepository implements IUserRepository {
       store.memoryRecords = store.memoryRecords.filter((e) => e.userId !== id);
       return files;
     });
-    await Promise.all(fileIds.map(removeEncrypted));
     if (cloudStorage()) await deletePendingUploads(id);
   }
 }

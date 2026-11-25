@@ -1,3 +1,4 @@
+import {localPrivacy} from "../../../../../infrastructure/security/AccountPrivacy";
 import {relationshipGraph} from "../../../../../domain/services/RelationshipGraph";
 import { after, NextResponse } from "next/server";
 import { createHash } from "node:crypto";
@@ -23,7 +24,7 @@ export async function GET(
       })),
     );
     const waiting = files.find((x) => needsAnalysis(x));
-    if (waiting && !item.isLocked)
+    if (!localPrivacy() && waiting && !item.isLocked)
       after(async () => {
         await analyzeEvidence(item.evidences.find((x) => x.id === waiting.id)!);
       });

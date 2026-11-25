@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { currentSession } from "../api/_utils";
 import { AppShell } from "../../presentation/components/AppShell";
+import { workspaceSurface } from "../../presentation/workspace-surface";
 
 export default async function WorkspaceLayout({
   children,
@@ -8,5 +9,5 @@ export default async function WorkspaceLayout({
   children: React.ReactNode;
 }) {
   if (!(await currentSession())) redirect("/login");
-  return <AppShell>{children}</AppShell>;
+  return <AppShell surface={await workspaceSurface()}>{children}</AppShell>;
 }

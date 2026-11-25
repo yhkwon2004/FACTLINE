@@ -2,6 +2,10 @@ import assert from "node:assert/strict";
 import {diagramSchema,emptyDiagram,nextDiagram} from "./DiagramDocument";
 import {composeBoard,boardRoutes,layoutFeatures,proposeLayouts,rankLayout,boardBounds,wrapDiagramText} from "./DiagramLayout";
 import parity from "../../../ai/training/layout-parity.json";
+import generator from "../../../ai/training/layout-generator-run.json";
+import {predictCoordinates} from "./DiagramLayout";
+const network=predictCoordinates(generator.parity.nodes,generator.parity.edges as [number,number][])[0];
+assert(Math.abs(network.x-generator.parity.firstCoordinate[0])<1e-8 && Math.abs(network.y-generator.parity.firstCoordinate[1])<1e-8,"Browser coordinate network matches trained Python model");
 import type {RelationshipMap} from "./RelationshipGraph";
 const actual=layoutFeatures(parity.points.map(([x,y])=>({x,y})),parity.edges as [number,number][]);
 actual.forEach((v,i)=>assert.ok(Math.abs(v-parity.features[i])<1e-10,"Python/browser feature parity: "+i));
@@ -31,3 +35,6 @@ const axisNodes=board.nodes.map((n,i)=>({...n,x:[0,500,250][i],y:[3000,4000,3500
 const axisRoute=boardRoutes(axisNodes,[board.edges[0]],emptyDiagram())[0];
 const shiftedRoute=boardRoutes(axisNodes.map(n=>({...n,x:n.x+10000})),[board.edges[0]],emptyDiagram())[0];
 assert.deepEqual(shiftedRoute.points.map(p=>({...p,x:p.x-10000})),axisRoute.points,"Vertical routing must use y coordinates for outer lanes");
+
+assert.deepEqual(wrapDiagramText("가나다라 마바사아 자차카타",8,3),["가나다라","마바사아","자차카타"]);
+assert(!wrapDiagramText("가족 👨‍👩‍👧‍👦 기록입니다",5,3).some(s=>s.endsWith("\u200d")));

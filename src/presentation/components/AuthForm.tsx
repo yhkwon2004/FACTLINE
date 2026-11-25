@@ -1,5 +1,6 @@
 "use client";
 
+import {notifyAuthChange} from "./auth-notify";
 import { useMemo, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -67,6 +68,7 @@ export function RegisterForm({ next }: { next: string }) {
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error ?? "회원가입을 완료할 수 없습니다.");
 
+      notifyAuthChange(payload.user.id);
       setNotice({
         title: "계정이 생성되었습니다",
         description: "이제 일상 기록과 사건 정리를 계정 단위로 안전하게 이어갈 수 있습니다.",
@@ -87,7 +89,7 @@ export function RegisterForm({ next }: { next: string }) {
 
   return (
     <>
-      <form className="space-y-4" onSubmit={submit}>
+      <form className="space-y-4" method="post" action="/api/auth/register" onSubmit={submit}>
         <input type="hidden" name="next" value={next} />
         <Field label="이름">
           <div className="relative">
@@ -165,6 +167,7 @@ export function LoginForm({ next, isAuthRequired }: { next: string; isAuthRequir
       });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error ?? "로그인할 수 없습니다.");
+      notifyAuthChange(payload.user.id);
       router.push(payload.next ?? next);
     } catch (error) {
       setNotice({
@@ -179,7 +182,7 @@ export function LoginForm({ next, isAuthRequired }: { next: string; isAuthRequir
 
   return (
     <>
-      <form className="space-y-4" onSubmit={submit}>
+      <form className="space-y-4" method="post" action="/api/auth/login" onSubmit={submit}>
         <input type="hidden" name="next" value={next} />
         <Field label="이메일">
           <div className="relative">

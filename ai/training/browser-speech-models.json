@@ -1,0 +1,30 @@
+[
+  {
+    "name": "whisper-tiny",
+    "revision": "ff4177021cc41f7db950912b73ea4fdf7d01d8e7",
+    "files": [
+      {
+        "path": "onnx/decoder_model_merged_quantized.onnx",
+        "size": 30719241
+      },
+      {
+        "path": "onnx/encoder_model_quantized.onnx",
+        "size": 10124990
+      }
+    ]
+  },
+  {
+    "name": "whisper-small",
+    "revision": "36050c46d777d46dc4b5f43f6d90574fc38f8732",
+    "files": [
+      {
+        "path": "onnx/decoder_model_merged_quantized.onnx",
+        "size": 156750845
+      },
+      {
+        "path": "onnx/encoder_model_quantized.onnx",
+        "size": 92326160
+      }
+    ]
+  }
+]

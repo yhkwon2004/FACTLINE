@@ -1,0 +1,1776 @@
+{
+  "format": "eumlog-fictional-demo-v1",
+  "caseId": "d30a0000-1111-4111-8111-000000000001",
+  "title": "가상 행사 정산 기록",
+  "notice": "인물·단체·거래와 날짜는 제품 설명을 위한 허구입니다. 실제 사건·법률 판단 결과가 아닙니다.",
+  "createdAt": "2026-11-19T09:00:00+09:00",
+  "files": [
+    {
+      "id": "demo-evidence-1",
+      "name": "계약 메모.txt",
+      "text": "2026년 11월 16일 오후 2시 10분 김민수는 이서연과 행사 제작 계약을 맺었다.",
+      "analysis": {
+        "schemaVersion": 2,
+        "text": "2026년 11월 16일 오후 2시 10분 김민수는 이서연과 행사 제작 계약을 맺었다.",
+        "detectedLanguages": [
+          {
+            "text": "2026년 11월 16일 오후 2시 10분 김민수는 이서연과 행사 제작 계약을 맺었다.",
+            "language": "ko",
+            "score": 1.0
+          }
+        ],
+        "tokens": [
+          {
+            "text": "2026",
+            "tag": "SN",
+            "start": 0,
+            "length": 4
+          },
+          {
+            "text": "년",
+            "tag": "NNB",
+            "start": 4,
+            "length": 1
+          },
+          {
+            "text": "11",
+            "tag": "SN",
+            "start": 6,
+            "length": 2
+          },
+          {
+            "text": "월",
+            "tag": "NNB",
+            "start": 8,
+            "length": 1
+          },
+          {
+            "text": "16",
+            "tag": "SN",
+            "start": 10,
+            "length": 2
+          },
+          {
+            "text": "일",
+            "tag": "NNB",
+            "start": 12,
+            "length": 1
+          },
+          {
+            "text": "오후",
+            "tag": "NNG",
+            "start": 14,
+            "length": 2
+          },
+          {
+            "text": "2",
+            "tag": "SN",
+            "start": 17,
+            "length": 1
+          },
+          {
+            "text": "시",
+            "tag": "NNB",
+            "start": 18,
+            "length": 1
+          },
+          {
+            "text": "10",
+            "tag": "SN",
+            "start": 20,
+            "length": 2
+          },
+          {
+            "text": "분",
+            "tag": "NNB",
+            "start": 22,
+            "length": 1
+          },
+          {
+            "text": "김민수",
+            "tag": "NNP",
+            "start": 24,
+            "length": 3
+          },
+          {
+            "text": "는",
+            "tag": "JX",
+            "start": 27,
+            "length": 1
+          },
+          {
+            "text": "이서연",
+            "tag": "NNP",
+            "start": 29,
+            "length": 3
+          },
+          {
+            "text": "과",
+            "tag": "JKB",
+            "start": 32,
+            "length": 1
+          },
+          {
+            "text": "행사",
+            "tag": "NNG",
+            "start": 34,
+            "length": 2
+          },
+          {
+            "text": "제작",
+            "tag": "NNG",
+            "start": 37,
+            "length": 2
+          },
+          {
+            "text": "계약",
+            "tag": "NNG",
+            "start": 40,
+            "length": 2
+          },
+          {
+            "text": "을",
+            "tag": "JKO",
+            "start": 42,
+            "length": 1
+          },
+          {
+            "text": "맺",
+            "tag": "VV",
+            "start": 44,
+            "length": 1
+          },
+          {
+            "text": "었",
+            "tag": "EP",
+            "start": 45,
+            "length": 1
+          },
+          {
+            "text": "다",
+            "tag": "EF",
+            "start": 46,
+            "length": 1
+          },
+          {
+            "text": ".",
+            "tag": "SF",
+            "start": 47,
+            "length": 1
+          }
+        ],
+        "keywords": [
+          {
+            "text": "오후",
+            "count": 1
+          },
+          {
+            "text": "김민수",
+            "count": 1
+          },
+          {
+            "text": "이서연",
+            "count": 1
+          },
+          {
+            "text": "행사",
+            "count": 1
+          },
+          {
+            "text": "제작",
+            "count": 1
+          },
+          {
+            "text": "계약",
+            "count": 1
+          }
+        ],
+        "languages": {
+          "number": 11,
+          "ko": 25,
+          "other": 1
+        },
+        "classification": [
+          {
+            "label": "언어·협박",
+            "score": 0.452
+          },
+          {
+            "label": "금품·강요",
+            "score": 0.309
+          },
+          {
+            "label": "일반 기록",
+            "score": 0.127
+          },
+          {
+            "label": "상담·정서",
+            "score": 0.081
+          },
+          {
+            "label": "따돌림·사이버",
+            "score": 0.019
+          },
+          {
+            "label": "신체 피해",
+            "score": 0.011
+          }
+        ],
+        "uncertain": true,
+        "candidates": [
+          {
+            "id": "0",
+            "quote": "2026년 11월 16일 오후 2시 10분 김민수는 이서연과 행사 제작 계약을 맺었다.",
+            "title": "2026년 11월 16일 오후 2시 10분 김민수는 이서연과 행사 제작 계약을 맺",
+            "datetime": "2026-11-16T14:10:00+09:00",
+            "isApproximateTime": false,
+            "dateSource": "explicit",
+            "approximateTimeText": "2026년 11월 16일 오후 2시 10분",
+            "location": null,
+            "actor": "김민수",
+            "action": "맺었다",
+            "damage": null,
+            "audioRange": null
+          }
+        ],
+        "relations": [
+          {
+            "id": "r0",
+            "candidateId": "0",
+            "actor": "김민수",
+            "target": "이서연",
+            "actorKind": "person",
+            "targetKind": "person",
+            "actorAmbiguous": false,
+            "targetAmbiguous": false,
+            "action": "맺었다",
+            "kind": "work",
+            "typeLabel": "소속·업무",
+            "score": 0.456,
+            "polarity": "uncertain",
+            "directed": true,
+            "amount": null,
+            "quote": "2026년 11월 16일 오후 2시 10분 김민수는 이서연과 행사 제작 계약을 맺었다.",
+            "sourceSpan": {
+              "start": 0,
+              "end": 48
+            },
+            "mentions": [
+              {
+                "text": "김민수",
+                "kind": "person",
+                "ambiguous": false
+              },
+              {
+                "text": "이서연",
+                "kind": "person",
+                "ambiguous": false
+              }
+            ],
+            "model": "E5 + fitted relation Ridge; Kiwi source spans"
+          }
+        ],
+        "associations": [],
+        "references": [
+          {
+            "id": "labor-law-91-0",
+            "title": "근로기준법",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 2026년 10월 2일부터 시행한다. <단서 생략> 제2조부터 제11조까지 생략 ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=285279&efYd=20261008&ancYnChk=0&chrClsCd=010202",
+            "citation": "근로기준법 제1조(시행일)",
+            "sourceSha256": "7d5454c616574f0817a43f31199cfb76033d934bb1c47ee9bf43badfeae2830b",
+            "score": 0.4099,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "sexual-violence-law-113-0",
+            "title": "성폭력범죄의처벌등에관한특례법",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 2026년 10월 2일부터 시행한다. ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=289993&efYd=20261002&ancYnChk=0&chrClsCd=010202",
+            "citation": "성폭력범죄의처벌등에관한특례법 제1조(시행일)",
+            "sourceSha256": "d8add83bcf89df2973158c948ee3d42c83b6a534707203116600a0356942d99e",
+            "score": 0.4065,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "communications-law-78-0",
+            "title": "통신비밀보호법",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 2026년 10월 2일부터 시행한다. ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290003&efYd=20261002&ancYnChk=0&chrClsCd=010202",
+            "citation": "통신비밀보호법 제1조(시행일)",
+            "sourceSha256": "3e436f9c3e2a9f2dfc463dfeeb3184f7bae5a8947a2c56205e5c4fb2d0d8c580",
+            "score": 0.4065,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "communications-law-76-0",
+            "title": "통신비밀보호법",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 2026년 10월 2일부터 시행한다. <단서 생략> 제2조부터 제14조까지 생략 ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290003&efYd=20261002&ancYnChk=0&chrClsCd=010202",
+            "citation": "통신비밀보호법 제1조(시행일)",
+            "sourceSha256": "3e436f9c3e2a9f2dfc463dfeeb3184f7bae5a8947a2c56205e5c4fb2d0d8c580",
+            "score": 0.3661,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "privacy-law-126-2200",
+            "title": "개인정보보호법",
+            "category": "법령",
+            "content": "부과한다. <개정 2025. 4. 1.> 1. 제26조 제6항 을 위반하여 위탁자의 동의를 받지 아니하고 제3자에게 다시 위탁한 자 2. 제31조의2 제1항 을 위반하여 국내대리인을 지정하지 아니한 자 3. 제31조의2 제2항 을 위반하여 국내대리인을 지정한 자 4. 제31조의2 제3항 을 위반하여 국내대리인을 관리ㆍ감독하지 아니한 자 ④ 다음 각 호의 어느 하나에 해당하는 자에게는 1천만원 이하의 과태료를 부과한다. <개정 2025. 4. 1.> 1. 제11조의2 제2항 을 위반하여 정당한 사유 없이 자료를 제출하지 아니하거나 거짓으로 제출한 자 2. 제21조 제3항 ( 제26조 제8항 에 따라 준용되는 경우를 포함한다)을 위반하여 개인정보를 분리하여 저장ㆍ관리하지 아니한 자 3. 제22조 제1항부터 제3항 까지( 제26조 제8항 에 따라 준용되는 경우를 포함한다)를 위반하여 동의를 받은 자 4. 제26조 제1항 을 위반하여 업무 위탁 시 같은 항 각 호의 내용이 포함된 문서로 하지 아니한 자 5. 제26조 제2항 을 위반하여 위탁하는 업무의 내용과 수탁자를 공개하지 아니한 자 6. 제27조 제1항 ㆍ제2항( 제26조 제8항 에 따라 준용되는 경우를 포함한다)을 위반하여 정보주체에게 개인정보의 이전 사실을 알리지 아니한 자 7. 제28조의4 제3항 ( 제26조 제8항 에 따라 준용되는 경우를 포함한다)을 위반하여 관련 기록을 작성하여 보관하지 아니한 자 8. 제30조 제1항 또는 제2항 ( 제26조 제8항 에 따라 준용되는 경우를 포함한다)을 위반하여 개인정보 처리방침을 정하지 아니하거나 이를 공개하지 아니한 자 9. 삭제 <2026. 3. 10.> 9의2. 제31조의2 제4항 을 위반하여 국내대리인의 성명ㆍ주소ㆍ전화번호 및 전자우편 주소를 개인정보 처리방침에 포함하지 아니한 자 10. 제35조 제3항 ㆍ제4항, 제36조 제2항 ㆍ제4항 또는 제37조 제4항 ( 제26조 제8항 에 따라 준용되는 경우를 포함한다)을 위반하여 정보주체에게 알려야 할 사항을 알리지 아니한 자 11. 제45조 제1항 에 따른 자료를 정당한 사유 없이 제출하지 아니하거나 거짓으로 제출한 자 12. 제45조 제2항 에 따른 출입ㆍ조사ㆍ열람을 정당한 사유 없이 거부ㆍ방해 또는 기피한 자 ⑤ 제1항부터 제4항까지에 따른 과태료는 대통령령 으로 정하는 바에 따라 보호위원회가 부과ㆍ징수한다. 이 경우 보호위원회는 위반행위의 정도ㆍ동기ㆍ결과, ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=283839&efYd=20260911&ancYnChk=0&chrClsCd=010202",
+            "citation": "개인정보보호법 제29조 ( 제26조 제8항 에 따라 준용되는 경우를 포함한다) · 원문 구간 3",
+            "sourceSha256": "cf9d44753cd389378bca37ef8e1b9f4b47fe1d0e67f8fbb34a159a2f6f5c18c0",
+            "score": 0.3536,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          }
+        ],
+        "model": "Kiwi + 다국어 E5 + 학습 분류기",
+        "notice": "분류 점수는 내부 상대 점수입니다. 사건의 진위·법적 책임을 판정하지 않습니다."
+      },
+      "date": "2026-11-19",
+      "sha256": "bce9a3ac869a290e7518b28a05d542e4ca1b3dfc817aa6e968de881634d30665"
+    },
+    {
+      "id": "demo-evidence-2",
+      "name": "송금 기록.txt",
+      "text": "2026년 11월 17일 오전 10시 20분 김민수는 이서연에게 5만원을 송금했다.",
+      "analysis": {
+        "schemaVersion": 2,
+        "text": "2026년 11월 17일 오전 10시 20분 김민수는 이서연에게 5만원을 송금했다.",
+        "detectedLanguages": [
+          {
+            "text": "2026년 11월 17일 오전 10시 20분 김민수는 이서연에게 5만원을 송금했다.",
+            "language": "ko",
+            "score": 1.0
+          }
+        ],
+        "tokens": [
+          {
+            "text": "2026",
+            "tag": "SN",
+            "start": 0,
+            "length": 4
+          },
+          {
+            "text": "년",
+            "tag": "NNB",
+            "start": 4,
+            "length": 1
+          },
+          {
+            "text": "11",
+            "tag": "SN",
+            "start": 6,
+            "length": 2
+          },
+          {
+            "text": "월",
+            "tag": "NNB",
+            "start": 8,
+            "length": 1
+          },
+          {
+            "text": "17",
+            "tag": "SN",
+            "start": 10,
+            "length": 2
+          },
+          {
+            "text": "일",
+            "tag": "NNB",
+            "start": 12,
+            "length": 1
+          },
+          {
+            "text": "오전",
+            "tag": "NNG",
+            "start": 14,
+            "length": 2
+          },
+          {
+            "text": "10",
+            "tag": "SN",
+            "start": 17,
+            "length": 2
+          },
+          {
+            "text": "시",
+            "tag": "NNB",
+            "start": 19,
+            "length": 1
+          },
+          {
+            "text": "20",
+            "tag": "SN",
+            "start": 21,
+            "length": 2
+          },
+          {
+            "text": "분",
+            "tag": "NNB",
+            "start": 23,
+            "length": 1
+          },
+          {
+            "text": "김민수",
+            "tag": "NNP",
+            "start": 25,
+            "length": 3
+          },
+          {
+            "text": "는",
+            "tag": "JX",
+            "start": 28,
+            "length": 1
+          },
+          {
+            "text": "이서연",
+            "tag": "NNP",
+            "start": 30,
+            "length": 3
+          },
+          {
+            "text": "에게",
+            "tag": "JKB",
+            "start": 33,
+            "length": 2
+          },
+          {
+            "text": "5",
+            "tag": "SN",
+            "start": 36,
+            "length": 1
+          },
+          {
+            "text": "만",
+            "tag": "NR",
+            "start": 37,
+            "length": 1
+          },
+          {
+            "text": "원",
+            "tag": "NNB",
+            "start": 38,
+            "length": 1
+          },
+          {
+            "text": "을",
+            "tag": "JKO",
+            "start": 39,
+            "length": 1
+          },
+          {
+            "text": "송금",
+            "tag": "NNG",
+            "start": 41,
+            "length": 2
+          },
+          {
+            "text": "하",
+            "tag": "XSV",
+            "start": 43,
+            "length": 1
+          },
+          {
+            "text": "었",
+            "tag": "EP",
+            "start": 43,
+            "length": 1
+          },
+          {
+            "text": "다",
+            "tag": "EF",
+            "start": 44,
+            "length": 1
+          },
+          {
+            "text": ".",
+            "tag": "SF",
+            "start": 45,
+            "length": 1
+          }
+        ],
+        "keywords": [
+          {
+            "text": "오전",
+            "count": 1
+          },
+          {
+            "text": "김민수",
+            "count": 1
+          },
+          {
+            "text": "이서연",
+            "count": 1
+          },
+          {
+            "text": "송금",
+            "count": 1
+          }
+        ],
+        "languages": {
+          "number": 13,
+          "ko": 23,
+          "other": 1
+        },
+        "classification": [
+          {
+            "label": "금품·강요",
+            "score": 0.957
+          },
+          {
+            "label": "언어·협박",
+            "score": 0.026
+          },
+          {
+            "label": "상담·정서",
+            "score": 0.008
+          },
+          {
+            "label": "일반 기록",
+            "score": 0.006
+          },
+          {
+            "label": "따돌림·사이버",
+            "score": 0.003
+          },
+          {
+            "label": "신체 피해",
+            "score": 0.001
+          }
+        ],
+        "uncertain": false,
+        "candidates": [
+          {
+            "id": "0",
+            "quote": "2026년 11월 17일 오전 10시 20분 김민수는 이서연에게 5만원을 송금했다.",
+            "title": "2026년 11월 17일 오전 10시 20분 김민수는 이서연에게 5만원을 송금했다",
+            "datetime": "2026-11-17T10:20:00+09:00",
+            "isApproximateTime": false,
+            "dateSource": "explicit",
+            "approximateTimeText": "2026년 11월 17일 오전 10시 20분",
+            "location": null,
+            "actor": "김민수",
+            "action": "송금했다",
+            "damage": null,
+            "audioRange": null
+          }
+        ],
+        "relations": [
+          {
+            "id": "r0",
+            "candidateId": "0",
+            "actor": "김민수",
+            "target": "이서연",
+            "actorKind": "person",
+            "targetKind": "person",
+            "actorAmbiguous": false,
+            "targetAmbiguous": false,
+            "action": "송금했다",
+            "kind": "payment",
+            "typeLabel": "금전",
+            "score": 0.906,
+            "polarity": "reported",
+            "directed": true,
+            "amount": "5만원",
+            "quote": "2026년 11월 17일 오전 10시 20분 김민수는 이서연에게 5만원을 송금했다.",
+            "sourceSpan": {
+              "start": 0,
+              "end": 46
+            },
+            "mentions": [
+              {
+                "text": "김민수",
+                "kind": "person",
+                "ambiguous": false
+              },
+              {
+                "text": "이서연",
+                "kind": "person",
+                "ambiguous": false
+              }
+            ],
+            "model": "E5 + fitted relation Ridge; Kiwi source spans"
+          }
+        ],
+        "associations": [],
+        "references": [
+          {
+            "id": "labor-law-91-0",
+            "title": "근로기준법",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 2026년 10월 2일부터 시행한다. <단서 생략> 제2조부터 제11조까지 생략 ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=285279&efYd=20261008&ancYnChk=0&chrClsCd=010202",
+            "citation": "근로기준법 제1조(시행일)",
+            "sourceSha256": "7d5454c616574f0817a43f31199cfb76033d934bb1c47ee9bf43badfeae2830b",
+            "score": 0.3958,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "sexual-violence-law-113-0",
+            "title": "성폭력범죄의처벌등에관한특례법",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 2026년 10월 2일부터 시행한다. ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=289993&efYd=20261002&ancYnChk=0&chrClsCd=010202",
+            "citation": "성폭력범죄의처벌등에관한특례법 제1조(시행일)",
+            "sourceSha256": "d8add83bcf89df2973158c948ee3d42c83b6a534707203116600a0356942d99e",
+            "score": 0.3924,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "communications-law-78-0",
+            "title": "통신비밀보호법",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 2026년 10월 2일부터 시행한다. ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290003&efYd=20261002&ancYnChk=0&chrClsCd=010202",
+            "citation": "통신비밀보호법 제1조(시행일)",
+            "sourceSha256": "3e436f9c3e2a9f2dfc463dfeeb3184f7bae5a8947a2c56205e5c4fb2d0d8c580",
+            "score": 0.3924,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "network-law-0-4400",
+            "title": "정보통신망이용촉진및정보보호등에관한법률",
+            "category": "법령",
+            "content": " 12. 1.> 7. 제47조 제9항 을 위반하여 인증받은 내용을 거짓으로 홍보한 자 8. 삭제 <2012. 2. 17.> 9. 삭제 <2012. 2. 17.> 10. 제47조의4 제4항 을 위반하여 소프트웨어 사용자에게 알리지 아니한 자 11. 삭제 <2026. 3. 31.> 11의2. 삭제 <2024. 2. 13.> 11의3. 삭제 <2026. 3. 31.> 11의4. 제48조의3 제4항 을 위반하여 침해사고 발생 사실을 이용자에게 통지하지 아니한 자 12. 삭제 <2026. 3. 31.> 12의2. 제49조의2 제4항 을 위반하여 과학기술정보통신부장관 또는 방송미디어통신위원회의 명령을 이행하지 아니한 자 12의3. 제50조 제7항 을 위반하여 수신동의, 수신거부 또는 수신동의 철회에 대한 처리 결과를 알리지 아니한 자 12의4. 삭제 <2024. 1. 23.> 13. 제52조 제6항 을 위반하여 한국인터넷진흥원의 명칭을 사용한 자 14. 제53조 제4항 을 위반하여 사업의 휴업ㆍ폐업ㆍ해산의 신고를 아니한 자 15. 제56조 제1항 을 위반하여 약관을 신고하지 아니한 자 16. 제57조 제2항 을 위반하여 관리적 조치 또는 기술적 조치를 하지 아니한 자 17. 제58조 제1항 을 위반하여 통신과금서비스 이용일시 등을 통신과금서비스이용자에게 고지하지 아니한 자 18. 제58조 제2항 을 위반하여 통신과금서비스이용자가 구매ㆍ이용 내역을 확인할 수 있는 방법을 제공하지 아니하거나 통신과금서비스이용자의 제공 요청에 따르지 아니한 자 19. 제58조 제3항 을 위반하여 통신과금서비스이용자로부터 받은 통신과금에 대한 정정요구가 이유 있음에도 결제대금의 지급을 유보하지 아니하거나 통신과금서비스이용자의 요청에 대한 처리 결과를 통신과금서비스이용자에게 알려 주지 아니한 자 20. 제58조 제4항 을 위반하여 통신과금서비스에 관한 기록을 보존하지 아니한 자 20의2. 제58조 제5항 을 위반하여 통신과금서비스이용자의 동의를 받지 아니하고 통신과금서비스를 제공하거나 이용한도액을 증액한 자 20의3. 제58조 제6항 을 위반하여 통신과금서비스 약관의 변경에 관한 통지를 하지 아니한 자 20의4. ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290001&efYd=20261002&ancYnChk=0&chrClsCd=010202",
+            "citation": "정보통신망이용촉진및정보보호등에관한법률 제58조의2 ( 제59조 제2항 에 따라 준용되는 경우를 포함한다) · 원문 구간 5",
+            "sourceSha256": "d3ab24d7c08c56ffaf53278a43f3d75e8c93a6607e1877287066197a440540c9",
+            "score": 0.3833,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "network-law-0-1100",
+            "title": "정보통신망이용촉진및정보보호등에관한법률",
+            "category": "법령",
+            "content": "수할 수 있으며, 이를 몰수할 수 없을 때에는 그 가액을 추징할 수 있다. 이 경우 몰수 또는 추징은 다른 벌칙에 부가하여 과할 수 있다. <개정 2020. 2. 4., 2026. 3. 31.> [본조신설 2016. 3. 22.]\n① 다음 각 호의 어느 하나에 해당하는 자에게는 5천만원 이하의 과태료를 부과한다. <신설 2026. 3. 31.> 1. 제48조의2 제4항 에 따른 시정명령을 이행하지 아니한 자 2. 제48조의3 제1항 을 위반하여 침해사고의 신고를 하지 아니하거나 지연하여 신고한 자 ② 다음 각 호의 어느 하나에 해당하는 자와 제7호부터 제11호까지의 경우에 해당하는 행위를 하도록 한 자에게는 3천만원 이하의 과태료를 부과한다. <개정 2011. 3. 29., 2012. 2. 17., 2013. 3. 23., 2014. 5. 28., 2015. 6. 22., 2015. 12. 1., 2016. 3. 22., 2017. 7. 26., 2018. 9. 18., 2020. 2. 4., 2021. 6. 8., 2023. 1. 3., 2024. 1. 23., 2024. 2. 13., 2025. 10. 1., 2026. 3. 31.> 1. 제22조의2 제2항 을 위반하여 서비스의 제공을 거부한 자 1의2. 제22조의2 제3항 을 위반하여 접근권한에 대한 이용자의 동의 및 철회방법을 마련하는 등 이용자 정보 보호를 위하여 필요한 조치를 하지 아니한 자 2. 제23조의2 제1항 을 위반하여 주민등록번호를 수집ㆍ이용하거나 같은 조 제2항 에 따른 필요한 조치를 하지 아니한 자 2의2. 삭제 <2020. 2. 4.> 2의3. 삭제 <2020. 2. 4.> 2의4. 삭제 <2020. 2. 4.> 2의5. 제23조의6 제1항 에 따른 물리적ㆍ기술적ㆍ관리적 조치를 하지 아니한 자 2의6. 제23조의6 제2항 에 따른 안전조치를 하지 아니한 자 3. 삭제 <2020. 2. 4.> 4. 삭제 <2020. 2. 4.> 5. 삭제 <2020. 2. 4.> 5의2. 삭제 <2020. 2. 4.> 6. 삭제 <2014. 5. 28.> 6의2. 제45조의3 제1항 을 위반하여 대통령령 으로 정하는 기준에 해당하는 임원을 정보보호 최고책임자로 지정하지 아니하거나 정보보호 최고책임자의 지정을 신고하지 아니한 자 6의3. 제45조의3 제3항 을 위반하여 정보보호 최고책임자로 하여금 같은 조 제4항 의 업무 외의 다른 업무를 겸직하게 한 ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290001&efYd=20261002&ancYnChk=0&chrClsCd=010202",
+            "citation": "정보통신망이용촉진및정보보호등에관한법률 제58조의2 ( 제59조 제2항 에 따라 준용되는 경우를 포함한다) · 원문 구간 2",
+            "sourceSha256": "d3ab24d7c08c56ffaf53278a43f3d75e8c93a6607e1877287066197a440540c9",
+            "score": 0.3809,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          }
+        ],
+        "model": "Kiwi + 다국어 E5 + 학습 분류기",
+        "notice": "분류 점수는 내부 상대 점수입니다. 사건의 진위·법적 책임을 판정하지 않습니다."
+      },
+      "date": "2026-11-19",
+      "sha256": "7b6c4d4664a66a8d1eb998d2809db3f95a7fd5bd44b2bd5973e42ef9c32b41e9"
+    },
+    {
+      "id": "demo-evidence-3",
+      "name": "연락과 약속.txt",
+      "text": "2026년 11월 18일 오후 3시 10분 박지훈은 이서연에게 전화했다. 2026년 11월 18일 오후 4시 20분 이서연은 김민수에게 내일 자료를 보내겠다고 말했다.",
+      "analysis": {
+        "schemaVersion": 2,
+        "text": "2026년 11월 18일 오후 3시 10분 박지훈은 이서연에게 전화했다. 2026년 11월 18일 오후 4시 20분 이서연은 김민수에게 내일 자료를 보내겠다고 말했다.",
+        "detectedLanguages": [
+          {
+            "text": "2026년 11월 18일 오후 3시 10분 박지훈은 이서연에게 전화했다.",
+            "language": "ko",
+            "score": 1.0
+          },
+          {
+            "text": "2026년 11월 18일 오후 4시 20분 이서연은 김민수에게 내일 자료를 보내겠다고 말했다.",
+            "language": "ko",
+            "score": 1.0
+          }
+        ],
+        "tokens": [
+          {
+            "text": "2026",
+            "tag": "SN",
+            "start": 0,
+            "length": 4
+          },
+          {
+            "text": "년",
+            "tag": "NNB",
+            "start": 4,
+            "length": 1
+          },
+          {
+            "text": "11",
+            "tag": "SN",
+            "start": 6,
+            "length": 2
+          },
+          {
+            "text": "월",
+            "tag": "NNB",
+            "start": 8,
+            "length": 1
+          },
+          {
+            "text": "18",
+            "tag": "SN",
+            "start": 10,
+            "length": 2
+          },
+          {
+            "text": "일",
+            "tag": "NNB",
+            "start": 12,
+            "length": 1
+          },
+          {
+            "text": "오후",
+            "tag": "NNG",
+            "start": 14,
+            "length": 2
+          },
+          {
+            "text": "3",
+            "tag": "SN",
+            "start": 17,
+            "length": 1
+          },
+          {
+            "text": "시",
+            "tag": "NNB",
+            "start": 18,
+            "length": 1
+          },
+          {
+            "text": "10",
+            "tag": "SN",
+            "start": 20,
+            "length": 2
+          },
+          {
+            "text": "분",
+            "tag": "NNB",
+            "start": 22,
+            "length": 1
+          },
+          {
+            "text": "박",
+            "tag": "NNP",
+            "start": 24,
+            "length": 1
+          },
+          {
+            "text": "지훈",
+            "tag": "NNP",
+            "start": 25,
+            "length": 2
+          },
+          {
+            "text": "은",
+            "tag": "JX",
+            "start": 27,
+            "length": 1
+          },
+          {
+            "text": "이서연",
+            "tag": "NNP",
+            "start": 29,
+            "length": 3
+          },
+          {
+            "text": "에게",
+            "tag": "JKB",
+            "start": 32,
+            "length": 2
+          },
+          {
+            "text": "전화",
+            "tag": "NNG",
+            "start": 35,
+            "length": 2
+          },
+          {
+            "text": "하",
+            "tag": "XSV",
+            "start": 37,
+            "length": 1
+          },
+          {
+            "text": "었",
+            "tag": "EP",
+            "start": 37,
+            "length": 1
+          },
+          {
+            "text": "다",
+            "tag": "EF",
+            "start": 38,
+            "length": 1
+          },
+          {
+            "text": ".",
+            "tag": "SF",
+            "start": 39,
+            "length": 1
+          },
+          {
+            "text": "2026",
+            "tag": "SN",
+            "start": 41,
+            "length": 4
+          },
+          {
+            "text": "년",
+            "tag": "NNB",
+            "start": 45,
+            "length": 1
+          },
+          {
+            "text": "11",
+            "tag": "SN",
+            "start": 47,
+            "length": 2
+          },
+          {
+            "text": "월",
+            "tag": "NNB",
+            "start": 49,
+            "length": 1
+          },
+          {
+            "text": "18",
+            "tag": "SN",
+            "start": 51,
+            "length": 2
+          },
+          {
+            "text": "일",
+            "tag": "NNB",
+            "start": 53,
+            "length": 1
+          },
+          {
+            "text": "오후",
+            "tag": "NNG",
+            "start": 55,
+            "length": 2
+          },
+          {
+            "text": "4",
+            "tag": "SN",
+            "start": 58,
+            "length": 1
+          },
+          {
+            "text": "시",
+            "tag": "NNB",
+            "start": 59,
+            "length": 1
+          },
+          {
+            "text": "20",
+            "tag": "SN",
+            "start": 61,
+            "length": 2
+          },
+          {
+            "text": "분",
+            "tag": "NNB",
+            "start": 63,
+            "length": 1
+          },
+          {
+            "text": "이서연",
+            "tag": "NNP",
+            "start": 65,
+            "length": 3
+          },
+          {
+            "text": "은",
+            "tag": "JX",
+            "start": 68,
+            "length": 1
+          },
+          {
+            "text": "김민수",
+            "tag": "NNP",
+            "start": 70,
+            "length": 3
+          },
+          {
+            "text": "에게",
+            "tag": "JKB",
+            "start": 73,
+            "length": 2
+          },
+          {
+            "text": "내일",
+            "tag": "NNG",
+            "start": 76,
+            "length": 2
+          },
+          {
+            "text": "자료",
+            "tag": "NNG",
+            "start": 79,
+            "length": 2
+          },
+          {
+            "text": "를",
+            "tag": "JKO",
+            "start": 81,
+            "length": 1
+          },
+          {
+            "text": "보내",
+            "tag": "VV",
+            "start": 83,
+            "length": 2
+          },
+          {
+            "text": "겠",
+            "tag": "EP",
+            "start": 85,
+            "length": 1
+          },
+          {
+            "text": "다고",
+            "tag": "EC",
+            "start": 86,
+            "length": 2
+          },
+          {
+            "text": "말",
+            "tag": "NNG",
+            "start": 89,
+            "length": 1
+          },
+          {
+            "text": "하",
+            "tag": "XSV",
+            "start": 90,
+            "length": 1
+          },
+          {
+            "text": "었",
+            "tag": "EP",
+            "start": 90,
+            "length": 1
+          },
+          {
+            "text": "다",
+            "tag": "EF",
+            "start": 91,
+            "length": 1
+          },
+          {
+            "text": ".",
+            "tag": "SF",
+            "start": 92,
+            "length": 1
+          }
+        ],
+        "keywords": [
+          {
+            "text": "오후",
+            "count": 2
+          },
+          {
+            "text": "이서연",
+            "count": 2
+          },
+          {
+            "text": "지훈",
+            "count": 1
+          },
+          {
+            "text": "전화",
+            "count": 1
+          },
+          {
+            "text": "김민수",
+            "count": 1
+          },
+          {
+            "text": "내일",
+            "count": 1
+          },
+          {
+            "text": "자료",
+            "count": 1
+          },
+          {
+            "text": "보내",
+            "count": 1
+          }
+        ],
+        "languages": {
+          "number": 22,
+          "ko": 49,
+          "other": 2
+        },
+        "classification": [
+          {
+            "label": "언어·협박",
+            "score": 0.531
+          },
+          {
+            "label": "금품·강요",
+            "score": 0.196
+          },
+          {
+            "label": "일반 기록",
+            "score": 0.143
+          },
+          {
+            "label": "상담·정서",
+            "score": 0.08
+          },
+          {
+            "label": "따돌림·사이버",
+            "score": 0.037
+          },
+          {
+            "label": "신체 피해",
+            "score": 0.012
+          }
+        ],
+        "uncertain": true,
+        "candidates": [
+          {
+            "id": "0",
+            "quote": "2026년 11월 18일 오후 3시 10분 박지훈은 이서연에게 전화했다.",
+            "title": "2026년 11월 18일 오후 3시 10분 박지훈은 이서연에게 전화했다.",
+            "datetime": "2026-11-18T15:10:00+09:00",
+            "isApproximateTime": false,
+            "dateSource": "explicit",
+            "approximateTimeText": "2026년 11월 18일 오후 3시 10분",
+            "location": null,
+            "actor": "박지훈",
+            "action": "전화했다",
+            "damage": null,
+            "audioRange": null
+          },
+          {
+            "id": "1",
+            "quote": "2026년 11월 18일 오후 4시 20분 이서연은 김민수에게 내일 자료를 보내겠다고 말했다.",
+            "title": "2026년 11월 18일 오후 4시 20분 이서연은 김민수에게 내일 자료를 보내겠",
+            "datetime": "2026-11-18T16:20:00+09:00",
+            "isApproximateTime": false,
+            "dateSource": "explicit",
+            "approximateTimeText": "2026년 11월 18일 오후 4시 20분",
+            "location": null,
+            "actor": "이서연",
+            "action": "보내겠다고 말했다",
+            "damage": null,
+            "audioRange": null
+          }
+        ],
+        "relations": [
+          {
+            "id": "r0",
+            "candidateId": "0",
+            "actor": "박지훈",
+            "target": "이서연",
+            "actorKind": "person",
+            "targetKind": "person",
+            "actorAmbiguous": false,
+            "targetAmbiguous": false,
+            "action": "전화했다",
+            "kind": "communication",
+            "typeLabel": "연락·대화",
+            "score": 0.819,
+            "polarity": "reported",
+            "directed": true,
+            "amount": null,
+            "quote": "2026년 11월 18일 오후 3시 10분 박지훈은 이서연에게 전화했다.",
+            "sourceSpan": {
+              "start": 0,
+              "end": 40
+            },
+            "mentions": [
+              {
+                "text": "박지훈",
+                "kind": "person",
+                "ambiguous": false
+              },
+              {
+                "text": "이서연",
+                "kind": "person",
+                "ambiguous": false
+              }
+            ],
+            "model": "E5 + fitted relation Ridge; Kiwi source spans"
+          },
+          {
+            "id": "r1",
+            "candidateId": "1",
+            "actor": "이서연",
+            "target": "김민수",
+            "actorKind": "person",
+            "targetKind": "person",
+            "actorAmbiguous": false,
+            "targetAmbiguous": false,
+            "action": "보내겠다고 말했다",
+            "kind": "communication",
+            "typeLabel": "연락·대화",
+            "score": 0.729,
+            "polarity": "planned",
+            "directed": true,
+            "amount": null,
+            "quote": "2026년 11월 18일 오후 4시 20분 이서연은 김민수에게 내일 자료를 보내겠다고 말했다.",
+            "sourceSpan": {
+              "start": 41,
+              "end": 93
+            },
+            "mentions": [
+              {
+                "text": "이서연",
+                "kind": "person",
+                "ambiguous": false
+              },
+              {
+                "text": "김민수",
+                "kind": "person",
+                "ambiguous": false
+              }
+            ],
+            "model": "E5 + fitted relation Ridge; Kiwi source spans"
+          }
+        ],
+        "associations": [
+          {
+            "source": "오후",
+            "target": "이서연",
+            "count": 2,
+            "pmi": 0.0
+          }
+        ],
+        "references": [
+          {
+            "id": "labor-law-91-0",
+            "title": "근로기준법",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 2026년 10월 2일부터 시행한다. <단서 생략> 제2조부터 제11조까지 생략 ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=285279&efYd=20261008&ancYnChk=0&chrClsCd=010202",
+            "citation": "근로기준법 제1조(시행일)",
+            "sourceSha256": "7d5454c616574f0817a43f31199cfb76033d934bb1c47ee9bf43badfeae2830b",
+            "score": 0.4078,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "communications-law-78-0",
+            "title": "통신비밀보호법",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 2026년 10월 2일부터 시행한다. ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290003&efYd=20261002&ancYnChk=0&chrClsCd=010202",
+            "citation": "통신비밀보호법 제1조(시행일)",
+            "sourceSha256": "3e436f9c3e2a9f2dfc463dfeeb3184f7bae5a8947a2c56205e5c4fb2d0d8c580",
+            "score": 0.4015,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "sexual-violence-law-113-0",
+            "title": "성폭력범죄의처벌등에관한특례법",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 2026년 10월 2일부터 시행한다. ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=289993&efYd=20261002&ancYnChk=0&chrClsCd=010202",
+            "citation": "성폭력범죄의처벌등에관한특례법 제1조(시행일)",
+            "sourceSha256": "d8add83bcf89df2973158c948ee3d42c83b6a534707203116600a0356942d99e",
+            "score": 0.4015,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "privacy-law-108-1100",
+            "title": "개인정보보호법",
+            "category": "법령",
+            "content": "제공하거나 일반에 공개해서는 아니 된다. <신설 2020. 2. 4., 2023. 3. 14.> ⑦ 보호위원회는 정보통신망을 통하여 자료의 제출 등을 받은 경우나 수집한 자료 등을 전자화한 경우에는 개인정보ㆍ영업비밀 등이 유출되지 아니하도록 제도적ㆍ기술적 보완조치를 하여야 한다. <신설 2020. 2. 4., 2023. 3. 14.> ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=283839&efYd=20260911&ancYnChk=0&chrClsCd=010202",
+            "citation": "개인정보보호법 제63조(자료제출 요구 및 검사) · 원문 구간 2",
+            "sourceSha256": "cf9d44753cd389378bca37ef8e1b9f4b47fe1d0e67f8fbb34a159a2f6f5c18c0",
+            "score": 0.3678,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "privacy-law-126-2200",
+            "title": "개인정보보호법",
+            "category": "법령",
+            "content": "부과한다. <개정 2025. 4. 1.> 1. 제26조 제6항 을 위반하여 위탁자의 동의를 받지 아니하고 제3자에게 다시 위탁한 자 2. 제31조의2 제1항 을 위반하여 국내대리인을 지정하지 아니한 자 3. 제31조의2 제2항 을 위반하여 국내대리인을 지정한 자 4. 제31조의2 제3항 을 위반하여 국내대리인을 관리ㆍ감독하지 아니한 자 ④ 다음 각 호의 어느 하나에 해당하는 자에게는 1천만원 이하의 과태료를 부과한다. <개정 2025. 4. 1.> 1. 제11조의2 제2항 을 위반하여 정당한 사유 없이 자료를 제출하지 아니하거나 거짓으로 제출한 자 2. 제21조 제3항 ( 제26조 제8항 에 따라 준용되는 경우를 포함한다)을 위반하여 개인정보를 분리하여 저장ㆍ관리하지 아니한 자 3. 제22조 제1항부터 제3항 까지( 제26조 제8항 에 따라 준용되는 경우를 포함한다)를 위반하여 동의를 받은 자 4. 제26조 제1항 을 위반하여 업무 위탁 시 같은 항 각 호의 내용이 포함된 문서로 하지 아니한 자 5. 제26조 제2항 을 위반하여 위탁하는 업무의 내용과 수탁자를 공개하지 아니한 자 6. 제27조 제1항 ㆍ제2항( 제26조 제8항 에 따라 준용되는 경우를 포함한다)을 위반하여 정보주체에게 개인정보의 이전 사실을 알리지 아니한 자 7. 제28조의4 제3항 ( 제26조 제8항 에 따라 준용되는 경우를 포함한다)을 위반하여 관련 기록을 작성하여 보관하지 아니한 자 8. 제30조 제1항 또는 제2항 ( 제26조 제8항 에 따라 준용되는 경우를 포함한다)을 위반하여 개인정보 처리방침을 정하지 아니하거나 이를 공개하지 아니한 자 9. 삭제 <2026. 3. 10.> 9의2. 제31조의2 제4항 을 위반하여 국내대리인의 성명ㆍ주소ㆍ전화번호 및 전자우편 주소를 개인정보 처리방침에 포함하지 아니한 자 10. 제35조 제3항 ㆍ제4항, 제36조 제2항 ㆍ제4항 또는 제37조 제4항 ( 제26조 제8항 에 따라 준용되는 경우를 포함한다)을 위반하여 정보주체에게 알려야 할 사항을 알리지 아니한 자 11. 제45조 제1항 에 따른 자료를 정당한 사유 없이 제출하지 아니하거나 거짓으로 제출한 자 12. 제45조 제2항 에 따른 출입ㆍ조사ㆍ열람을 정당한 사유 없이 거부ㆍ방해 또는 기피한 자 ⑤ 제1항부터 제4항까지에 따른 과태료는 대통령령 으로 정하는 바에 따라 보호위원회가 부과ㆍ징수한다. 이 경우 보호위원회는 위반행위의 정도ㆍ동기ㆍ결과, ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=283839&efYd=20260911&ancYnChk=0&chrClsCd=010202",
+            "citation": "개인정보보호법 제29조 ( 제26조 제8항 에 따라 준용되는 경우를 포함한다) · 원문 구간 3",
+            "sourceSha256": "cf9d44753cd389378bca37ef8e1b9f4b47fe1d0e67f8fbb34a159a2f6f5c18c0",
+            "score": 0.3647,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          }
+        ],
+        "model": "Kiwi + 다국어 E5 + 학습 분류기",
+        "notice": "분류 점수는 내부 상대 점수입니다. 사건의 진위·법적 책임을 판정하지 않습니다."
+      },
+      "date": "2026-11-19",
+      "sha256": "facc8f19b3e2f7f238e4c6195d35ea62d2f9d04dfd448356fb42137008a71550"
+    },
+    {
+      "id": "demo-evidence-4",
+      "name": "서로 다른 진술.txt",
+      "text": "2026년 11월 18일 오후 5시 30분 김민수는 박지훈을 밀치지 않았다고 말했다. 2026년 11월 19일 오전 9시 10분 한수빈은 이서연이 돈을 돌려줬다는 이야기를 들었다.",
+      "analysis": {
+        "schemaVersion": 2,
+        "text": "2026년 11월 18일 오후 5시 30분 김민수는 박지훈을 밀치지 않았다고 말했다. 2026년 11월 19일 오전 9시 10분 한수빈은 이서연이 돈을 돌려줬다는 이야기를 들었다.",
+        "detectedLanguages": [
+          {
+            "text": "2026년 11월 18일 오후 5시 30분 김민수는 박지훈을 밀치지 않았다고 말했다.",
+            "language": "ko",
+            "score": 1.0
+          },
+          {
+            "text": "2026년 11월 19일 오전 9시 10분 한수빈은 이서연이 돈을 돌려줬다는 이야기를 들었다.",
+            "language": "ko",
+            "score": 1.0
+          }
+        ],
+        "tokens": [
+          {
+            "text": "2026",
+            "tag": "SN",
+            "start": 0,
+            "length": 4
+          },
+          {
+            "text": "년",
+            "tag": "NNB",
+            "start": 4,
+            "length": 1
+          },
+          {
+            "text": "11",
+            "tag": "SN",
+            "start": 6,
+            "length": 2
+          },
+          {
+            "text": "월",
+            "tag": "NNB",
+            "start": 8,
+            "length": 1
+          },
+          {
+            "text": "18",
+            "tag": "SN",
+            "start": 10,
+            "length": 2
+          },
+          {
+            "text": "일",
+            "tag": "NNB",
+            "start": 12,
+            "length": 1
+          },
+          {
+            "text": "오후",
+            "tag": "NNG",
+            "start": 14,
+            "length": 2
+          },
+          {
+            "text": "5",
+            "tag": "SN",
+            "start": 17,
+            "length": 1
+          },
+          {
+            "text": "시",
+            "tag": "NNB",
+            "start": 18,
+            "length": 1
+          },
+          {
+            "text": "30",
+            "tag": "SN",
+            "start": 20,
+            "length": 2
+          },
+          {
+            "text": "분",
+            "tag": "NNB",
+            "start": 22,
+            "length": 1
+          },
+          {
+            "text": "김민수",
+            "tag": "NNP",
+            "start": 24,
+            "length": 3
+          },
+          {
+            "text": "는",
+            "tag": "JX",
+            "start": 27,
+            "length": 1
+          },
+          {
+            "text": "박",
+            "tag": "NNP",
+            "start": 29,
+            "length": 1
+          },
+          {
+            "text": "지훈",
+            "tag": "NNP",
+            "start": 30,
+            "length": 2
+          },
+          {
+            "text": "을",
+            "tag": "JKO",
+            "start": 32,
+            "length": 1
+          },
+          {
+            "text": "밀치",
+            "tag": "VV",
+            "start": 34,
+            "length": 2
+          },
+          {
+            "text": "지",
+            "tag": "EC",
+            "start": 36,
+            "length": 1
+          },
+          {
+            "text": "않",
+            "tag": "VX",
+            "start": 38,
+            "length": 1
+          },
+          {
+            "text": "었",
+            "tag": "EP",
+            "start": 39,
+            "length": 1
+          },
+          {
+            "text": "다고",
+            "tag": "EC",
+            "start": 40,
+            "length": 2
+          },
+          {
+            "text": "말",
+            "tag": "NNG",
+            "start": 43,
+            "length": 1
+          },
+          {
+            "text": "하",
+            "tag": "XSV",
+            "start": 44,
+            "length": 1
+          },
+          {
+            "text": "었",
+            "tag": "EP",
+            "start": 44,
+            "length": 1
+          },
+          {
+            "text": "다",
+            "tag": "EF",
+            "start": 45,
+            "length": 1
+          },
+          {
+            "text": ".",
+            "tag": "SF",
+            "start": 46,
+            "length": 1
+          },
+          {
+            "text": "2026",
+            "tag": "SN",
+            "start": 48,
+            "length": 4
+          },
+          {
+            "text": "년",
+            "tag": "NNB",
+            "start": 52,
+            "length": 1
+          },
+          {
+            "text": "11",
+            "tag": "SN",
+            "start": 54,
+            "length": 2
+          },
+          {
+            "text": "월",
+            "tag": "NNB",
+            "start": 56,
+            "length": 1
+          },
+          {
+            "text": "19",
+            "tag": "SN",
+            "start": 58,
+            "length": 2
+          },
+          {
+            "text": "일",
+            "tag": "NNB",
+            "start": 60,
+            "length": 1
+          },
+          {
+            "text": "오전",
+            "tag": "NNG",
+            "start": 62,
+            "length": 2
+          },
+          {
+            "text": "9",
+            "tag": "SN",
+            "start": 65,
+            "length": 1
+          },
+          {
+            "text": "시",
+            "tag": "NNB",
+            "start": 66,
+            "length": 1
+          },
+          {
+            "text": "10",
+            "tag": "SN",
+            "start": 68,
+            "length": 2
+          },
+          {
+            "text": "분",
+            "tag": "NNB",
+            "start": 70,
+            "length": 1
+          },
+          {
+            "text": "한수빈",
+            "tag": "NNP",
+            "start": 72,
+            "length": 3
+          },
+          {
+            "text": "은",
+            "tag": "JX",
+            "start": 75,
+            "length": 1
+          },
+          {
+            "text": "이서연",
+            "tag": "NNP",
+            "start": 77,
+            "length": 3
+          },
+          {
+            "text": "이",
+            "tag": "JKS",
+            "start": 80,
+            "length": 1
+          },
+          {
+            "text": "돈",
+            "tag": "NNG",
+            "start": 82,
+            "length": 1
+          },
+          {
+            "text": "을",
+            "tag": "JKO",
+            "start": 83,
+            "length": 1
+          },
+          {
+            "text": "돌려주",
+            "tag": "VV",
+            "start": 85,
+            "length": 3
+          },
+          {
+            "text": "었",
+            "tag": "EP",
+            "start": 87,
+            "length": 1
+          },
+          {
+            "text": "다는",
+            "tag": "ETM",
+            "start": 88,
+            "length": 2
+          },
+          {
+            "text": "이야기",
+            "tag": "NNG",
+            "start": 91,
+            "length": 3
+          },
+          {
+            "text": "를",
+            "tag": "JKO",
+            "start": 94,
+            "length": 1
+          },
+          {
+            "text": "듣",
+            "tag": "VV-I",
+            "start": 96,
+            "length": 1
+          },
+          {
+            "text": "었",
+            "tag": "EP",
+            "start": 97,
+            "length": 1
+          },
+          {
+            "text": "다",
+            "tag": "EF",
+            "start": 98,
+            "length": 1
+          },
+          {
+            "text": ".",
+            "tag": "SF",
+            "start": 99,
+            "length": 1
+          }
+        ],
+        "keywords": [
+          {
+            "text": "오후",
+            "count": 1
+          },
+          {
+            "text": "김민수",
+            "count": 1
+          },
+          {
+            "text": "지훈",
+            "count": 1
+          },
+          {
+            "text": "밀치",
+            "count": 1
+          },
+          {
+            "text": "오전",
+            "count": 1
+          },
+          {
+            "text": "한수빈",
+            "count": 1
+          },
+          {
+            "text": "이서연",
+            "count": 1
+          },
+          {
+            "text": "돌려주",
+            "count": 1
+          },
+          {
+            "text": "이야기",
+            "count": 1
+          }
+        ],
+        "languages": {
+          "number": 22,
+          "ko": 54,
+          "other": 2
+        },
+        "classification": [
+          {
+            "label": "금품·강요",
+            "score": 0.726
+          },
+          {
+            "label": "언어·협박",
+            "score": 0.223
+          },
+          {
+            "label": "일반 기록",
+            "score": 0.024
+          },
+          {
+            "label": "신체 피해",
+            "score": 0.01
+          },
+          {
+            "label": "따돌림·사이버",
+            "score": 0.009
+          },
+          {
+            "label": "상담·정서",
+            "score": 0.008
+          }
+        ],
+        "uncertain": false,
+        "candidates": [
+          {
+            "id": "0",
+            "quote": "2026년 11월 18일 오후 5시 30분 김민수는 박지훈을 밀치지 않았다고 말했다.",
+            "title": "2026년 11월 18일 오후 5시 30분 김민수는 박지훈을 밀치지 않았다고 말했",
+            "datetime": "2026-11-18T17:30:00+09:00",
+            "isApproximateTime": false,
+            "dateSource": "explicit",
+            "approximateTimeText": "2026년 11월 18일 오후 5시 30분",
+            "location": null,
+            "actor": "김민수",
+            "action": "밀치지 않았다고 말했다",
+            "damage": null,
+            "audioRange": null
+          },
+          {
+            "id": "1",
+            "quote": "2026년 11월 19일 오전 9시 10분 한수빈은 이서연이 돈을 돌려줬다는 이야기를 들었다.",
+            "title": "2026년 11월 19일 오전 9시 10분 한수빈은 이서연이 돈을 돌려줬다는 이야",
+            "datetime": "2026-11-19T09:10:00+09:00",
+            "isApproximateTime": false,
+            "dateSource": "explicit",
+            "approximateTimeText": "2026년 11월 19일 오전 9시 10분",
+            "location": null,
+            "actor": "한수빈",
+            "action": "돌려줬다는 이야기를 들었다",
+            "damage": null,
+            "audioRange": null
+          }
+        ],
+        "relations": [
+          {
+            "id": "r0",
+            "candidateId": "0",
+            "actor": "김민수",
+            "target": "박지훈",
+            "actorKind": "person",
+            "targetKind": "person",
+            "actorAmbiguous": false,
+            "targetAmbiguous": false,
+            "action": "밀치지 않았다고 말했다",
+            "kind": "other",
+            "typeLabel": "기타",
+            "score": 0.586,
+            "polarity": "denied",
+            "directed": true,
+            "amount": null,
+            "quote": "2026년 11월 18일 오후 5시 30분 김민수는 박지훈을 밀치지 않았다고 말했다.",
+            "sourceSpan": {
+              "start": 0,
+              "end": 47
+            },
+            "mentions": [
+              {
+                "text": "김민수",
+                "kind": "person",
+                "ambiguous": false
+              },
+              {
+                "text": "박지훈",
+                "kind": "person",
+                "ambiguous": false
+              }
+            ],
+            "model": "E5 + fitted relation Ridge; Kiwi source spans"
+          },
+          {
+            "id": "r1",
+            "candidateId": "1",
+            "actor": "한수빈",
+            "target": null,
+            "actorKind": "person",
+            "targetKind": null,
+            "actorAmbiguous": false,
+            "targetAmbiguous": false,
+            "action": "돌려줬다는 이야기를 들었다",
+            "kind": "payment",
+            "typeLabel": "금전",
+            "score": 0.515,
+            "polarity": "uncertain",
+            "directed": false,
+            "amount": null,
+            "quote": "2026년 11월 19일 오전 9시 10분 한수빈은 이서연이 돈을 돌려줬다는 이야기를 들었다.",
+            "sourceSpan": {
+              "start": 48,
+              "end": 100
+            },
+            "mentions": [
+              {
+                "text": "한수빈",
+                "kind": "person",
+                "ambiguous": false
+              },
+              {
+                "text": "이서연",
+                "kind": "person",
+                "ambiguous": false
+              }
+            ],
+            "model": "E5 + fitted relation Ridge; Kiwi source spans"
+          }
+        ],
+        "associations": [],
+        "references": [
+          {
+            "id": "sexual-violence-law-113-0",
+            "title": "성폭력범죄의처벌등에관한특례법",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 2026년 10월 2일부터 시행한다. ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=289993&efYd=20261002&ancYnChk=0&chrClsCd=010202",
+            "citation": "성폭력범죄의처벌등에관한특례법 제1조(시행일)",
+            "sourceSha256": "d8add83bcf89df2973158c948ee3d42c83b6a534707203116600a0356942d99e",
+            "score": 0.3499,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "communications-law-78-0",
+            "title": "통신비밀보호법",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 2026년 10월 2일부터 시행한다. ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=290003&efYd=20261002&ancYnChk=0&chrClsCd=010202",
+            "citation": "통신비밀보호법 제1조(시행일)",
+            "sourceSha256": "3e436f9c3e2a9f2dfc463dfeeb3184f7bae5a8947a2c56205e5c4fb2d0d8c580",
+            "score": 0.3499,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "labor-law-91-0",
+            "title": "근로기준법",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 2026년 10월 2일부터 시행한다. <단서 생략> 제2조부터 제11조까지 생략 ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=285279&efYd=20261008&ancYnChk=0&chrClsCd=010202",
+            "citation": "근로기준법 제1조(시행일)",
+            "sourceSha256": "7d5454c616574f0817a43f31199cfb76033d934bb1c47ee9bf43badfeae2830b",
+            "score": 0.3494,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "school-law-77-0",
+            "title": "학교폭력예방및대책에관한법률",
+            "category": "법령",
+            "content": "제1조(시행일) 이 법은 공포한 날부터 시행한다. 다만, 부칙 제7조에 따라 개정되는 법률 중 이 법 시행 전에 공포되었으나 시행일이 도래하지 아니한 법률을 개정한 부분은 각각 해당 법률의 시행일부터 시행하고, 다음 각 호의 개정규정은 해당 호에서 정하는 날부터 시행한다. 1. 다음 각 목의 개정규정은 2026년 1월 2일부터 시행한다. 다만, 부칙 제7조에 따라 개정되는 법률(가목 및 나목의 개정규정과 관련되는 부분으로 한정한다) 중 본문에 따른 시행일 전에 공포되었으나 본문에 따른 시행일이 도래하지 아니한 법률을 개정한 부분은 각각 해당 법률의 시행일부터 시행한다. 가. 제19조제4항, 제23조, 제29조제1항제1호 및 제30조의 개정규정 나. 제12조제2항, 제19조제3항, 제22조 및 제29조제2항 단서의 개정규정(재정경제부장관 및 재정경제부에 관한 부분으로 한정한다) 다. 부칙 제7조에 따라 개정되는 법률(가목 및 나목의 개정규정과 관련되는 부분으로 한정한다) 2. 생략 제2조 부터 제6조까지 생략 ",
+            "sourceUrl": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=286361&efYd=20260602&ancYnChk=0&chrClsCd=010202",
+            "citation": "학교폭력예방및대책에관한법률 제1조(시행일)",
+            "sourceSha256": "7170adf94e275d591bed1fd09bd8bb5f7622f6abaf2e519c27857403b8e75605",
+            "score": 0.3357,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          },
+          {
+            "id": "precedent-158543-0-3300",
+            "title": "사기 · 대법원 2011도8829",
+            "category": "판례",
+            "content": "고, 그 후 피고인으로부터 2008. 11. 30.경까지 위 2,000만 원을 변제하겠다는 차용증을 받기도 한 점, ② 피해자 공소외 2는 피고인이 사무실 이전비 등으로 5,000만 원을 주면 1개월 이내에 상환하여 준다고 하여 공소사실과 같이 피고인에게 합계 5,000만 원을 교부하게 되었다고 증언하였고, 피고인이 2008. 10. 6. 피해자 공소외 2에게 2008. 11. 20.까지 위 5,000만 원을 변제하겠다는 차용증을 작성하여 주기도 한 점, ③ 공소외 3 주식회사는 하나로저축은행에 대하여 약 10억 원의 채무를 부담하고 있었고, 우리은행에 대하여 약 1억 원의 채무도 부담하고 있었던 점 등에 비추어 보면, 이 부분 공소사실을 유죄로 인정한 제1심의 조치는 정당하다고 판단하였다.\n그러나 원심의 이와 같은 판단은 앞서 본 법리와 아래와 같은 사정에 비추어 볼 때 이를 그대로 수긍하기 어렵다.\n먼저, 원심 및 제1심이 적법하게 채택한 증거들에 의하면, ① 피해자 공소외 1은 부동산 중개업을 하던 자로서 2007. 11.경 공소외 3 주식회사의 공장부지 매입을 중개하는 과정에서 피고인을 알게 되었는데, 2008. 4.경부터 공소외 3 주식회사의 부사장으로 행세하면서 공소외 3 주식회사의 사업자금을 조달하는 역할을 하였던 사실, ② 피해자 공소외 1은 공소외 4, 공소외 5를 통하여 공소외 6 회계법인의 상무였던 공소외 7을 피고인에게 소개하여 주었으며, 그에 따라 공소외 3 주식회사는 2008. 5. 18.경 공소외 6 회계법인 측과 금융자문계약을 체결하기도 하였던 사실, ③ 피해자 공소외 1은 2008. 5. 26.경 위 공소외 4, 공소외 5와 더불어 피고인과 업무약정을 체결하였는데, 위 업무약정에 의하면 위 3인 중 1인이 대리점 모집을 통하여 공소외 3 주식회사의 자금을 유치할 경우에는 입금된 금액의 10%를 성과급으로 지급받을 수 있었던 사실, ④ 피해자 공소외 1은 2008. 6.경 피해자 공소외 8을 피고인에게 소개하였고, 그에 따라 위 공소외 8은 2008. 7. 10.경 공소외 3 주식회사와 대리점계약을 체결하였는데, 피해자 공소외 1은 위 공소외 8이 대리점계약의 보증금 명목으로 공소외 3 주식회사에 교부한 자금에 대하여도 위 업무약정에 따른 성과급을 지급받았던 사실, ⑤ 한편 피해자 공소외 1은 공소외 3 주식회사의 사업자금 조달을 위하여 씨티은행 지점장 출신인 피해자 공소외 2를 피",
+            "sourceUrl": "https://www.law.go.kr/precInfoP.do?precSeq=158543",
+            "citation": "사기 · 대법원 2011도8829 판결 원문 · 원문 구간 4",
+            "sourceSha256": "adce7bd3b278ad739f92e76e1b7bc3891b7aabd1e365b6fbcf97e8292f283172",
+            "score": 0.3343,
+            "description": "다국어 의미·형태소 유사도 · 법률 적용 가능성 점수 아님"
+          }
+        ],
+        "model": "Kiwi + 다국어 E5 + 학습 분류기",
+        "notice": "분류 점수는 내부 상대 점수입니다. 사건의 진위·법적 책임을 판정하지 않습니다."
+      },
+      "date": "2026-11-19",
+      "sha256": "76a8c4f0dd750166a90a60917ef8b48b4dcf6dc6291a514564c254cc9d76a8f4"
+    }
+  ]
+}

@@ -9,6 +9,8 @@ export interface NavigationInput {
 
 const PUBLIC_PATHS = new Set(["/", "/login", "/register"]);
 const PROTECTED_PREFIXES = [
+  "/link-google",
+  "/vault",
   "/dashboard",
   "/cases",
   "/settings",
@@ -37,6 +39,7 @@ export class AuthNavigationPolicy {
 
   normalizeReturnPath(value: unknown) {
     if (typeof value !== "string" || value.length === 0) return "/dashboard";
+    if (value.includes("\\") || /[\u0000-\u001f]/.test(value)) return "/dashboard";
     if (!value.startsWith("/") || value.startsWith("//")) return "/dashboard";
     if (
       value.startsWith("/api/") ||

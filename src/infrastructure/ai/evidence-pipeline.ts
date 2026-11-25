@@ -1,3 +1,4 @@
+import {localPrivacy} from "../security/AccountPrivacy";
 import { createHash, randomUUID } from "node:crypto";
 import { createContainer } from "../di/container";
 import {
@@ -68,6 +69,7 @@ export async function analyzeEvidence(
   e: Evidence,
   force = false,
 ): Promise<EvidenceProgress> {
+  if(localPrivacy())throw Error("이전 원본의 서버 분석을 중단했습니다. 기기 보관함으로 가져와 주세요.");
   const lease = randomUUID();
   let job:EvidenceProgress;
   try {

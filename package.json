@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "next dev -H 127.0.0.1",
-    "build": "prisma generate && next build",
+    "build": "node scripts/prepare-browser-ai.mjs && prisma generate && next build",
     "start": "next start -H 127.0.0.1",
     "preview": "next start",
     "clean": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\"",
     "lint": "tsc --noEmit",
-    "test": "node --test --import tsx src/domain/services/domain-services.test.ts src/application/services/auth-navigation-policy.test.ts src/application/services/auth-service.test.ts src/application/services/memory-integration-service.test.ts src/infrastructure/ai/mock-ai-service.test.ts src/infrastructure/storage/local-storage.test.ts src/domain/services/evidence-graph.test.ts src/infrastructure/security/google-identity.test.ts src/infrastructure/storage/byte-range.test.ts src/domain/services/relationship-graph.test.ts src/domain/services/diagram.test.ts",
+    "test": "node --test --import tsx src/domain/services/domain-services.test.ts src/application/services/auth-navigation-policy.test.ts src/application/services/auth-service.test.ts src/application/services/memory-integration-service.test.ts src/infrastructure/ai/mock-ai-service.test.ts src/infrastructure/storage/local-storage.test.ts src/domain/services/evidence-graph.test.ts src/infrastructure/security/google-identity.test.ts src/infrastructure/storage/byte-range.test.ts src/domain/services/relationship-graph.test.ts src/domain/services/diagram.test.ts src/domain/services/private-data.test.ts src/domain/services/case-index.test.ts src/infrastructure/ai/remote-worker.test.ts",
     "check:local": "node scripts/check-local.mjs",
     "ai:train": "node scripts/python.mjs train.py",
     "ai:semantic": "node scripts/python.mjs train_semantic.py",
@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.170",
+    "@huggingface/transformers": "^3.8.1",
     "@prisma/client": "^5.11.0",
     "@tailwindcss/postcss": "^4.2.4",
     "@vercel/blob": "^2.9.0",
@@ -35,16 +36,22 @@
     "date-fns": "^4.1.0",
     "jose": "^6.2.3",
     "lucide-react": "^0.546.0",
+    "mammoth": "^1.11.0",
     "next": "^16.2.4",
+    "pdfjs-dist": "^5.4.149",
     "prisma": "^5.11.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "tailwind-merge": "^3.5.0",
-    "zod": "^4.3.6",
+    "tesseract.js": "^6.0.1",
+    "zod": "^4.6.6",
     "zustand": "^5.0.12"
   },
   "overrides": {
-    "postcss": "^8.5.10"
+    "postcss": "^8.5.10",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.6",
+    "esbuild": "^0.28.1"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

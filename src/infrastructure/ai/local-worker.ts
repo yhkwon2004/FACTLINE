@@ -105,6 +105,7 @@ export async function localAI<T>(
   });
 }
 export interface Candidate {
+  sourceSpan?: { start: number; end: number };
   dateSource?:string;
   audioRange?:{start:number;end:number;approximate:boolean};
   isApproximateTime?: boolean;

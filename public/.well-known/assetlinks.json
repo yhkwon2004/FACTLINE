@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.yhkwon2004.eumlog",
+      "sha256_cert_fingerprints": [
+        "4F:05:F7:5D:0F:68:20:1E:B9:09:D0:A8:9A:F2:22:14:C4:C1:6E:1F:3E:5E:C3:E9:BB:61:7F:61:57:85:81:28"
+      ]
+    }
+  }
+]

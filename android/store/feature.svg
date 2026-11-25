@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 500" width="1024" height="500">
+  <rect width="1024" height="500" fill="#eff7f4"/>
+  <g fill="#193e3a" font-family="'Malgun Gothic',sans-serif">
+    <text x="74" y="160" font-size="29" font-weight="700">이음로그</text>
+    <text x="72" y="238" font-size="52" font-weight="700">흩어진 기록을</text>
+    <text x="72" y="308" font-size="52" font-weight="700">한눈에.</text>
+  </g>
+  <g fill="none" stroke-width="5">
+    <path d="M554 196 H653 Q670 196 670 211 V290 Q670 308 690 308 H776" stroke="#9fbcba"/>
+    <path d="M632 115 V169 Q632 196 656 196 H842" stroke="#5daca1"/>
+    <path d="M776 308 H838 Q855 308 855 331 V373" stroke="#83a8a2" stroke-dasharray="8 7"/>
+  </g>
+  <g stroke-width="3">
+    <circle cx="552" cy="196" r="32" fill="#fff" stroke="#75a69e"/>
+    <circle cx="632" cy="115" r="24" fill="#a8d1c7" stroke="#76aa9c"/>
+    <rect x="755" y="270" width="86" height="75" rx="18" fill="#fff" stroke="#86a7a4"/>
+    <circle cx="844" cy="196" r="36" fill="#26766d" stroke="#236e66"/>
+    <circle cx="855" cy="377" r="23" fill="#e2efe8" stroke="#87b7a9"/>
+  </g>
+  <g fill="#e6faf2"><circle cx="844" cy="185" r="9"/><path d="M828 212 Q830 190 844 194 Q859 191 861 212Z"/></g>
+  <g stroke="#99b9b2" stroke-width="4" stroke-linecap="round"><path d="M775 298H821"/><path d="M775 310H813"/><path d="M775 322H801"/></g>
+</svg>

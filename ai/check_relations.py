@@ -14,3 +14,9 @@ r=one('🙂 김민수는 박지훈에게 연락했다.'); raw='🙂 김민수는
 for r in extract_relations('김민수는 박지훈에게 5만원을 송금했다. 김민수는 박지훈을 때리지 않았다.',k):
  assert r['actor'] in r['quote'] and (not r['target'] or r['target'] in r['quote']) and r['action'] in r['quote']
 print('PASS actual learned relation inference, source spans, passive direction, denial, planned actions and Unicode offsets')
+
+r=one('김민수는 박지훈을 밀치지 않았다고 말했다.');assert r['polarity']=='denied' and r['target']=='박지훈',r
+r=one('김민수는 박지훈에게 돈을 보내겠다고 말했다.');assert r['polarity']=='planned' and r['target']=='박지훈',r
+r=one('김민수는 박지훈에게 가만두지 않겠다고 협박했다.');assert r['polarity']!='denied',r
+r=one('김민수는 박지훈이 돈을 받았다는 이야기를 들었다.');assert r['polarity']=='uncertain' and r['target'] is None,r
+print('PASS direct denial, promise recipient, negative threat wording and indirect speech')

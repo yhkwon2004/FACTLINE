@@ -19,6 +19,15 @@ tsconfig.tsbuildinfo
 .data/
 ai/models/*
 !ai/models/adapter/
+!ai/models/dialogue-adapter/
+ai/models/dialogue-adapter/*
+!ai/models/dialogue-adapter/adapter_config.json
+!ai/models/dialogue-adapter/adapter_model.safetensors
+!ai/models/korean-pairs/
+ai/models/korean-pairs/*
+!ai/models/korean-pairs/adapter_config.json
+!ai/models/korean-pairs/adapter_model.safetensors
+!ai/models/korean-pairs/head.pt
 !ai/models/semantic_classifier.pkl
 !ai/models/relation_classifier.pkl
 !ai/models/relation-metrics.json
@@ -27,3 +36,8 @@ ai/models/*
 !ai/models/metrics.json
 !ai/models/training-run.json
 ai/__pycache__/
+
+public/device-speech.js
+public/onnx/
+public/ocr/
+public/pdf.worker.min.mjs
