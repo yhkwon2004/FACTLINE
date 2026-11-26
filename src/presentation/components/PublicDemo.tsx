@@ -328,6 +328,7 @@ export function PublicDemo({mobile=false}:{mobile?:boolean}) {
       </details>
       <footer>
         <a href={mobile?"/demo?view=desktop":"/demo?view=mobile"}>{mobile?"웹 작업대로 보기":"모바일 수첩으로 보기"}</a>
+        <Link href="/demo/training#structure-order">관계도 학습 기록</Link>
         <p>모든 인물과 기록은 가상입니다. 편집 내용은 새로고침하면 초기화됩니다.</p>
         <Link href="/register">
           Google로 내 보관함 시작하기 <ArrowRight size={16} />

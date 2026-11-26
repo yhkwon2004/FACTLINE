@@ -62,7 +62,7 @@
 
 **AI 정렬**에서는 브라우저의 신경망이 같은 단에 놓일 요소의 순서를 제안합니다. 카드 사이를 통과하는 선과 교차가 적도록 순서를 고른 뒤, 카드와 그룹 제목을 피해 화살표를 꺾고 같은 두 사람을 잇는 여러 선은 서로 다른 지점에 연결합니다. 직접 만든 그룹은 내부 배치를 유지하며, 저장한 관계도는 다시 열어 이어서 편집할 수 있습니다. [배치 코드](src/domain/services/StructureLayout.ts) · [화살표 경로](src/domain/services/DiagramLayout.ts) · [편집 설계](docs/precision-design.md)
 
-합성 그래프 480개의 노드 순서를 바꾼 12,396개 예시로 배치 순서 모델을 학습했습니다. 학습에서 제외한 그래프 120개에서 카드 중심을 직선으로 이었을 때 평균 교차가 초기 순서의 **1.77회에서 1.01회**로 줄었습니다. 최종 화면의 꺾은선이나 실제 사용자의 판독 속도는 이 수치에 포함되지 않습니다. [학습 코드](ai/train_structure_order.py) · [평가 결과와 가중치 해시](ai/training/structure-order-run.json) · [학습 화면](https://eumlog-evidence.vercel.app/models)
+합성 그래프 480개의 노드 순서를 바꾼 12,396개 예시로 배치 순서 모델을 학습했습니다. 학습에서 제외한 그래프 120개에서 카드 중심을 직선으로 이었을 때 평균 교차가 초기 순서의 **1.77회에서 1.01회**로 줄었습니다. 최종 화면의 꺾은선이나 실제 사용자의 판독 속도는 이 수치에 포함되지 않습니다. [학습 코드](ai/train_structure_order.py) · [평가 결과와 가중치 해시](ai/training/structure-order-run.json) · [학습 화면](https://eumlog-evidence.vercel.app/demo/training#structure-order)
 
 ## 자료가 이동하는 경로
 
@@ -100,7 +100,7 @@ flowchart LR
 
 ![Qwen3-1.7B 한국어 응답 어댑터 실제 학습 손실, 1,280단계](public/demo/dialogue-loss.svg)
 
-곡선은 실행 로그에 저장된 단계별 학습 손실입니다. 마지막 20단계 평균은 0.00923입니다. 같은 작은 자료를 반복하면 손실이 낮아질 수 있습니다. 법률 관련 질문을 처리하는 별도 경로는 확인할 항목과 공식 출처를 제시합니다. [실제 학습 입력·정답](ai/training/dialogue-samples.json) · [학습 원본 로그](ai/training/dialogue-run.json) · [학습 화면 열기](https://eumlog-evidence.vercel.app/models)
+곡선은 실행 로그에 저장된 단계별 학습 손실입니다. 마지막 20단계 평균은 0.00923입니다. 같은 작은 자료를 반복하면 손실이 낮아질 수 있습니다. 법률 관련 질문을 처리하는 별도 경로는 확인할 항목과 공식 출처를 제시합니다. [실제 학습 입력·정답](ai/training/dialogue-samples.json) · [학습 원본 로그](ai/training/dialogue-run.json) · [학습 화면 열기](https://eumlog-evidence.vercel.app/demo/training)
 
 Qwen3-1.7B 기본 모델은 Apache 2.0, KLUE RE는 CC BY-SA 4.0을 적용합니다. KLUE에서 변형한 120개 문답의 원본 GUID와 출처를 보존하며 파생 어댑터·실험 가중치의 배포 조건을 명시했습니다. [모델·자료 이용조건](ai/MODEL-NOTICES.md) · [데이터 카드](ai/data/README.md) · [전체 학습 실행 기록과 재현 방법](ai/training/README.md) · [기술 구조](docs/architecture.md) · [검증 기록](docs/verification.md)
 
