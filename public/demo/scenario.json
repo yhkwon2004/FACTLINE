@@ -232,7 +232,7 @@
             "approximateTimeText": "2026년 11월 16일 오후 2시 10분",
             "location": null,
             "actor": "김민수",
-            "action": "맺었다",
+            "action": "계약을 맺었다",
             "damage": null,
             "audioRange": null
           }
@@ -247,12 +247,12 @@
             "targetKind": "person",
             "actorAmbiguous": false,
             "targetAmbiguous": false,
-            "action": "맺었다",
+            "action": "계약을 맺었다",
             "kind": "work",
             "typeLabel": "소속·업무",
             "score": 0.456,
             "polarity": "reported",
-            "directed": true,
+            "directed": false,
             "amount": null,
             "quote": "2026년 11월 16일 오후 2시 10분 김민수는 이서연과 행사 제작 계약을 맺었다.",
             "sourceSpan": {

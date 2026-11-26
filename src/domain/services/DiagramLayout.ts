@@ -1,5 +1,6 @@
 import model from "./layout-ranker.json";
 import coordinates from "./layout-generator.json";
+import {structureDocument} from "./StructureLayout";
 import type {DiagramDocument} from "./DiagramDocument";
 import type {RelationshipMap,RelationshipEdge} from "./RelationshipGraph";
 export type Point={x:number;y:number};
@@ -73,37 +74,235 @@ export function composeBoard(graph:RelationshipMap,document:DiagramDocument){
  const rawNodes=[...graph.nodes.map(n=>({id:n.id,label:n.label,kind:n.kind==="action"?"note" as const:n.kind,ambiguous:n.ambiguous,manual:false})),...document.manualNodes.map(n=>({...n,ambiguous:false,manual:true}))];
  const rawEdges=[...graph.edges,...document.manualEdges.map(e=>({id:e.id,source:e.source,target:e.target,action:e.label,kind:"manual",amount:null,polarity:"reported" as const,directed:e.directed,confirmed:false,quote:"",evidenceId:null,candidateId:null,score:0}))];
  const visible=rawNodes.filter(n=>!document.nodes[n.id]?.hidden),visibleIds=new Set(visible.map(n=>n.id)),rawLinks=rawEdges.filter(e=>visibleIds.has(e.source)&&visibleIds.has(e.target)&&!document.edges[e.id]?.hidden);
- const suggested=proposeLayouts(visible,rawLinks)[0]?.positions??{};
+ const suggested=visible.some(n=>!document.nodes[n.id])?proposeLayouts(visible,rawLinks)[0]?.positions??{}:{};
  const nodes:BoardNode[]=visible.map(n=>{const patch=document.nodes[n.id];return {id:n.id,label:patch?.label??n.label,originalLabel:n.label,subtitle:patch?.subtitle??(n.ambiguous?"별칭 · 신원 미확인":""),kind:patch?.shape??n.kind,color:patch?.color??(n.kind==="organization"?"blue":n.kind==="note"?"amber":"mint"),manual:n.manual,portraitEvidenceId:patch?.portraitEvidenceId,groupId:patch?.groupId,x:patch?.x??suggested[n.id]?.x??200,y:patch?.y??suggested[n.id]?.y??200};});
  // Keep saved positions fixed while new evidence nodes find an unoccupied nearby slot.
  const placed=nodes.filter(n=>document.nodes[n.id]);for(const n of nodes.filter(n=>!document.nodes[n.id])){let tries=0;while(placed.some(p=>Math.abs(p.x-n.x)<210&&Math.abs(p.y-n.y)<230)&&tries++<180){n.x+=260;if(tries%4===0){n.x-=1040;n.y+=260;}}placed.push(n);}
- const edges:BoardEdge[]=rawLinks.map(e=>{const p=document.edges[e.id];return {...e,label:p?.label??e.action,detail:p?.detail??(e.amount??""),color:p?.color??(e.polarity==="denied"?"rose":e.kind==="payment"?"amber":e.kind==="family"?"violet":"slate"),manual:e.kind==="manual",dashed:p?.dashed??(!e.confirmed||e.polarity!=="reported"),route:p?.route??"elbow"};});
+ const edges:BoardEdge[]=rawLinks.map(e=>{const p=document.edges[e.id];return {...e,label:p?.label??e.action,detail:p?.detail??[e.amount,"when" in e?e.when:undefined].filter(Boolean).join(" · "),color:p?.color??(e.polarity==="denied"?"rose":e.kind==="payment"?"amber":e.kind==="family"?"violet":"slate"),manual:e.kind==="manual",dashed:p?.dashed??(!e.confirmed||e.polarity!=="reported"),route:p?.route??"elbow"};});
  return {nodes,edges};
+}
+export function arrangeDiagram(graph:RelationshipMap, document:DiagramDocument):DiagramDocument {
+ return structureDocument(composeBoard(graph,document),document);
 }
 export function boardBounds(nodes:Point[],groups:Array<{x:number;y:number;width:number;height:number}>=[]){
  if(!nodes.length&&!groups.length)return {x:0,y:0,width:1100,height:720};
  const left=[...nodes.map(n=>n.x-120),...groups.map(g=>g.x)],top=[...nodes.map(n=>n.y-120),...groups.map(g=>g.y)],right=[...nodes.map(n=>n.x+120),...groups.map(g=>g.x+g.width)],bottom=[...nodes.map(n=>n.y+145),...groups.map(g=>g.y+g.height)];
  const x=Math.min(...left)-55,y=Math.min(...top)-55;return {x,y,width:Math.max(400,Math.max(...right)-x+55),height:Math.max(350,Math.max(...bottom)-y+55)};
 }
-const pathLength=(p:Point[])=>p.slice(1).reduce((sum,v,i)=>sum+distance(p[i],v),0);
-function hitsNode(points:Point[],n:BoardNode){return points.slice(1).some((b,i)=>{const a=points[i];return a.x===b.x?a.x>n.x-105&&a.x<n.x+105&&Math.max(a.y,b.y)>n.y-65&&Math.min(a.y,b.y)<n.y+120:a.y===b.y&&a.y>n.y-65&&a.y<n.y+120&&Math.max(a.x,b.x)>n.x-105&&Math.min(a.x,b.x)<n.x+105;});}
-export function boardRoutes(nodes:BoardNode[],edges:BoardEdge[],document:DiagramDocument){
- const byId=new Map(nodes.map(n=>[n.id,n])),labels:Point[]=[];
- function portOffset(nodeId:string,edgeId:string,terminal:boolean,horizontal:boolean){const related=edges.filter(e=>{if((terminal?e.target:e.source)!==nodeId)return false;const a=byId.get(e.source)!,b=byId.get(e.target)!;return (Math.abs(b.x-a.x)>=Math.abs(b.y-a.y))===horizontal;});return clampPort((related.findIndex(e=>e.id===edgeId)-(related.length-1)/2)*22);}
- function clampPort(v:number){return Math.max(-30,Math.min(30,v));}
- return edges.map(e=>{const a=byId.get(e.source)!,b=byId.get(e.target)!,patch=document.edges[e.id],dx=b.x-a.x,dy=b.y-a.y;
- const horizontal=Math.abs(dx)>=Math.abs(dy),sign=horizontal?Math.sign(dx||1):Math.sign(dy||1),padA=a.kind==="note"?100:58,padB=b.kind==="note"?100:58;
- const startOffset=portOffset(a.id,e.id,false,horizontal),endOffset=portOffset(b.id,e.id,true,horizontal);
- const start=horizontal?{x:a.x+sign*padA,y:a.y+startOffset}:{x:a.x+startOffset,y:a.y+(sign>0?120:-65)},end=horizontal?{x:b.x-sign*padB,y:b.y+endOffset}:{x:b.x+endOffset,y:b.y+(sign>0?-65:120)};
- let points:Point[];
- if(e.route==="straight")points=[start,end];else{const lane=horizontal?patch?.viaX:patch?.viaY,mid=horizontal?(start.x+end.x)/2:(start.y+end.y)/2;
- const options=(lane!==undefined?[lane]:[mid,mid-90,mid+90,Math.min(horizontal?a.x:a.y,horizontal?b.x:b.y)-180,Math.max(horizontal?a.x:a.y,horizontal?b.x:b.y)+180]).map(v=>horizontal?[start,{x:v,y:start.y},{x:v,y:end.y},end]:[start,{x:start.x,y:v},{x:end.x,y:v},end]);
- points=options.sort((p,q)=>{const cost=(v:Point[])=>nodes.filter(n=>n.id!==a.id&&n.id!==b.id&&hitsNode(v,n)).length*10000+pathLength(v);return cost(p)-cost(q);})[0];}
- let longest=0,index=0;for(let i=0;i<points.length-1;i++){const length=distance(points[i],points[i+1]);if(length>longest){longest=length;index=i;}}
- const mid={x:(points[index].x+points[index+1].x)/2,y:(points[index].y+points[index+1].y)/2};let label={x:patch?.labelX??mid.x,y:patch?.labelY??mid.y};
- if(patch?.labelX===undefined||patch?.labelY===undefined){let best=Infinity;for(const ox of [0,-100,100,-190,190])for(const oy of [0,-60,60,-90,90,-120,120]){const p={x:mid.x+ox,y:mid.y+oy},collision=nodes.filter(n=>n.kind==="person"?((Math.abs(n.x-p.x)<157&&Math.abs(n.y-p.y)<86)||(Math.abs(n.x-p.x)<185&&p.y>n.y+42&&p.y<n.y+148)):(Math.abs(n.x-p.x)<205&&p.y>n.y-98&&p.y<n.y+125)).length+labels.filter(l=>Math.abs(l.x-p.x)<195&&Math.abs(l.y-p.y)<66).length,cost=collision*10000+distance(p,mid);if(cost<best){best=cost;label=p;}}}
- labels.push(label);return {id:e.id,points,label,handle:points.length>2?{x:(points[1].x+points[2].x)/2,y:(points[1].y+points[2].y)/2}:mid,path:points.map((p,i)=>(i?"L":"M")+p.x+","+p.y).join(" ")};
- });
+type Rect = { left: number; top: number; right: number; bottom: number };
+type Segment = { a: Point; b: Point };
+const overlaps = (a: Rect, b: Rect) =>
+  a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+const clampTo = (value: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, value));
+const centeredRect = (p: Point, width: number, height: number): Rect => ({
+  left: p.x - width / 2, right: p.x + width / 2, top: p.y - height / 2, bottom: p.y + height / 2,
+});
+function segmentHits(a: Point, b: Point, box: Rect) {
+  if (Math.max(a.x,b.x) <= box.left || Math.min(a.x,b.x) >= box.right ||
+      Math.max(a.y,b.y) <= box.top || Math.min(a.y,b.y) >= box.bottom) return false;
+  if (a.x === b.x || a.y === b.y) return true;
+  const x1=(box.left-a.x)/(b.x-a.x), x2=(box.right-a.x)/(b.x-a.x);
+  const y1=(box.top-a.y)/(b.y-a.y), y2=(box.bottom-a.y)/(b.y-a.y);
+  return Math.max(0,Math.min(x1,x2),Math.min(y1,y2)) < Math.min(1,Math.max(x1,x2),Math.max(y1,y2));
+}
+function cleanRoute(points: Point[]) {
+  const result: Point[] = [];
+  for (const p of points) {
+    const b=result.at(-1), a=result.at(-2);
+    if (b?.x === p.x && b.y === p.y) continue;
+    if (a && b && (a.x === b.x && b.x === p.x && (b.y-a.y)*(p.y-b.y)>=0 ||
+                   a.y === b.y && b.y === p.y && (b.x-a.x)*(p.x-b.x)>=0)) result.pop();
+    result.push(p);
+  }
+  return result;
+}
+function crossingCost(a: Point, b: Point, other: Segment) {
+  const {a:c,b:d}=other;
+  if (Math.min(a.x,b.x)>Math.max(c.x,d.x) || Math.max(a.x,b.x)<Math.min(c.x,d.x) ||
+      Math.min(a.y,b.y)>Math.max(c.y,d.y) || Math.max(a.y,b.y)<Math.min(c.y,d.y)) return 0;
+  const horizontal=a.y===b.y && c.y===d.y && a.y===c.y;
+  const vertical=a.x===b.x && c.x===d.x && a.x===c.x;
+  if (horizontal || vertical) {
+    const k=horizontal?"x":"y";
+    const shared=Math.min(Math.max(a[k],b[k]),Math.max(c[k],d[k]))-Math.max(Math.min(a[k],b[k]),Math.min(c[k],d[k]));
+    return shared>0 ? 140+shared*3 : 0;
+  }
+  return orientation(a,b,c)*orientation(a,b,d)<0 && orientation(c,d,a)*orientation(c,d,b)<0 ? 60 : 0;
+}
+function closestPoint(p: Point, a: Point, b: Point): Point {
+  const dx=b.x-a.x, dy=b.y-a.y;
+  const t=clampTo(((p.x-a.x)*dx+(p.y-a.y)*dy)/(dx*dx+dy*dy || 1),0,1);
+  return {x:a.x+t*dx,y:a.y+t*dy};
+}
+function caption(edge: BoardEdge) {
+  const labelLines=wrapDiagramText(edge.label,10,2);
+  const detailLine=edge.detail ? wrapDiagramText(edge.detail,14,1)[0] : "";
+  const qualifier=edge.manual?"직접 작성":({reported:"",denied:"부인 진술",planned:"예정·가정",uncertain:"전언·불확실"})[edge.polarity];
+  function width(text: string, font: number) {
+    if (measuring) {
+      measuring.font=`650 ${font}px Pretendard, "Malgun Gothic", sans-serif`;
+      return measuring.measureText(text).width;
+    }
+    return Array.from(diagramSegmenter.segment(text),part=>/^[\x20-\x7E]$/.test(part.segment)?font*.68:font).reduce((a,b)=>a+b,0);
+  }
+  const labelWidth=Math.ceil(Math.max(38,...labelLines.map(s=>width(s,18)),width(detailLine,14),width(qualifier,13)))+24;
+  return {labelLines,detailLine,labelWidth,labelHeight:14+labelLines.length*22+(detailLine?17:0)+(qualifier?17:0)};
+}
+
+export function boardRoutes(nodes: BoardNode[], edges: BoardEdge[], document: DiagramDocument) {
+  const byId=new Map(nodes.map(n=>[n.id,n]));
+  const obstacles=nodes.map(n=>({left:n.x-99,right:n.x+99,top:n.y-75,bottom:n.y+95}));
+  for (const g of document.groups) obstacles.push({left:g.x,top:g.y,right:g.x+g.width,bottom:g.y+48});
+  const captions=edges.map(caption);
+  edges.forEach((edge,i)=>{
+    const patch=document.edges[edge.id];
+    if(patch?.labelX!==undefined && patch.labelY!==undefined) {
+      const c=captions[i];
+      obstacles.push(centeredRect({x:patch.labelX,y:patch.labelY},c.labelWidth+12,c.labelHeight+10));
+    }
+  });
+  const ends=edges.map(edge=>{
+    const a=byId.get(edge.source)!, b=byId.get(edge.target)!;
+    const horizontal=Math.abs(b.x-a.x)>=Math.abs(b.y-a.y);
+    const sign=Math.sign(horizontal?b.x-a.x:b.y-a.y)||1;
+    return {a,b,horizontal,sign};
+  });
+  // Incoming and outgoing tips share a physical side. Distribute both on that side in reading order.
+  const fans=new Map<string,Array<{i:number;end:0|1;near:number}>>();
+  ends.forEach(({a,b,horizontal,sign},i)=>{
+    ([0,1] as const).forEach(end=>{
+      const n=end?b:a, other=end?a:b, key=JSON.stringify([n.id,horizontal,end?-sign:sign]);
+      const fan=fans.get(key)??[];
+      fan.push({i,end,near:horizontal?other.y:other.x});
+      fans.set(key,fan);
+    });
+  });
+  const offsets=edges.map(()=>[0,0]);
+  for (const fan of fans.values()) {
+    fan.sort((a,b)=>a.near-b.near || (edges[a.i].id<edges[b.i].id?-1:1));
+    const step=Math.min(21,96/Math.max(1,fan.length-1));
+    fan.forEach((p,j)=>{offsets[p.i][p.end]=(j-(fan.length-1)/2)*step;});
+  }
+  const used: Segment[]=[];
+  const routes=edges.map((edge,i)=>{
+    const {a,b,horizontal,sign}=ends[i], patch=document.edges[edge.id];
+    const point=(u:number,v:number):Point=>horizontal?{x:u,y:v}:{x:v,y:u};
+    const u=(p:Point)=>horizontal?p.x:p.y, v=(p:Point)=>horizontal?p.y:p.x;
+    const port=(n:BoardNode,side:number,offset:number)=>horizontal
+      ? {x:n.x+side*93,y:n.y+10+offset}
+      : {x:n.x+offset,y:n.y+(side<0?-69:89)};
+    const start=port(a,sign,offsets[i][0]), end=port(b,-sign,offsets[i][1]);
+    const from=u(start)+sign*24, to=u(end)-sign*24, sv=v(start), ev=v(end);
+    const fromStub=point(from,sv), toStub=point(to,ev), middle=(from+to)/2;
+    const lane=horizontal?patch?.viaX:patch?.viaY, across=horizontal?patch?.viaY:patch?.viaX;
+    const horizontalLane=(along:number)=>cleanRoute([start,fromStub,point(along,sv),point(along,ev),toStub,end]);
+    const crossLane=(side:number)=>cleanRoute([start,fromStub,point(from,side),point(to,side),toStub,end]);
+    function cost(path:Point[], limit:number) {
+      let total=(path.length-2)*19;
+      for(let j=1;j<path.length;j++){
+        const p=path[j-1], q=path[j]; total+=distance(p,q);
+        for(let k=0;k<obstacles.length;k++){
+          if (j===1 && nodes[k]?.id===a.id || j===path.length-1 && nodes[k]?.id===b.id) continue;
+          if(segmentHits(p,q,obstacles[k])) total+=1000000;
+        }
+        if(total>=limit) return total;
+        for(const line of used) total+=crossingCost(p,q,line);
+        if(total>=limit) return total;
+      }
+      return total;
+    }
+    let points:Point[], handle:Point|undefined;
+    if (edge.route==="straight") points=[start,end];
+    else if (lane!==undefined || across!==undefined) {
+      const main=lane??middle, side=across??(sv+ev)/2;
+      handle=point(main,side);
+      const followsLane=side>=Math.min(sv,ev) && side<=Math.max(sv,ev);
+      points=cleanRoute(followsLane
+        ? [start,point(main,sv),point(main,ev),end]
+        : [start,point(main,sv),handle,point(to,side),toStub,end]);
+      if(across!==undefined && main>=Math.min(from,to) && main<=Math.max(from,to)){
+        const transverse=crossLane(side);
+        if(cost(transverse,Infinity)<cost(points,Infinity)) points=transverse;
+      }
+    } else {
+      // ponytail: score single-track detours for interactive dragging; a maze of overlapping manual cards can require a visibility-graph router.
+      let best=horizontalLane(middle), bestCost=cost(best,Infinity);
+      function consider(path:Point[]) {const c=cost(path,bestCost); if(c<bestCost){bestCost=c;best=path;}}
+      if (bestCost>distance(start,end)+.01) {
+        for(const main of [from,to,middle-32,middle+32]) consider(horizontalLane(main));
+        const rails=new Set([(sv+ev)/2,Math.min(sv,ev)-32,Math.max(sv,ev)+32]);
+        const near=obstacles.filter(r=>horizontal
+          ? r.right>Math.min(from,to) && r.left<Math.max(from,to)
+          : r.bottom>Math.min(from,to) && r.top<Math.max(from,to));
+        for(const r of near) {
+          rails.add((horizontal?r.top:r.left)-12);
+          rails.add((horizontal?r.bottom:r.right)+12);
+        }
+        for(const rail of [...rails].sort((x,y)=>Math.abs(x-(sv+ev)/2)-Math.abs(y-(sv+ev)/2))) consider(crossLane(rail));
+      }
+      points=best;
+    }
+    if(points.length<2) points=[start,end];
+    const segments=points.slice(1).map((b,j)=>({a:points[j],b}));
+    used.push(...segments);
+    const longest=segments.reduce((best,s)=>distance(s.a,s.b)>distance(best.a,best.b)?s:best,segments[0]);
+    handle??={x:(longest.a.x+longest.b.x)/2,y:(longest.a.y+longest.b.y)/2};
+    return {id:edge.id,points,segments,handle,path:points.map((p,i)=>(i?"L":"M")+p.x+","+p.y).join(" "),...captions[i]};
+  });
+
+  const occupied=obstacles.slice();
+  return routes.map(r=>{
+    const patch=document.edges[r.id], pinned=patch?.labelX!==undefined && patch.labelY!==undefined;
+    let best=Infinity, label=r.handle, anchor=r.handle;
+    const otherLines=used.filter(s=>!r.segments.includes(s));
+    function candidate(x:number,y:number,mid:Point,a:Point,b:Point) {
+      const p={x:patch?.labelX??x,y:patch?.labelY??y};
+      const foot=closestPoint(p,a,b);
+      const box=centeredRect(p,r.labelWidth+8,r.labelHeight+6);
+      let score=distance(p,foot)+distance(mid,foot)*.12;
+      if (!pinned) {
+        for(const ob of occupied) if(overlaps(box,ob)) score+=100000;
+        if(score>=best) return;
+        for(const s of otherLines) if(segmentHits(s.a,s.b,box)) score+=140;
+        for(const s of r.segments) if(segmentHits(s.a,s.b,box)) score+=100;
+      }
+      if(score<best){best=score;label=p;anchor=foot;}
+    }
+    const segments=[...r.segments].sort((x,y)=>distance(y.a,y.b)-distance(x.a,x.b));
+    for(const {a,b} of segments) {
+      const mid={x:(a.x+b.x)/2,y:(a.y+b.y)/2};
+      const horizontal=Math.abs(b.x-a.x)>=Math.abs(b.y-a.y);
+      for(const t of [.5,.28,.72,.12,.88]) {
+        const x=a.x+(b.x-a.x)*t, y=a.y+(b.y-a.y)*t;
+        for(const level of [-1,1,-2,2,0]){
+          const offset=level*((horizontal?r.labelHeight:r.labelWidth)/2+10);
+          candidate(x+(horizontal?0:offset),y+(horizontal?offset:0),mid,a,b);
+        }
+      }
+    }
+    // If every nearby caption slot is occupied, walk the blocked intervals to the nearest free gap.
+    if(best>=100000 && !pinned) {
+      const halfX=r.labelWidth/2+5, halfY=r.labelHeight/2+4;
+      for(const {a,b} of segments){
+        const mid={x:(a.x+b.x)/2,y:(a.y+b.y)/2};
+        for(const axis of ["x","y"] as const){
+          if((axis==="x"?patch?.labelX:patch?.labelY)!==undefined) continue;
+          const fixed=axis==="x"?(patch?.labelY??mid.y):(patch?.labelX??mid.x);
+          const intervals=occupied.filter(o=>axis==="x"
+            ? fixed>o.top-halfY && fixed<o.bottom+halfY : fixed>o.left-halfX && fixed<o.right+halfX)
+            .map(o=>axis==="x"?[o.left-halfX,o.right+halfX]:[o.top-halfY,o.bottom+halfY]);
+          for(const sign of [-1,1]){
+            let pos=mid[axis];
+            intervals.sort((l,r)=>sign>0?l[0]-r[0]:r[1]-l[1]);
+            for(const [lo,hi] of intervals) if(pos>lo && pos<hi) pos=sign>0?hi:lo;
+            candidate(axis==="x"?pos:fixed,axis==="y"?pos:fixed,mid,a,b);
+          }
+        }
+      }
+    }
+    if(!pinned) occupied.push(centeredRect(label,r.labelWidth+10,r.labelHeight+8));
+    return {...r,label,anchor};
+  });
 }
 const diagramSegmenter=new Intl.Segmenter('ko',{granularity:'grapheme'});
 let measuring:CanvasRenderingContext2D|null|undefined;

@@ -1,9 +1,21 @@
 export type SourceRelation={id:string;candidateId:string;actor:string;target:string|null;actorKind:"person"|"organization";targetKind?:"person"|"organization"|null;actorAmbiguous?:boolean;targetAmbiguous?:boolean;action:string;kind:string;typeLabel:string;score:number;polarity:"reported"|"denied"|"uncertain"|"planned";directed:boolean;amount:string|null;quote:string;sourceSpan:{start:number;end:number};mentions:Array<{text:string;kind:string;ambiguous:boolean}>;model:string};
 export type RelationshipNode={id:string;label:string;kind:"person"|"organization"|"action";evidenceIds:string[];ambiguous?:boolean;quote?:string};
-export type RelationshipEdge={id:string;source:string;target:string;action:string;kind:string;amount:string|null;polarity:SourceRelation["polarity"];directed:boolean;confirmed:boolean;quote:string;evidenceId:string|null;candidateId:string|null;score:number;audioRange?:{start:number;end:number}};
+export type RelationshipEdge={id:string;source:string;target:string;action:string;kind:string;amount:string|null;when?:string;polarity:SourceRelation["polarity"];directed:boolean;confirmed:boolean;quote:string;evidenceId:string|null;candidateId:string|null;score:number;audioRange?:{start:number;end:number}};
 export type RelationshipMap={nodes:RelationshipNode[];edges:RelationshipEdge[];totalRelations:number;shownRelations:number};
-type Input={id:string;name:string;analysis?:{relations?:SourceRelation[];candidates?:Array<{id:string;quote:string;actor?:string|null;audioRange?:{start:number;end:number}}> }|null};
+type GraphCandidate={id:string;quote:string;actor?:string|null;datetime?:string|null;dateSource?:string;approximateTimeText?:string|null;isApproximateTime?:boolean;audioRange?:{start:number;end:number}};
+type Input={id:string;name:string;analysis?:{relations?:SourceRelation[];candidates?:GraphCandidate[]} |null};
 type Fact={id:string;title:string;rawStatement:string;actor?:string|null;evidenceIds:string[];candidateId?:string};
+const koreanTime = new Intl.DateTimeFormat("sv-SE", {timeZone:"Asia/Seoul", dateStyle:"short", timeStyle:"short"});
+function statementTime(candidate?: GraphCandidate) {
+ if (!candidate) return;
+ const wording = candidate.approximateTimeText?.split(" · ")[0].trim();
+ if (candidate.dateSource === "explicit" && candidate.datetime && candidate.isApproximateTime === false) {
+   const timestamp = Date.parse(candidate.datetime);
+   if (Number.isFinite(timestamp)) return koreanTime.format(timestamp);
+ }
+ // For a partial date or an estimated time keep the source wording, including relative days.
+ if (wording && candidate.quote.includes(wording)) return wording;
+}
 export const participantId=(label:string,kind:"person"|"organization",fileId:string,ambiguous=false)=>
  kind+":"+label.normalize("NFC").trim()+(ambiguous?":"+fileId:"");
 export function relationshipGraph(files:Input[],facts:Fact[]):RelationshipMap {
@@ -18,8 +30,8 @@ export function relationshipGraph(files:Input[],facts:Fact[]):RelationshipMap {
    if(!relation.target)nodes.set(target,{id:target,label:relation.action,kind:"action",evidenceIds:[file.id],quote:relation.quote});
    if(source===target)continue;
    const confirmed=facts.some(f=>f.evidenceIds.includes(file.id)&&f.rawStatement===relation.quote&&(f.candidateId===undefined||f.candidateId===relation.candidateId));
-   const candidate=file.analysis?.candidates?.find(x=>x.id===relation.candidateId);
-   edges.push({id:file.id+":"+relation.id,source,target,action:relation.action,kind:relation.kind,amount:relation.amount,polarity:relation.polarity,directed:relation.target?relation.directed:true,confirmed,quote:relation.quote,evidenceId:file.id,candidateId:relation.candidateId,score:relation.score,audioRange:candidate?.audioRange});
+   const candidate=file.analysis?.candidates?.find(x=>x.id===relation.candidateId && x.quote===relation.quote);
+   edges.push({id:file.id+":"+relation.id,source,target,action:relation.action,kind:relation.kind,amount:relation.amount,when:statementTime(candidate),polarity:relation.polarity,directed:relation.target?relation.directed:true,confirmed,quote:relation.quote,evidenceId:file.id,candidateId:relation.candidateId,score:relation.score,audioRange:candidate?.audioRange});
   }
  }
  // Older approved records remain visible; they do not acquire a guessed recipient or relationship.

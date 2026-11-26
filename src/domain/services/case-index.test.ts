@@ -4,6 +4,7 @@ import { test } from "node:test";
 import { fictionalCase, type FictionalScenario } from "./DeviceWorkspaceState";
 import { indexCase, selectCaseRows } from "./CaseIndex";
 import { anonymize, restoreInspection } from "./PrivateData";
+import { arrangeDiagram, composeBoard } from "./DiagramLayout";
 
 const demo: FictionalScenario = JSON.parse(
   readFileSync(
@@ -11,6 +12,23 @@ const demo: FictionalScenario = JSON.parse(
     "utf8",
   ),
 );
+
+test("the public sample uses generated positions and labels derived from its six source statements", () => {
+  const sample = fictionalCase(demo);
+  const original = sample.diagram.document;
+  assert.deepEqual(original.nodes, {});
+  assert.deepEqual(original.edges, {});
+  const {graph} = indexCase(sample);
+  const arranged = arrangeDiagram(graph, original);
+  const board = composeBoard(graph, arranged);
+  assert.equal(board.nodes.length, graph.nodes.length);
+  assert.deepEqual(board.edges.map(e => [e.id, e.quote]), graph.edges.map(e => [e.id, e.quote]));
+  const transfer = board.edges.find(e => e.amount === "5만원");
+  assert.match(transfer?.detail ?? "", /5만원/);
+  assert.match(transfer?.detail ?? "", /11-17 10:20/);
+  assert.ok(arranged.groups.length > 0);
+  assert.deepEqual(original.nodes, {});
+});
 
 test("the three case axes return original, scoped statements in chronological order", () => {
   const sample = fictionalCase(demo),

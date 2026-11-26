@@ -42,7 +42,6 @@ export function PublicDemo({mobile=false}:{mobile?:boolean}) {
       .then((d: Demo) => {
         snapshot.current = fictionalCase(d).diagram;
         setDemo(d);
-        setSelected(d.files[0].id);
       })
       .catch((e) => {
         if (e.name !== "AbortError") setMessage("시연 자료를 읽지 못했습니다.");
@@ -74,7 +73,9 @@ export function PublicDemo({mobile=false}:{mobile?:boolean}) {
         <p role="status">{message || "가상 사건을 준비하고 있어요."}</p>
       </main>
     );
-  const graph = index.graph, file = demo.files.find((f) => f.id === selected) ?? demo.files[0];
+  const graph = index.graph;
+  const sourceId = selected || (graph.edges.find((edge) => edge.kind === "payment") ?? graph.edges[0])?.evidenceId;
+  const file = demo.files.find((f) => f.id === sourceId) ?? demo.files[0];
   const events = selectCaseRows(index, "", "", "", false);
   return (
     <main className={mobile?"public-demo phone-demo":"public-demo web-demo"} data-surface={mobile?"mobile":"desktop"}>
@@ -111,6 +112,7 @@ export function PublicDemo({mobile=false}:{mobile?:boolean}) {
       {view === "graph" ? (
         <RelationshipCanvas
           graph={graph}
+          mobile={mobile}
           browseFirst
           caseId="fictional-demo"
           transport={transport}
@@ -165,7 +167,7 @@ export function PublicDemo({mobile=false}:{mobile?:boolean}) {
             {demo.files.map((f) => (
               <button
                 key={f.id}
-                aria-pressed={selected === f.id}
+                aria-pressed={file.id === f.id}
                 onClick={() => setSelected(f.id)}
               >
                 {f.name.replace(".txt", "")}

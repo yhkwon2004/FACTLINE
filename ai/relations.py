@@ -50,6 +50,12 @@ def extract_relations(text,kiwi):
         if predicate and predicate.tag in {'XSV','XSA','VCP'}:
             before=[t for t in ts if t.start<action_start and t.start>=boundary and t.tag.startswith('N')]
             if before:action_start=before[-1].start
+        # The comitative party to a contract is not the recipient of a transfer.
+        mutual_contract = None
+        if target and target['particle'] in {'와','과'} and sentence[action_start:].startswith(('맺','체결')):
+            mutual_contract = re.search(r'계약(?:을)?\s*$', sentence[boundary:action_start])
+            if mutual_contract:
+                action_start = boundary + mutual_contract.start()
         action=sentence[action_start:].strip(' .!?\n')[:60] or LABELS[kind]+' 언급'
         denied=bool(re.search(r'지\s*않|지\s*못|아니|(?:^|\s)안\s|없었다|부인(?:했|하였|한다|하는|한\s)|하지\s*않',sentence))
         if kind=='threat' and re.search(r'협박|위협',action) and not re.search(r'(?:협박|위협)(?:하|을\s*하|를\s*하)?지\s*않|협박한\s*적.*없|위협한\s*적.*없',action):denied=False
@@ -65,5 +71,5 @@ def extract_relations(text,kiwi):
         amount=re.search(r'(?:\d[\d,.]*\s*(?:억|천|만)?|[일이삼사오육칠팔구십백천만억]+)\s*원',sentence)
         start=getattr(source,'start',text.find(sentence));utf_start=len(text[:start].encode('utf-16-le'))//2
         unique=list({m['text']:m for m in names}.values())
-        results.append(dict(id='r'+str(index),candidateId=str(index),actor=actor['text'],target=target['text'] if target else None,actorKind=actor['kind'],targetKind=target['kind'] if target else None,actorAmbiguous=actor['ambiguous'],targetAmbiguous=target['ambiguous'] if target else False,action=action,kind=kind,typeLabel=LABELS[kind],score=round(confidence,3),polarity=polarity,directed=kind not in {'family'} and target is not None,amount=amount.group(0) if amount else None,quote=sentence,sourceSpan=dict(start=utf_start,end=utf_start+len(sentence.encode('utf-16-le'))//2),mentions=[{k:v for k,v in m.items() if k in {'text','kind','ambiguous'}} for m in unique],model='E5 + fitted relation Ridge; Kiwi source spans'))
+        results.append(dict(id='r'+str(index),candidateId=str(index),actor=actor['text'],target=target['text'] if target else None,actorKind=actor['kind'],targetKind=target['kind'] if target else None,actorAmbiguous=actor['ambiguous'],targetAmbiguous=target['ambiguous'] if target else False,action=action,kind=kind,typeLabel=LABELS[kind],score=round(confidence,3),polarity=polarity,directed=kind!='family' and not mutual_contract and target is not None,amount=amount.group(0) if amount else None,quote=sentence,sourceSpan=dict(start=utf_start,end=utf_start+len(sentence.encode('utf-16-le'))//2),mentions=[{k:v for k,v in m.items() if k in {'text','kind','ambiguous'}} for m in unique],model='E5 + fitted relation Ridge; Kiwi source spans'))
     return results

@@ -1,0 +1,84 @@
+{
+  "model": "9-20-12-1 ReLU layer-order regressor",
+  "seed": 172,
+  "sourceTrainGraphs": 480,
+  "variantsPerTrainingGraph": 3,
+  "trainingNodes": 12396,
+  "testGraphs": 120,
+  "testNodes": 962,
+  "epochs": 227,
+  "means": {
+    "inputOrder": {
+      "throughCards": 1.7083333333333333,
+      "crossings": 1.7666666666666666,
+      "edgeLength": 16.428102006969944
+    },
+    "predictedOrder": {
+      "throughCards": 1.1916666666666667,
+      "crossings": 0.9833333333333333,
+      "edgeLength": 15.424921317098145
+    },
+    "guardedPrediction": {
+      "throughCards": 1.1083333333333334,
+      "crossings": 1.0083333333333333,
+      "edgeLength": 15.402302568287183
+    }
+  },
+  "improvedGraphs": 53,
+  "datasetSHA256": "053a5bd2a779a1870ebdc46c066097aaead3bcc7d4f2c2eedc75c0c4c5ac5b6b",
+  "modelSHA256": "c49be62d17c1d0880898f374289bc47f6344b344cfa03fbb4e9796857dc7db7e",
+  "parity": {
+    "nodes": 10,
+    "edges": [
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        5,
+        0
+      ],
+      [
+        6,
+        2
+      ],
+      [
+        7,
+        2
+      ],
+      [
+        8,
+        7
+      ],
+      [
+        9,
+        2
+      ]
+    ],
+    "scores": [
+      -0.5281383300863193,
+      -0.6770886742580985,
+      -0.003018963172756073,
+      -0.4330232882585465,
+      -0.3118494604950094,
+      0.08790402836790506,
+      0.024888712975803973,
+      0.6852955363576767,
+      0.8515132455794834,
+      0.9285244262169726
+    ]
+  },
+  "limitation": "Centerline geometry of unwrapped synthetic distance layers, before card sizing, grouping or elbow routing. No human preference or case-outcome labels."
+}

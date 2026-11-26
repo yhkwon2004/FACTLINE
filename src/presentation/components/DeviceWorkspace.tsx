@@ -388,7 +388,7 @@ export function DeviceWorkspace({ path, mobile = false }: { path: string[]; mobi
         </Card>
       );
     if (mobile && !path[2]) return <PhoneCase item={c} />;
-    return <DeviceCasePage key={c.id} item={c} tab={path[2] ?? "evidence"} />;
+    return <DeviceCasePage key={c.id} item={c} tab={path[2] ?? "evidence"} mobile={mobile} />;
   }
   if (path[0] === "life") return <DeviceVoice />;
   if (path[0] === "integrations")
@@ -600,7 +600,7 @@ function DeviceVoice() {
     </Card>
   );
 }
-function DeviceCasePage({ item, tab }: { item: DeviceCase; tab: string }) {
+function DeviceCasePage({ item, tab, mobile }: { item: DeviceCase; tab: string; mobile: boolean }) {
   const { vault, commit } = useVault(),
     [selected, setSelected] = useState<string | null>(null),
     [urls, setUrls] = useState<Record<string, string>>({}),
@@ -974,6 +974,8 @@ function DeviceCasePage({ item, tab }: { item: DeviceCase; tab: string }) {
               </div>
               <div id="relationships"><RelationshipCanvas
                 graph={graph}
+                mobile={mobile}
+                browseFirst={mobile}
                 caseId={item.id}
                 transport={transport}
                 mediaUrl={(id) => urls[id]}

@@ -11,3 +11,12 @@ assert.equal(relationshipGraph([{...file,analysis:{relations:[{...relation,targe
 const ambiguous=relationshipGraph([file,{...file,id:"f2",analysis:{relations:[{...relation,actor:"김씨",quote:"김씨가 이서연에게 5만원을 송금했다.",actorAmbiguous:true}]}}],[]);
 assert.equal(ambiguous.nodes.filter(n=>n.label==="이서연").length,1);
 console.log("PASS grounded directed relationship map, denial, source/audio provenance");
+
+const datedQuote="2026년 11월 17일 오전 10시 20분 "+relation.quote;
+const dated={...file,analysis:{relations:[{...relation,quote:datedQuote}],candidates:[{id:"0",quote:datedQuote,datetime:"2026-11-17T01:20:00Z",dateSource:"explicit",isApproximateTime:false,approximateTimeText:"2026년 11월 17일 오전 10시 20분"}]}};
+assert.equal(relationshipGraph([dated],[]).edges[0].when,"2026-11-17 10:20");
+dated.analysis.candidates[0].isApproximateTime=true;
+dated.analysis.candidates[0].approximateTimeText="11월 17일";
+assert.equal(relationshipGraph([dated],[]).edges[0].when,"11월 17일");
+dated.analysis.candidates[0].quote="별개의 진술";
+assert.equal(relationshipGraph([dated],[]).edges[0].when,undefined);

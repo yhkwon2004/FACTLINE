@@ -30,6 +30,13 @@ assert layout['modelSha256']==hashlib.sha256((ROOT.parent/'src/domain/services/l
 assert all(len(g['layouts'])==6 for g in data)
 print('PASS layout ranker data, graph-level holdout and browser model hash')
 
+order = load('training/structure-order-run.json')
+assert order['datasetSHA256'] == digest('data/layout-supervision.json')
+assert order['modelSHA256'] == digest('../src/domain/services/structure-order.json')
+assert order['trainingNodes'] == sum(g['nodes'] for g in data if g['split'] == 'train') * order['variantsPerTrainingGraph']
+assert order['testNodes'] == sum(g['nodes'] for g in data if g['split'] == 'test')
+print('PASS trained structure-order weights, dataset and graph split counts')
+
 dialogue = load('training/dialogue-run.json')
 samples = load('training/dialogue-samples.json')
 assert dialogue['samplesSha256'] == digest('training/dialogue-samples.json')

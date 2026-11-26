@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { diagramSchema,emptyDiagram, type DiagramSnapshot } from "./DiagramDocument";
-import { relationshipGraph } from "./RelationshipGraph";
 import { IncidentEvent } from "../entities/IncidentEvent";
 import { TimelineService } from "./TimelineService";
 import type {
@@ -177,80 +176,6 @@ export function fictionalCase(demo: FictionalScenario): DeviceCase {
     for (const candidate of f.analysis.candidates)
       confirmCandidate(c, f.id, candidate);
   }
-  const graph = relationshipGraph(
-    c.evidence.map((e) => ({ id: e.id, name: e.name, analysis: e.analysis })),
-    [],
-  );
-  const places: Record<string, { x: number; y: number }> = {
-    김민수: { x: 220, y: 190 },
-    이서연: { x: 600, y: 190 },
-    박지훈: { x: 220, y: 650 },
-    한수빈: { x: 600, y: 650 },
-  };
   c.diagram.document.title = "가상 행사 정산 · 인물과 진술";
-  c.diagram.document.groups = [
-    {
-      id: "group:contract",
-      label: "계약 · 지급",
-      x: 60,
-      y: 60,
-      width: 1090,
-      height: 320,
-      color: "blue",
-    },
-    {
-      id: "group:statements",
-      label: "확인 · 진술",
-      x: 60,
-      y: 500,
-      width: 1090,
-      height: 340,
-      color: "slate",
-    },
-  ];
-  for (const n of graph.nodes)
-    c.diagram.document.nodes[n.id] = {
-      ...(places[n.label] ?? { x: 990, y: 650 }),
-      subtitle: n.kind === "action" ? "전언 · 사실 미확인" : "합성 인물",
-      groupId:
-        n.kind === "action" || ["박지훈", "한수빈"].includes(n.label)
-          ? "group:statements"
-          : "group:contract",
-      color: n.kind === "action" ? "amber" : "slate",
-    };
-  c.diagram.document.manualNodes.push({
-    id: "manual:demo-context",
-    label: "행사 제작 의뢰",
-    kind: "note",
-  });
-  c.diagram.document.nodes["manual:demo-context"] = {
-    x: 990,
-    y: 190,
-    subtitle: "설명용 카드 · 근거 미연결",
-    groupId: "group:contract",
-    color: "blue",
-  };
-  for (const edge of graph.edges) {
-    if (edge.kind === "payment" && edge.target === "person:이서연")
-      c.diagram.document.edges[edge.id] = { labelX: 410, labelY: 330 };
-    else if (edge.kind === "work")
-      c.diagram.document.edges[edge.id] = { labelX: 410, labelY: 105 };
-    else if (edge.polarity === "planned")
-      c.diagram.document.edges[edge.id] = {
-        labelX: 550,
-        labelY: 430,
-        color: "violet",
-        dashed: true,
-      };
-    else if (edge.polarity === "denied")
-      c.diagram.document.edges[edge.id] = {
-        labelX: 220,
-        labelY: 430,
-        color: "rose",
-        dashed: true,
-      };
-    else if (edge.source === "person:박지훈")
-      c.diagram.document.edges[edge.id] = { labelX: 900, labelY: 430 };
-  }
   return c;
 }

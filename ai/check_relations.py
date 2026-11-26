@@ -19,7 +19,9 @@ r=one('김민수는 박지훈을 밀치지 않았다고 말했다.');assert r['p
 r=one('김민수는 박지훈에게 돈을 보내겠다고 말했다.');assert r['polarity']=='planned' and r['target']=='박지훈',r
 r=one('김민수는 박지훈에게 가만두지 않겠다고 협박했다.');assert r['polarity']!='denied',r
 r=one('김민수는 박지훈이 돈을 받았다는 이야기를 들었다.');assert r['polarity']=='uncertain' and r['target'] is None,r
-r=one('2026년 11월 16일 오후 2시 10분 김민수는 이서연과 행사 제작 계약을 맺었다.');assert r['polarity']=='reported' and r['target']=='이서연',r
+r=one('2026년 11월 16일 오후 2시 10분 김민수는 이서연과 행사 제작 계약을 맺었다.');assert r['polarity']=='reported' and r['target']=='이서연' and not r['directed'] and r['action']=='계약을 맺었다',r
+r=one('김민수는 이서연과 계약을 체결했다.');assert not r['directed'] and r['action']=='계약을 체결했다',r
+r=one('김민수는 이서연에게 계약서를 보냈다.');assert r['directed'] and r['target']=='이서연',r
 r=one('김민수는 박지훈의 가방을 들었다.');assert r['polarity']=='reported',r
 r=one('김민수는 박지훈이 돈을 받지 않았다는 말을 들었다.');assert r['polarity']=='uncertain' and r['target'] is None,r
 print('PASS direct denial, promise recipient, negative threat wording and indirect speech')

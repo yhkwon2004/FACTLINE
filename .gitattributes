@@ -11,5 +11,6 @@ src/domain/services/layout-ranker.json -text whitespace=cr-at-eol
 public/demo/scenario.json -text whitespace=cr-at-eol
 *.m4a -text
 src/domain/services/layout-generator.json -text
+src/domain/services/structure-order.json -text
 android/gradlew text eol=lf
 *.jar -text

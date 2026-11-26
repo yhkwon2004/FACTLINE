@@ -38,3 +38,33 @@ assert.deepEqual(shiftedRoute.points.map(p=>({...p,x:p.x-10000})),axisRoute.poin
 
 assert.deepEqual(wrapDiagramText("가나다라 마바사아 자차카타",8,3),["가나다라","마바사아","자차카타"]);
 assert(!wrapDiagramText("가족 👨‍👩‍👧‍👦 기록입니다",5,3).some(s=>s.endsWith("\u200d")));
+
+// The two reporters exchange three records across a third person's card.
+const newsroomNodes=[[0,0],[800,0],[400,0],[0,440],[400,440],[800,440]].map(([x,y],i)=>({...board.nodes[0],id:"n"+i,x,y}));
+const newsroomEdges=[[0,1],[1,0],[0,1],[0,4],[2,5],[3,1],[4,2],[5,0]].map(([a,b],i)=>({
+  ...board.edges[0], id:"r"+i, source:"n"+a,target:"n"+b,label:i===2?"자료를 다시 제출해 달라고 요청했다":"문서를 전달했다",
+}));
+const newsroomDoc=emptyDiagram();
+newsroomDoc.groups.push({id:"group:test",label:"확인한 기록",x:170,y:220,width:460,height:500,color:"blue"});
+const newsroom=boardRoutes(newsroomNodes,newsroomEdges,newsroomDoc);
+const boxes=newsroomNodes.map(n=>({left:n.x-90,right:n.x+90,top:n.y-66,bottom:n.y+86}));
+boxes.push({left:170,right:630,top:220,bottom:268});
+for(const [i,r] of newsroom.entries()){
+  for(const {a,b} of r.segments) for(const box of boxes){
+    assert(!(Math.max(a.x,b.x)>box.left && Math.min(a.x,b.x)<box.right &&
+             Math.max(a.y,b.y)>box.top && Math.min(a.y,b.y)<box.bottom),"Arrow cannot pass through a card or group heading: "+r.id);
+  }
+  const caption={left:r.label.x-r.labelWidth/2,right:r.label.x+r.labelWidth/2,top:r.label.y-r.labelHeight/2,bottom:r.label.y+r.labelHeight/2};
+  for(const box of boxes)assert(caption.left>=box.right || caption.right<=box.left ||
+    caption.top>=box.bottom || caption.bottom<=box.top,"Caption cannot hide a card or group heading");
+  for(const other of newsroom.slice(0,i))assert(Math.abs(r.label.x-other.label.x)>=(r.labelWidth+other.labelWidth)/2 ||
+    Math.abs(r.label.y-other.label.y)>=(r.labelHeight+other.labelHeight)/2,"Distinguish nearby captions");
+  assert(r.segments.some(({a,b})=>r.anchor.x>=Math.min(a.x,b.x)&&r.anchor.x<=Math.max(a.x,b.x)&&
+    r.anchor.y>=Math.min(a.y,b.y)&&r.anchor.y<=Math.max(a.y,b.y)),"Caption leader attaches to its own connector");
+}
+assert.equal(new Set([newsroom[0].points[0].y,newsroom[1].points.at(-1)!.y,newsroom[2].points[0].y]).size,3,"Reciprocal arrows use distinct tips on the shared side");
+newsroomDoc.edges.r0={labelX:211,labelY:-231,viaX:360,viaY:-160};
+const pinned=boardRoutes(newsroomNodes,newsroomEdges,newsroomDoc)[0];
+assert.deepEqual(pinned.label,{x:211,y:-231});assert.deepEqual(pinned.handle,{x:360,y:-160});
+assert(pinned.segments.some(({a,b})=>a.y===-160&&b.y===-160&&360>=Math.min(a.x,b.x)&&360<=Math.max(a.x,b.x)),"A dragged detour stays on the requested rail");
+console.log("PASS card and group-title clearance, distinct reciprocal arrow ports, compact captions and pinned detours");

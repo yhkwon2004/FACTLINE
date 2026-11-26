@@ -1108,9 +1108,10 @@ h1{font-weight:600;letter-spacing:-.04em}h2{font-weight:600}button:disabled{curs
 .relation-reader label,.relation-kind{display:block;font-size:12px;color:#51637b;font-weight:600}
 .relation-reader select{display:block;margin-top:10px;width:100%;min-height:44px;padding:6px 10px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;font-size:13px;color:#202124}
 .relation-reader h3{font-size:19px;line-height:1.5;margin:7px 0 12px}
-.relation-reader blockquote{font-size:15px;line-height:1.85;word-break:keep-all}
+.relation-reader .relation-summary{display:flex;align-items:baseline;gap:4px 12px;flex-wrap:wrap;margin:0 0 14px;font-size:15px;line-height:1.5;color:#243d5c}.relation-summary span{font-variant-numeric:tabular-nums;color:#455468}.relation-actions{display:flex;flex-wrap:wrap;column-gap:18px}.relation-reader button.relation-neighbour{display:block;text-align:start;margin:0;line-height:1.5}.relation-reader blockquote{font-size:15px;line-height:1.85;word-break:keep-all}
 .relation-kind{margin-top:32px}.relation-reader button{display:inline-flex;align-items:center;gap:5px;min-height:44px;margin-top:12px;color:#0b57d0;font-size:13px}
 .is-reading.is-fullscreen .diagram-stage{height:100%;flex:1}
+.diagram-camera button.diagram-overview{display:inline-flex;gap:5px;align-items:center;width:auto;padding-inline:11px;border-radius:20px;white-space:nowrap;font-size:12px}
 .demo-intro h1,.auth-card h1{word-break:keep-all;overflow-wrap:anywhere}
 @media(max-width:767px){
   .public-demo{padding-inline:clamp(12px,4vw,24px)}.demo-intro{padding:34px 0 25px}

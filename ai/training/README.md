@@ -12,6 +12,8 @@ Qwen3-1.7B의 q/v projection에 LoRA r8, alpha 16, dropout 0.05를 적용했습�
 
 ## 관계 분류와 배치
 
+구조도에서 같은 단의 인물 순서를 예측하는 모델을 추가했습니다. 기존 학습 그래프 480개의 노드 순서를 세 가지로 바꿔 12,396개 노드 예시로 학습했습니다. 별도 평가 그래프 120개에서 초기 순서와 예측 순서를 비교해 기하 비용이 낮은 쪽을 사용했습니다. 카드 중심을 잇는 선의 평균 교차는 1.77회에서 1.01회로 줄었습니다. 측정은 실제 카드 크기와 꺾인 화살표를 적용하기 전 단계에서 수행했습니다. [학습 코드](../train_structure_order.py) · [평가·해시](structure-order-run.json)
+
 | 실행 | 데이터·측정 | 원본 |
 |---|---|---|
 | 사건 분류 · E5 고정 + Ridge | 합성 360 학습 / 120 평가, 6종 일치율 70.83% | [기존 실행 지표](baseline-metrics.json) |
@@ -36,6 +38,7 @@ node scripts/python.mjs train_dialogue.py
 node scripts/python.mjs calibrate_dialogue.py
 node scripts/python.mjs check_dialogue.py
 node scripts/python.mjs train_layout_generator.py
+node scripts/python.mjs train_structure_order.py
 .venv\Scripts\python.exe docs/plot_dialogue.py
 npm run ai:check-training
 ```
